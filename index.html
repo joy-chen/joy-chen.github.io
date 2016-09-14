@@ -192,6 +192,8 @@
             
                 <div class="postShorten-content" itemprop="articleBody">
                     <h2 id="FgThread-解析"><a href="#FgThread-解析" class="headerlink" title="FgThread 解析"></a>FgThread 解析</h2><p>FgThread继承ServiceThread<br><img src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/bg/BgThread.png?raw=true" alt="img"></p>
+<p>FgThread作为单例存在系统中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">FgThread</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>(<span class="string">"android.fg"</span>,android.os.Process.THREAD_PRIORITY_DEFAULT, <span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>framework中很多系统服务会利用这个Thread,做耗时工作.</p>
 
                     
                         
