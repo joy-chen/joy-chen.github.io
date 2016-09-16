@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Joy</title>
+  <subtitle>abc</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2016-09-15T16:08:27.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>JoyChen</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Image Test</title>
+    <link href="http://yoursite.com/2016/09/15/water/"/>
+    <id>http://yoursite.com/2016/09/15/water/</id>
+    <published>2016-09-15T10:48:57.000Z</published>
+    <updated>2016-09-15T16:08:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<a id="more"></a>
+<div class="figure center" style="width:100%;"><a class="fancybox" href="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" style="width:100%;height:100%;" alt=""></a></div><div style="clear:both;"></div>
+<!-- endcontent --><div class="figure figure--fullWidth"><img class="figure-img" src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/wide.jpg?raw=true" alt=""><span class="caption"></span></div><!-- content -->
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+    
+    </summary>
+    
+    
+      <category term="随处可栖" scheme="http://yoursite.com/tags/%E9%9A%8F%E5%A4%84%E5%8F%AF%E6%A0%96/"/>
+    
+      <category term="媚子" scheme="http://yoursite.com/tags/%E5%AA%9A%E5%AD%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android FgThread</title>
+    <link href="http://yoursite.com/2016/09/13/AndroidFgThread/"/>
+    <id>http://yoursite.com/2016/09/13/AndroidFgThread/</id>
+    <published>2016-09-13T03:22:02.000Z</published>
+    <updated>2016-09-15T15:50:01.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>FgThread继承ServiceThread<br><a id="more"></a><br><img src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/bg/BgThread.png?raw=true" alt="img"></p>
+<p>FgThread作为单例存在系统中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">FgThread</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">super</span>(<span class="string">"android.fg"</span>,android.os.Process.THREAD_PRIORITY_DEFAULT, <span class="keyword">true</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>framework中很多系统服务会利用这个Thread,做耗时工作.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      test
+    
+    </summary>
+    
+      <category term="framework" scheme="http://yoursite.com/categories/framework/"/>
+    
+    
+      <category term="AFS" scheme="http://yoursite.com/tags/AFS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2016/08/07/hello-world/"/>
+    <id>http://yoursite.com/2016/08/07/hello-world/</id>
+    <published>2016-08-07T13:30:40.000Z</published>
+    <updated>2016-09-15T15:50:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- toc -->
+<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.<br><a id="more"></a></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- toc --&gt;
+&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
