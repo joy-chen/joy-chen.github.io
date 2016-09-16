@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-15T16:08:27.000Z</updated>
+  <updated>2016-09-16T07:01:17.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,11 +20,12 @@
     <link href="http://yoursite.com/2016/09/15/water/"/>
     <id>http://yoursite.com/2016/09/15/water/</id>
     <published>2016-09-15T10:48:57.000Z</published>
-    <updated>2016-09-15T16:08:27.000Z</updated>
+    <updated>2016-09-16T07:01:17.000Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <a id="more"></a>
-<div class="figure center" style="width:100%;"><a class="fancybox" href="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" style="width:100%;height:100%;" alt=""></a></div><div style="clear:both;"></div>
+<div class="figure left" style="width:50%;"><a class="fancybox" href="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" style="width:50%;height:50%;" alt=""></a></div><div style="clear:both;"></div>
+<div class="figure right" style="width:50%;"><a class="fancybox" href="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" title="" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf.nosdn.127.net/img/SDNSM3A1RmE3NjREamIrMngxT2V4MGFXNUZ6K3pzcWlDTGtXSWZ1YUpaL2ozdXZ2UjJRM0NBPT0.jpg?imageView&thumbnail=2000y2000&type=jpg&quality=96&stripmeta=0&type=jpg" style="width:50%;height:50%;" alt=""></a></div><div style="clear:both;"></div>
 <!-- endcontent --><div class="figure figure--fullWidth"><img class="figure-img" src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/wide.jpg?raw=true" alt=""><span class="caption"></span></div><!-- content -->
 ]]></content>
     
