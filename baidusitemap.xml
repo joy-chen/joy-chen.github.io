@@ -4,13 +4,17 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/08/07/hello-world/</loc>
-    <lastmod>2016-09-16T12:21:15.000Z</lastmod>
+    <loc>http://yoursite.com/2016/09/15/water/</loc>
+    <lastmod>2016-09-16T17:14:52.000Z</lastmod>
     <data>
         <display>
-        <title>Hello World</title>
-        <pubTime>2016-08-07T13:30:40.000Z</pubTime>
+        <title>有关媚子</title>
+        <pubTime>2016-09-15T10:48:57.000Z</pubTime>
         
+        <tag>随处可栖</tag>
+         
+        <tag>媚子</tag>
+         
          
            
         </display>
@@ -18,18 +22,15 @@
     </url>
 
     
+    
   <url>
-    <loc>http://yoursite.com/2016/09/15/water/</loc>
-    <lastmod>2016-09-16T12:20:03.000Z</lastmod>
+    <loc>http://yoursite.com/2016/08/07/hello-world/</loc>
+    <lastmod>2016-09-16T12:21:15.000Z</lastmod>
     <data>
         <display>
-        <title>Image Test</title>
-        <pubTime>2016-09-15T10:48:57.000Z</pubTime>
+        <title>Hello World</title>
+        <pubTime>2016-08-07T13:30:40.000Z</pubTime>
         
-        <tag>随处可栖</tag>
-         
-        <tag>媚子</tag>
-         
          
            
         </display>
