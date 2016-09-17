@@ -4,9 +4,9 @@
   <subtitle>abc</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://joyflyaway.com/"/>
   <updated>2016-09-17T06:26:34.000Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://joyflyaway.com/</id>
   
   <author>
     <name>Joy</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>有关媚子</title>
-    <link href="http://yoursite.com/2016/09/15/water/"/>
-    <id>http://yoursite.com/2016/09/15/water/</id>
+    <link href="http://joyflyaway.com/2016/09/15/water/"/>
+    <id>http://joyflyaway.com/2016/09/15/water/</id>
     <published>2016-09-15T10:48:57.000Z</published>
     <updated>2016-09-17T06:26:34.000Z</updated>
     
@@ -66,16 +66,16 @@
     </summary>
     
     
-      <category term="随处可栖" scheme="http://yoursite.com/tags/%E9%9A%8F%E5%A4%84%E5%8F%AF%E6%A0%96/"/>
+      <category term="随处可栖" scheme="http://joyflyaway.com/tags/%E9%9A%8F%E5%A4%84%E5%8F%AF%E6%A0%96/"/>
     
-      <category term="媚子" scheme="http://yoursite.com/tags/%E5%AA%9A%E5%AD%90/"/>
+      <category term="媚子" scheme="http://joyflyaway.com/tags/%E5%AA%9A%E5%AD%90/"/>
     
   </entry>
   
   <entry>
     <title>Android FgThread</title>
-    <link href="http://yoursite.com/2016/09/13/AndroidFgThread/"/>
-    <id>http://yoursite.com/2016/09/13/AndroidFgThread/</id>
+    <link href="http://joyflyaway.com/2016/09/13/AndroidFgThread/"/>
+    <id>http://joyflyaway.com/2016/09/13/AndroidFgThread/</id>
     <published>2016-09-13T03:22:02.000Z</published>
     <updated>2016-09-16T10:57:01.000Z</updated>
     
@@ -90,10 +90,10 @@
     
     </summary>
     
-      <category term="framework" scheme="http://yoursite.com/categories/framework/"/>
+      <category term="framework" scheme="http://joyflyaway.com/categories/framework/"/>
     
     
-      <category term="AFS" scheme="http://yoursite.com/tags/AFS/"/>
+      <category term="AFS" scheme="http://joyflyaway.com/tags/AFS/"/>
     
   </entry>
   
