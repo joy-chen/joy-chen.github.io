@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-09-18T12:23:52.000Z</updated>
+  <updated>2016-09-18T13:40:33.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -20,16 +20,15 @@
     <link href="http://joyflyaway.com/2016/09/18/GUI/"/>
     <id>http://joyflyaway.com/2016/09/18/GUI/</id>
     <published>2016-09-18T11:26:37.000Z</published>
-    <updated>2016-09-18T12:23:52.000Z</updated>
+    <updated>2016-09-18T13:40:33.000Z</updated>
     
-    <content type="html"><![CDATA[<p>start<br><a id="more"></a><br><div class="figure center" style="width:;"><img class="fig-img" src="ape_fwk_graphics.png" alt="img"><span class="caption">img</span></div><div style="clear:both;"></div></p>
+    <content type="html"><![CDATA[<!-- excerpt --><br><div class="figure center" style="width:;"><img class="fig-img" src="ape_fwk_graphics.png" alt="img"><span class="caption">img</span></div><div style="clear:both;"></div></p>
 <h3 id="SurfaceFlinger"><a href="#SurfaceFlinger" class="headerlink" title="SurfaceFlinger"></a>SurfaceFlinger</h3><p>SurfaceFlinger accepts buffers of data from multiple sources, composites them, and sends them to the display.</p>
-<p>end</p>
-]]></content>
+<p>WindowManager -&gt; SurfaceFlinger -&gt; Surface -&gt; Layer -&gt; BufferQueue</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;start&lt;br&gt;
+      &lt;p&gt;SurfaceFlinger&lt;br&gt;
     
     </summary>
     
