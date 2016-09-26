@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-09-25T04:31:09.000Z</updated>
+  <updated>2016-09-26T15:24:42.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>quick_solution</title>
+    <link href="http://joyflyaway.com/2016/09/26/quick-solution/"/>
+    <id>http://joyflyaway.com/2016/09/26/quick-solution/</id>
+    <published>2016-09-26T15:20:00.000Z</published>
+    <updated>2016-09-26T15:24:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>遇到一个未涉及的领域问题，首先google下，是否有相关答案(可能性较小)。没有的话，用现有知识分析定位问题，需要定位到代码的模块，然后找到模块的顶层代码，试着看，判断出代码的核心类，如有不懂，针对这些核心类google，最终定位到解决方案。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;遇到一个未涉及的领域问题，首先google下，是否有相关答案(可能性较小)。没有的话，用现有知识分析定位问题，需要定位到代码的模块，然后找到模块的顶层代码，试着看，判断出代码的核心类，如有不懂，针对这些核心类google，最终定位到解决方案。&lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SeAndroid</title>
