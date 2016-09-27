@@ -49,7 +49,7 @@
     <link href="http://joyflyaway.com/2016/09/27/Framework%E5%B1%82%E7%9B%91%E5%90%AC%E5%89%8D%E5%8F%B0%E8%BF%9B%E7%A8%8B/"/>
     <id>http://joyflyaway.com/2016/09/27/Framework层监听前台进程/</id>
     <published>2016-09-27T08:13:50.000Z</published>
-    <updated>2016-09-27T08:22:36.000Z</updated>
+    <updated>2016-09-27T11:55:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>ActivityStack$moveTaskToFrontLocked:从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。<br>ActivityStackSupervisor$realStartActivityLocked:Activity创建的时候会被调用。</p>
 ]]></content>
