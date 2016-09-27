@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-09-26T15:25:33.000Z</updated>
+  <updated>2016-09-27T08:22:36.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Framework层监听前台进程</title>
+    <link href="http://joyflyaway.com/2016/09/27/Framework%E5%B1%82%E7%9B%91%E5%90%AC%E5%89%8D%E5%8F%B0%E8%BF%9B%E7%A8%8B/"/>
+    <id>http://joyflyaway.com/2016/09/27/Framework层监听前台进程/</id>
+    <published>2016-09-27T08:13:50.000Z</published>
+    <updated>2016-09-27T08:22:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>ActivityStack$moveTaskToFrontLocked:从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。<br>ActivityStackSupervisor$realStartActivityLocked:Activity创建的时候会被调用。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ActivityStack$moveTaskToFrontLocked:从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。&lt;br&gt;ActivityStackSupervisor$realStartActivityLocked:Activity
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>快速解决问题思路</title>
