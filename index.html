@@ -238,6 +238,52 @@
                 <section class="postShorten-group main-content-wrap">
     
     
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/09/28/SEAndroid-为APK添加权限/">
+                            SEAndroid:为APK添加权限
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-28T21:17:20+08:00">
+	
+		    9月 28, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br>解决方案：根据SeLinux规则，为Apk创建权限te文件。te默认文件路径：/source_root/external/sepolicy。一般厂家可以自己定制一套，目录：/source_root/device/factory/sepolicy/。我们选择厂家目录，新建apk.te文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type xxx_app, domain, mlstrustedsubject;app_domain(monitor_app)allow monitor_app xxx_service:service_manager xxx;r_dir_file(monitor_app, domain)</div></pre></td></tr></table></figure>
+<p>然后在device/factory/sepolicy/common/seapp_contexts下添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user=system seinfo=platform name=com.letv.android.monitor domain=monitor_app type=app_data_file</div></pre></td></tr></table></figure>
+<p>一般这时候打开apk是会报错： <strong>avc : denied</strong><br>不用慌，根据提示，缺什么补什么，按下面格式添加即可:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">allow monitor_app xxx_service:service_manager xxx;</div></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/28/SEAndroid-为APK添加权限/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
     <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
@@ -766,6 +812,25 @@
                     <hr>
                 </div>
                 
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/28/SEAndroid-为APK添加权限/">
+                            <h3 class="media-heading">SEAndroid:为APK添加权限</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
             </div>
         </div>
         <div class="modal-footer">
@@ -773,7 +838,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 7 篇文章
+                找到 8 篇文章
             </p>
         </div>
     </div>
