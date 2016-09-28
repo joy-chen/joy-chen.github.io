@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-09-28T13:32:01.000Z</updated>
+  <updated>2016-09-28T13:36:11.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -20,9 +20,9 @@
     <link href="http://joyflyaway.com/2016/09/28/SEAndroid-%E4%B8%BAAPK%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90/"/>
     <id>http://joyflyaway.com/2016/09/28/SEAndroid-为APK添加权限/</id>
     <published>2016-09-28T13:17:20.000Z</published>
-    <updated>2016-09-28T13:32:01.000Z</updated>
+    <updated>2016-09-28T13:36:11.000Z</updated>
     
-    <content type="html"><![CDATA[<p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br>解决方案：根据SeLinux规则，为Apk创建权限te文件。te默认文件路径：/source_root/external/sepolicy。一般厂家可以自己定制一套，目录：/source_root/device/factory/sepolicy/。我们选择厂家目录，新建apk.te文件：</p>
+    <content type="html"><![CDATA[<p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br><a id="more"></a><br>解决方案：根据SeLinux规则，为Apk创建权限te文件。te默认文件路径：/source_root/external/sepolicy。一般厂家可以自己定制一套，目录：/source_root/device/factory/sepolicy/。我们选择厂家目录，新建apk.te文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type xxx_app, domain, mlstrustedsubject;app_domain(monitor_app)allow monitor_app xxx_service:service_manager xxx;r_dir_file(monitor_app, domain)</div></pre></td></tr></table></figure>
 <p>然后在device/factory/sepolicy/common/seapp_contexts下添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user=system seinfo=platform name=com.letv.android.monitor domain=monitor_app type=app_data_file</div></pre></td></tr></table></figure>
@@ -31,12 +31,12 @@
     
     <summary type="html">
     
-      &lt;p&gt;背景：Apk为手机ROM内置apk。&lt;br&gt;需求：Apk需要读取/proc/pid/stat文件。&lt;br&gt;问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。&lt;br&gt;解决方案：根据Se
+      &lt;p&gt;背景：Apk为手机ROM内置apk。&lt;br&gt;需求：Apk需要读取/proc/pid/stat文件。&lt;br&gt;问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。&lt;br&gt;
     
     </summary>
     
     
-      <category term="［SEAndroid］" scheme="http://joyflyaway.com/tags/%EF%BC%BBSEAndroid%EF%BC%BD/"/>
+      <category term="［SEAndroid]" scheme="http://joyflyaway.com/tags/%EF%BC%BBSEAndroid/"/>
     
   </entry>
   
