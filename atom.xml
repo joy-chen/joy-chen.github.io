@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-09-28T13:48:09.000Z</updated>
+  <updated>2016-10-02T06:25:52.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,134 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>香港徒步线路</title>
+    <link href="http://joyflyaway.com/2016/10/02/%E9%A6%99%E6%B8%AF%E5%BE%92%E6%AD%A5%E7%BA%BF%E8%B7%AF/"/>
+    <id>http://joyflyaway.com/2016/10/02/香港徒步线路/</id>
+    <published>2016-10-02T05:28:01.000Z</published>
+    <updated>2016-10-02T06:25:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="麦理浩径"><a href="#麦理浩径" class="headerlink" title="麦理浩径"></a>麦理浩径</h2><h3 id="路程"><a href="#路程" class="headerlink" title="路程"></a>路程</h3><p>约14公里/ 徒步7小时</p>
+<h3 id="交通指示"><a href="#交通指示" class="headerlink" title="交通指示"></a>交通指示</h3><p>(旺角）东铁线到沙田站（8元），出地铁站在地面沙田  总公交站坐299巴士（10元），30站后到西贡市公交总站，转94专线巴士（5.8元）到北潭涌巴士站，往前走小段就能看到麦里浩经的牌子。</p>
+<h2 id="港岛径的第八段-又称作龙脊远足径"><a href="#港岛径的第八段-又称作龙脊远足径" class="headerlink" title="港岛径的第八段(又称作龙脊远足径)"></a>港岛径的第八段(又称作龙脊远足径)</h2><h3 id="路程-1"><a href="#路程-1" class="headerlink" title="路程"></a>路程</h3><p>约8.5公里/ 徒步4小时</p>
+<h3 id="交通指示-1"><a href="#交通指示-1" class="headerlink" title="交通指示"></a>交通指示</h3><p>从港铁筲箕湾站A3出口就是筲箕湾巴士总站，找到9号双层巴士，在石澳道土地湾巴士站下车。</p>
+<h2 id="凤凰径"><a href="#凤凰径" class="headerlink" title="凤凰径"></a>凤凰径</h2><h2 id="山顶环回步行径"><a href="#山顶环回步行径" class="headerlink" title="山顶环回步行径"></a>山顶环回步行径</h2><h3 id="路程-2"><a href="#路程-2" class="headerlink" title="路程"></a>路程</h3><p>约3.5公里/ 徒步1.5小时</p>
+<h3 id="交通指示-2"><a href="#交通指示-2" class="headerlink" title="交通指示"></a>交通指示</h3><p>由港铁中环站J2出口步行至花园道山下缆车总站，再乘山顶缆车登山，回程于凌霄阁山顶缆车站乘缆车至中环花园道山下缆车总站。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;麦理浩径&quot;&gt;&lt;a href=&quot;#麦理浩径&quot; class=&quot;headerlink&quot; title=&quot;麦理浩径&quot;&gt;&lt;/a&gt;麦理浩径&lt;/h2&gt;&lt;h3 id=&quot;路程&quot;&gt;&lt;a href=&quot;#路程&quot; class=&quot;headerlink&quot; title=&quot;路程&quot;&gt;&lt;/a&gt;路程&lt;/h
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>尼泊尔</title>
+    <link href="http://joyflyaway.com/2016/10/01/%E5%B0%BC%E6%B3%8A%E5%B0%94/"/>
+    <id>http://joyflyaway.com/2016/10/01/尼泊尔/</id>
+    <published>2016-10-01T05:23:12.000Z</published>
+    <updated>2016-10-02T05:28:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>徒步路线  </p>
+<ul>
+<li>大环ACT</li>
+<li>ABC+poonhill</li>
+<li>EBC</li>
+<li>ABC</li>
+<li>木斯塘(MUSTANG)</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;徒步路线  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大环ACT&lt;/li&gt;
+&lt;li&gt;ABC+poonhill&lt;/li&gt;
+&lt;li&gt;EBC&lt;/li&gt;
+&lt;li&gt;ABC&lt;/li&gt;
+&lt;li&gt;木斯塘(MUSTANG)&lt;/li&gt;
+&lt;/ul&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Log系统</title>
+    <link href="http://joyflyaway.com/2016/09/30/Android%20Log%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://joyflyaway.com/2016/09/30/Android Log系统/</id>
+    <published>2016-09-30T07:22:04.000Z</published>
+    <updated>2016-10-02T05:28:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
+<li><p>Mobile Log(也叫AP Log)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">涉及到应用层相关的log:ARN,FC</div><div class="line">再细分包含：kernel,main,event,radio</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Log分析工具："><a href="#Log分析工具：" class="headerlink" title="Log分析工具："></a>Log分析工具：</h2><h4 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a>logcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">-c:清楚日志</div><div class="line">-v:设置输出格式（time，process，tag）</div><div class="line">-b:查看指定日至缓冲区(radio，events，main，all)</div></pre></td></tr></table></figure>
+<h4 id="bugreport"><a href="#bugreport" class="headerlink" title="bugreport"></a>bugreport</h4><p>记录dumpsys,dumpstat和logcat等信息，包括进程列表、内存信息、VM等，获取的内容相当丰富。</p>
+<h2 id="对Log分析，定位"><a href="#对Log分析，定位" class="headerlink" title="对Log分析，定位"></a>对Log分析，定位</h2><ul>
+<li>crash问题：通过搜索FATAL关键字，可以快速定位到错误点。</li>
+<li>anr&amp;fc:搜索<span class="highlight-text primary">am_anr</span> in event log and <span class="highlight-text primary">ANR in</span> main log.  </li>
+</ul>
+<h2 id="Logs-for-different-Feature-Group"><a href="#Logs-for-different-Feature-Group" class="headerlink" title="Logs for different Feature Group"></a>Logs for different Feature Group</h2><ul>
+<li><p>Android AOSP  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">App, Framework, Kernel</div><div class="line">Wlan, BT, Camera, Audio, GPS, Sensor, TP, Fingerprints</div></pre></td></tr></table></figure>
+</li>
+<li><p>Platform BSP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Qualcomm: System Crash, Memory Dump  </div><div class="line">Qualcomm + MTK: Media, Modem, Audio, TCP IP</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Logs-for-different-platform-MTK-and-Qualcomm"><a href="#Logs-for-different-platform-MTK-and-Qualcomm" class="headerlink" title="Logs for different platform - MTK and Qualcomm"></a>Logs for different platform - MTK and Qualcomm</h2><ul>
+<li><p>MTK:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. Generally for MTK platform, the Offline MTKLoger will be fully enough</div><div class="line">2. For some display issue, also need dumpsys and dumpstate </div><div class="line">   adb shell dumpsys &gt; DumpSys.txt &amp; adb shell dumpstate &gt; DumpState.txt</div></pre></td></tr></table></figure>
+</li>
+<li><p>Qualcomm:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. The Offline log is less than needed generally, especially for Modem related feature. </div><div class="line">   (The Offline Log should only be used for Daily Use scenario, or AP + Kernel + TCP log capture)</div><div class="line">2. Modem related, GPS, Audio, and some others feature, Its’ better to take trace log via QXDM</div><div class="line">3. Everything MTK needed for more info (dumpstate and dumpsys) is also needed for Qualcomm</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Log获取方式"><a href="#Log获取方式" class="headerlink" title="Log获取方式"></a>Log获取方式</h2><ul>
+<li><p>开机log  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell dmesg &gt; dmesg.text</div></pre></td></tr></table></figure>
+</li>
+<li><p>kernel log(kernel缓冲区的log)  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb shell cat proc/kmsg &gt; kmsg.txt</div><div class="line">adb shell cat /proc/last_kmsg &gt;/local/file/name</div></pre></td></tr></table></figure>
+</li>
+<li><p>bugreport</p>
+</li>
+</ul>
+<h2 id="Log保存路径"><a href="#Log保存路径" class="headerlink" title="Log保存路径"></a>Log保存路径</h2><ul>
+<li>/data/anr  </li>
+<li>/data/tombstones  </li>
+<li>/data/system/dropbox<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
+</div>
+</li>
+</ul>
+<h2 id="Android-Tracing-–-App-App-FW-–-MTK-Qualcomm"><a href="#Android-Tracing-–-App-App-FW-–-MTK-Qualcomm" class="headerlink" title="Android Tracing – App, App FW – MTK + Qualcomm"></a>Android Tracing – App, App FW – MTK + Qualcomm</h2><ul>
+<li><p>Logcat, Kernel Log, Pull ANR, Tombstone, Dropbox out</p>
+</li>
+<li><p>ANR file is necessary log for “Application not responsible”<br>Force Close: FC logcat must Containing the keyword “fatal exception”</p>
+</li>
+<li><p>Most Feature (such as APK and display level) only need Logcat + Kernel Log </p>
+</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;QC打开log入口：*#*#8888#*#*&lt;br&gt;MTK打开log入口：*#*#3646633#*#*&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>SEAndroid:为APK添加权限</title>
