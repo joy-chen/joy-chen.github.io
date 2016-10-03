@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-10-02T06:34:06.000Z</updated>
+  <updated>2016-10-03T13:05:15.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>滨海栈道</title>
+    <link href="http://joyflyaway.com/2016/10/03/%E6%BB%A8%E6%B5%B7%E6%A0%88%E9%81%93/"/>
+    <id>http://joyflyaway.com/2016/10/03/滨海栈道/</id>
+    <published>2016-10-03T08:55:41.000Z</published>
+    <updated>2016-10-03T13:05:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt -->
+<p>aa</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;aaa&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="徒步" scheme="http://joyflyaway.com/tags/%E5%BE%92%E6%AD%A5/"/>
+    
+  </entry>
   
   <entry>
     <title>香港徒步线路</title>
