@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-10-06T03:20:31.000Z</updated>
+  <updated>2016-10-06T03:24:08.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -20,9 +20,10 @@
     <link href="http://joyflyaway.com/2016/10/06/%E5%8D%81%E4%B8%80%E6%9C%89%E6%84%9F/"/>
     <id>http://joyflyaway.com/2016/10/06/十一有感/</id>
     <published>2016-10-06T03:18:34.000Z</published>
-    <updated>2016-10-06T03:20:31.000Z</updated>
+    <updated>2016-10-06T03:24:08.000Z</updated>
     
-    <content type="html"><![CDATA[<ul>
+    <content type="html"><![CDATA[<!-- excerpt -->
+<ul>
 <li>纸上得来终觉浅 绝知此事要躬行</li>
 <li>要有计划</li>
 <li>要有备用方案</li>
@@ -34,20 +35,19 @@
 <li>怀有感恩的心，与外界和谐共处</li>
 <li>对水保持敬畏之心</li>
 <li>不要在低电量下做事</li>
-</ul>
-]]></content>
+</ul>]]></content>
     
     <summary type="html">
     
-      &lt;ul&gt;
+      &lt;!-- excerpt --&gt;
+&lt;ul&gt;
 &lt;li&gt;纸上得来终觉浅 绝知此事要躬行&lt;/li&gt;
 &lt;li&gt;要有计划&lt;/li&gt;
 &lt;li&gt;要有备用方案&lt;/li&gt;
 &lt;li&gt;养成洞察推理的习惯&lt;/li&gt;
 &lt;li&gt;训练自己的思维方式：横纵时空，归纳演绎&lt;/li&gt;
 &lt;li&gt;笑看世界&lt;/li&gt;
-&lt;li&gt;幸福主要来自内心&lt;/li&gt;
-
+&lt;
     
     </summary>
     
