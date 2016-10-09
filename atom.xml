@@ -146,7 +146,7 @@
     <link href="http://joyflyaway.com/2016/09/30/Android%20Log%E7%B3%BB%E7%BB%9F/"/>
     <id>http://joyflyaway.com/2016/09/30/Android Log系统/</id>
     <published>2016-09-30T07:22:04.000Z</published>
-    <updated>2016-10-09T09:37:35.000Z</updated>
+    <updated>2016-10-09T11:36:14.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
@@ -188,16 +188,10 @@
 </ul>
 <h2 id="Log保存路径"><a href="#Log保存路径" class="headerlink" title="Log保存路径"></a>Log保存路径</h2><ul>
 <li>/data/anr<div class="alert info"><p>Some trace files seem to get here (Dalvik writes stack traces here on ANR, i.e. “Application Not Responding” aka “Force-Close”;</p>
-<ul>
-<li>/data/tombstones</li>
-</ul>
-</div>
-<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
-<ul>
-<li>/data/system/dropbox</li>
-</ul>
-</div>
-<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
+</div></li>
+<li>/data/tombstones<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
+</div></li>
+<li>/data/system/dropbox<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
 </div>
 </li>
 </ul>

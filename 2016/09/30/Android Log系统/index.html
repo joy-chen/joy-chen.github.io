@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2016/09/30/Android Log系统/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
-<meta property="og:updated_time" content="2016-10-09T09:37:35.000Z">
+<meta property="og:updated_time" content="2016-10-09T11:36:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log系统">
 <meta name="twitter:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
@@ -315,16 +315,10 @@
 </ul>
 <h2 id="Log保存路径"><a href="#Log保存路径" class="headerlink" title="Log保存路径"></a>Log保存路径</h2><ul>
 <li>/data/anr<div class="alert info"><p>Some trace files seem to get here (Dalvik writes stack traces here on ANR, i.e. “Application Not Responding” aka “Force-Close”;</p>
-<ul>
-<li>/data/tombstones</li>
-</ul>
-</div>
-<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
-<ul>
-<li>/data/system/dropbox</li>
-</ul>
-</div>
-<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
+</div></li>
+<li>/data/tombstones<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
+</div></li>
+<li>/data/system/dropbox<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
 </div>
 </li>
 </ul>
