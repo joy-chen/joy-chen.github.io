@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2016/09/30/Android Log系统/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
-<meta property="og:updated_time" content="2016-10-09T11:36:14.000Z">
+<meta property="og:updated_time" content="2016-10-11T07:50:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Log系统">
 <meta name="twitter:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
@@ -279,7 +279,24 @@
 <h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
 <li><p>Mobile Log(也叫AP Log)</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">涉及到应用层相关的log:ARN,FC</div><div class="line">再细分包含：kernel,main,event,radio</div></pre></td></tr></table></figure>
+<ul>
+<li>events_log</li>
+<li>main_log</li>
+<li>sys_log</li>
+<li>radio_log</li>
+</ul>
 </li>
+<li>bugreport</li>
+<li>dropbox</li>
+<li>dmesg</li>
+<li>last_kmsg : <code>/proc/last_kmsg</code></li>
+<li>tombstones</li>
+<li>anr</li>
+<li>bootprof : /proc/bootprof</li>
+<li>properties</li>
+</ul>
+<h4 id="MTK"><a href="#MTK" class="headerlink" title="MTK"></a>MTK</h4><ul>
+<li>crash_log</li>
 </ul>
 <h2 id="Log分析工具："><a href="#Log分析工具：" class="headerlink" title="Log分析工具："></a>Log分析工具：</h2><h4 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a>logcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">-c:清楚日志</div><div class="line">-v:设置输出格式（time，process，tag）</div><div class="line">-b:查看指定日至缓冲区(radio，events，main，all)</div></pre></td></tr></table></figure>
 <h4 id="bugreport"><a href="#bugreport" class="headerlink" title="bugreport"></a>bugreport</h4><p>记录dumpsys,dumpstat和logcat等信息，包括进程列表、内存信息、VM等，获取的内容相当丰富。</p>
@@ -333,6 +350,11 @@
 <h2 id="logcat-1"><a href="#logcat-1" class="headerlink" title="logcat"></a>logcat</h2><ul>
 <li>logcat -v threadtime -d *:v  </li>
 <li>logcat -b events -v threadtime -d *:v</li>
+</ul>
+<h2 id="Log分析"><a href="#Log分析" class="headerlink" title="Log分析"></a>Log分析</h2><ul>
+<li>先确定错误发生时间，缩小log寻找范围<div class="alert info"><p>Log的打印顺序并不完全对应程序的执行顺序</p>
+</div>
+</li>
 </ul>
 <h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
 <li><a href="https://source.android.com/source/read-bug-reports.html#anrs-deadlocks" target="_blank" rel="external">Reading Bug Reports</a></li>
