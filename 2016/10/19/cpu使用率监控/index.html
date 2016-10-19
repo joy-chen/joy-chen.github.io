@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Joy">
-    <title>Log系统 - Joy</title>
+    <title>CPU使用率监控 - Joy</title>
     <meta name="author" content="Joy">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
+    <meta name="description" content="核心类：ProcessCpuTracker">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Log系统">
-<meta property="og:url" content="http://joyflyaway.com/2016/09/30/Android Log系统/index.html">
+<meta property="og:title" content="CPU使用率监控">
+<meta property="og:url" content="http://joyflyaway.com/2016/10/19/cpu使用率监控/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
-<meta property="og:updated_time" content="2016-10-14T13:50:49.000Z">
+<meta property="og:description" content="核心类：ProcessCpuTracker">
+<meta property="og:updated_time" content="2016-10-19T09:17:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Log系统">
-<meta name="twitter:description" content="QC打开log入口：*#*#8888#*#*MTK打开log入口：*#*#3646633#*#*">
+<meta name="twitter:title" content="CPU使用率监控">
+<meta name="twitter:description" content="核心类：ProcessCpuTracker">
     
     
         
@@ -256,16 +256,16 @@
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-        <div class="post-header main-content-wrap text-center">
+        <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Log系统
+            CPU使用率监控
         </h1>
     
     <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-09-30T15:22:04+08:00">
+    <time itemprop="datePublished" datetime="2016-10-19T16:49:27+08:00">
 	
-		    9月 30, 2016
+		    10月 19, 2016
     	
     </time>
     
@@ -275,126 +275,8 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt --></p>
-<h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
-<li><p>Mobile Log(也叫AP Log)</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">涉及到应用层相关的log:ARN,FC</div><div class="line">再细分包含：kernel,main,event,radio</div></pre></td></tr></table></figure>
-<ul>
-<li>events_log</li>
-<li>main_log</li>
-<li>sys_log</li>
-<li>radio_log</li>
-</ul>
-</li>
-<li>bugreport</li>
-<li>dropbox</li>
-<li><p>traceview</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Debug.startMethodTracingSamplingEx</div></pre></td></tr></table></figure>
-</li>
-<li><p>systrace  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">atrace -z gfx input view wm am sched freq idle</div><div class="line">-b 10480 -t 15 -c --async_start</div></pre></td></tr></table></figure>
-</li>
-<li><p>dmesg</p>
-</li>
-<li>last_kmsg : <code>/proc/last_kmsg</code></li>
-<li><p>tombstones  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">产生异常信号的C/C++程序与debuggerd建立连接后，debuggerd将进程信息dump</div><div class="line">到tombstone_XX文件中保存到/data/tombstone/文件夹下。可通过</div><div class="line">查看tombstone_XX分析异常进程的堆栈信息。</div><div class="line">在控制台中以命令debuggerd -b [&lt;tid&gt;]启动。如果加上-b参数，则由tid指定的进</div><div class="line">程的信息将dump到控制台上，否则dump到tombstone文件中。控制台中运行</div><div class="line">命令callstack/dumpstate，进程信息会写入这两个命令指定的文件中。</div></pre></td></tr></table></figure>
-</li>
-<li><p>anr</p>
-</li>
-<li>bootprof : /proc/bootprof</li>
-<li>properties</li>
-<li>coredump   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由linux支持，进程崩溃时记录存储堆栈空间，寄存器等相关内容，保留致命现场数据，便于分析查找根源。</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="MTK"><a href="#MTK" class="headerlink" title="MTK"></a>MTK</h4><ul>
-<li>crash_log</li>
-</ul>
-<h2 id="Log分析工具："><a href="#Log分析工具：" class="headerlink" title="Log分析工具："></a>Log分析工具：</h2><h4 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a>logcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">-c:清楚日志</div><div class="line">-v:设置输出格式（time，process，tag）</div><div class="line">-b:查看指定日至缓冲区(radio，events，main，all)</div></pre></td></tr></table></figure>
-<h4 id="bugreport"><a href="#bugreport" class="headerlink" title="bugreport"></a>bugreport</h4><p>记录dumpsys,dumpstat和logcat等信息，包括进程列表、内存信息、VM等，获取的内容相当丰富。</p>
-<h2 id="对Log分析，定位"><a href="#对Log分析，定位" class="headerlink" title="对Log分析，定位"></a>对Log分析，定位</h2><ul>
-<li>crash问题：通过搜索FATAL关键字，可以快速定位到错误点。</li>
-<li>anr&amp;fc:搜索<span class="highlight-text primary">am_anr</span> in event log and <span class="highlight-text primary">ANR in</span> main log.  <ul>
-<li>定位到log后，如果cpu使用率高，表明在进行大量计算或死循环，如果cpu使用率不高，说明处于IOWait状态。</li>
-<li>再结合data/anr/traces.txt分析</li>
-</ul>
-</li>
-</ul>
-<h2 id="Logs-for-different-Feature-Group"><a href="#Logs-for-different-Feature-Group" class="headerlink" title="Logs for different Feature Group"></a>Logs for different Feature Group</h2><ul>
-<li><p>Android AOSP  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">App, Framework, Kernel</div><div class="line">Wlan, BT, Camera, Audio, GPS, Sensor, TP, Fingerprints</div></pre></td></tr></table></figure>
-</li>
-<li><p>Platform BSP</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Qualcomm: System Crash, Memory Dump  </div><div class="line">Qualcomm + MTK: Media, Modem, Audio, TCP IP</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Logs-for-different-platform-MTK-and-Qualcomm"><a href="#Logs-for-different-platform-MTK-and-Qualcomm" class="headerlink" title="Logs for different platform - MTK and Qualcomm"></a>Logs for different platform - MTK and Qualcomm</h2><ul>
-<li><p>MTK:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. Generally for MTK platform, the Offline MTKLoger will be fully enough</div><div class="line">2. For some display issue, also need dumpsys and dumpstate</div><div class="line">   adb shell dumpsys &gt; DumpSys.txt &amp; adb shell dumpstate &gt; DumpState.txt</div></pre></td></tr></table></figure>
-</li>
-<li><p>Qualcomm:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. The Offline log is less than needed generally, especially for Modem related feature.</div><div class="line">   (The Offline Log should only be used for Daily Use scenario, or AP + Kernel + TCP log capture)</div><div class="line">2. Modem related, GPS, Audio, and some others feature, Its’ better to take trace log via QXDM</div><div class="line">3. Everything MTK needed for more info (dumpstate and dumpsys) is also needed for Qualcomm</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Log获取方式"><a href="#Log获取方式" class="headerlink" title="Log获取方式"></a>Log获取方式</h2><ul>
-<li><p>开机log  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell dmesg &gt; dmesg.text</div></pre></td></tr></table></figure>
-</li>
-<li><p>kernel log(kernel缓冲区的log)  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb shell cat proc/kmsg &gt; kmsg.txt</div><div class="line">adb shell cat /proc/last_kmsg &gt;/local/file/name</div></pre></td></tr></table></figure>
-</li>
-<li><p>bugreport</p>
-</li>
-</ul>
-<h2 id="Log保存路径"><a href="#Log保存路径" class="headerlink" title="Log保存路径"></a>Log保存路径</h2><ul>
-<li>/data/anr<div class="alert info"><p>Some trace files seem to get here (Dalvik writes stack traces here on ANR, i.e. “Application Not Responding” aka “Force-Close”;</p>
-</div></li>
-<li>/data/tombstones<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
-</div></li>
-<li>/data/system/dropbox<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
-</div>
-</li>
-</ul>
-<h2 id="Android-Tracing-–-App-App-FW-–-MTK-Qualcomm"><a href="#Android-Tracing-–-App-App-FW-–-MTK-Qualcomm" class="headerlink" title="Android Tracing – App, App FW – MTK + Qualcomm"></a>Android Tracing – App, App FW – MTK + Qualcomm</h2><ul>
-<li><p>Logcat, Kernel Log, Pull ANR, Tombstone, Dropbox out</p>
-</li>
-<li><p>ANR file is necessary log for “Application not responsible”<br>Force Close: FC logcat must Containing the keyword “fatal exception”</p>
-</li>
-<li><p>Most Feature (such as APK and display level) only need Logcat + Kernel Log</p>
-</li>
-</ul>
-<h2 id="logcat-1"><a href="#logcat-1" class="headerlink" title="logcat"></a>logcat</h2><ul>
-<li>logcat -v threadtime -d *:v  </li>
-<li>logcat -b events -v threadtime -d *:v</li>
-</ul>
-<h2 id="ptrace"><a href="#ptrace" class="headerlink" title="ptrace"></a>ptrace</h2><p>ptrace 提供了一种父进程可以控制子进程运行，并可以检查和改变它的核心image。它主要用于实现断点调试。一个被跟踪的进程运行中，直到发生一个信号，则进程被中止，并且通知其父进程。在进程中止的状态下，进程的内存空间可以被读写。父进程还可以使子进程继续执行，并选择是否是否忽略引起中止的信号。</p>
-<h2 id="Log分析"><a href="#Log分析" class="headerlink" title="Log分析"></a>Log分析</h2><ul>
-<li>先确定错误发生时间，缩小log寻找范围</li>
-<li>通过进程id来抽取log<div class="alert info"><p>Log的打印顺序并不完全对应程序的执行顺序<br>c++层和java层返回的线程id并不是一样的概念</p>
-</div>
-</li>
-</ul>
-<h4 id="native-log分析"><a href="#native-log分析" class="headerlink" title="native log分析"></a>native log分析</h4><ul>
-<li>根据pid tid定位到进程id，然后根据id寻找上下文log</li>
-<li>查看backtrace，用add2line -f -e path来找到调用栈</li>
-</ul>
-<h4 id="FC"><a href="#FC" class="headerlink" title="FC"></a>FC</h4><ul>
-<li>常规FC，在Main LOG 关键字 “FATAL EXCEPTION”</li>
-<li>Native Crash，在Main LOG 关键字 “backtrace”</li>
-</ul>
-<h4 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h4><ul>
-<li>在Main LOG 中关键字“ANR IN”</li>
-<li>在EventLog中对应的关键字是“am_anr”</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ANR 主要原因有以下三种：</div><div class="line">　　1. KeyDispatchTimeout(5 seconds) --主要类型按键或触摸事件在特定时间内无响应；</div><div class="line">　　2. BroadcastTimeout(10 seconds)BroadcastReceiver在特定时间内无法处理完成；</div><div class="line">　　3. ServiceTimeout(20 seconds) --小概率类型Service在特定的时间内无法处理完成。</div></pre></td></tr></table></figure>
-<h4 id="REBOOT"><a href="#REBOOT" class="headerlink" title="REBOOT"></a>REBOOT</h4><p>Reboot：主要分Framwork层重启和底层重启。所有重启在Main LOG 中关键字”Entered the Android system server!”。</p>
-<ul>
-<li>Framework 层重启（快速重启，系统开机时间不变）：在Main/Sys.log 对应关键字“Watchdog killing system proces”/“system_server_crash”；</li>
-<li>底层重启（系统开机时间重置）；在Main/Sys.log 对应关键字“Kernel panic”</li>
-</ul>
-<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
-<li><a href="https://source.android.com/source/read-bug-reports.html#anrs-deadlocks" target="_blank" rel="external">Reading Bug Reports</a></li>
-</ul>
+            <p>核心类：ProcessCpuTracker<br><a id="more"></a><br><figure class="codeblock codeblock--tabbed"><figcaption><span>获取进程cpu使用率</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mProcessCpuTracker.update();</span><br><span class="line"><span class="keyword">int</span> num = mProcessCpuTracker.countWorkingStats();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) {</span><br><span class="line">  ProcessCpuTracker.Stats st = mProcessCpuTracker.getWorkingStats(i);</span><br><span class="line">  <span class="keyword">long</span> total = (st.rel_uptime + <span class="number">5</span>) / <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">if</span> (total == <span class="number">0</span>) total = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">long</span> valid = st.rel_utime +  st.rel_stime;</span><br><span class="line">  <span class="keyword">long</span> thousands = (valid * <span class="number">1000</span>) / total;</span><br><span class="line">  <span class="keyword">long</span> hundreds = thousands / <span class="number">100</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+
             
         </div>
     </div>
@@ -405,7 +287,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/01/尼泊尔/"  data-tooltip="尼泊尔">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -413,7 +295,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/28/SEAndroid-为APK添加权限/" data-tooltip="SEAndroid:为APK添加权限">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/06/十一有感/" data-tooltip="十一有感">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -428,27 +310,27 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
@@ -474,7 +356,7 @@
             
                 <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-Android Log系统" data-title="Log系统" data-url="http://joyflyaway.com/2016/09/30/Android Log系统/"></div>
+    <div class="ds-thread" data-thread-key="post-cpu使用率监控" data-title="CPU使用率监控" data-url="http://joyflyaway.com/2016/10/19/cpu使用率监控/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -491,7 +373,7 @@
     <!-- 多说公共JS代码 end -->
 
     <!--
-    <div class="ds-share" data-thread-key="post-Android Log系统" data-title="Log系统" data-url="http://joyflyaway.com/2016/09/30/Android Log系统/">
+    <div class="ds-share" data-thread-key="post-cpu使用率监控" data-title="CPU使用率监控" data-url="http://joyflyaway.com/2016/10/19/cpu使用率监控/">
       <div class="ds-share-inline">
         <ul  class="ds-share-icons-16">
       	   <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -527,7 +409,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/01/尼泊尔/"  data-tooltip="尼泊尔">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -535,7 +417,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/09/28/SEAndroid-为APK添加权限/" data-tooltip="SEAndroid:为APK添加权限">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/06/十一有感/" data-tooltip="十一有感">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -550,27 +432,27 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-facebook-official"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
@@ -596,17 +478,17 @@
                 <div id="share-options-bar" class="share-options-bar" data-behavior="5">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weibo"></i><span>Share on weibo</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/09/30/Android Log系统/&amp;title=Log系统">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/19/cpu使用率监控/&amp;title=CPU使用率监控">
                 <i class="fa fa-weixin"></i><span>Share on weixin</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/09/30/Android Log系统/">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/19/cpu使用率监控/">
                 <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
             </a>
         </li>

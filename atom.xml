@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-10-07T02:27:09.000Z</updated>
+  <updated>2016-10-19T09:17:04.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,25 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CPU使用率监控</title>
+    <link href="http://joyflyaway.com/2016/10/19/cpu%E4%BD%BF%E7%94%A8%E7%8E%87%E7%9B%91%E6%8E%A7/"/>
+    <id>http://joyflyaway.com/2016/10/19/cpu使用率监控/</id>
+    <published>2016-10-19T08:49:27.000Z</published>
+    <updated>2016-10-19T09:17:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>核心类：ProcessCpuTracker<br><a id="more"></a><br><figure class="codeblock codeblock--tabbed"><figcaption><span>获取进程cpu使用率</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mProcessCpuTracker.update();</span><br><span class="line"><span class="keyword">int</span> num = mProcessCpuTracker.countWorkingStats();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) {</span><br><span class="line">  ProcessCpuTracker.Stats st = mProcessCpuTracker.getWorkingStats(i);</span><br><span class="line">  <span class="keyword">long</span> total = (st.rel_uptime + <span class="number">5</span>) / <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">if</span> (total == <span class="number">0</span>) total = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">long</span> valid = st.rel_utime +  st.rel_stime;</span><br><span class="line">  <span class="keyword">long</span> thousands = (valid * <span class="number">1000</span>) / total;</span><br><span class="line">  <span class="keyword">long</span> hundreds = thousands / <span class="number">100</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;核心类：ProcessCpuTracker&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>十一有感</title>
@@ -146,7 +165,7 @@
     <link href="http://joyflyaway.com/2016/09/30/Android%20Log%E7%B3%BB%E7%BB%9F/"/>
     <id>http://joyflyaway.com/2016/09/30/Android Log系统/</id>
     <published>2016-09-30T07:22:04.000Z</published>
-    <updated>2016-10-11T07:50:11.000Z</updated>
+    <updated>2016-10-14T13:50:49.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
@@ -161,12 +180,24 @@
 </li>
 <li>bugreport</li>
 <li>dropbox</li>
-<li>dmesg</li>
+<li><p>traceview</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Debug.startMethodTracingSamplingEx</div></pre></td></tr></table></figure>
+</li>
+<li><p>systrace  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">atrace -z gfx input view wm am sched freq idle</div><div class="line">-b 10480 -t 15 -c --async_start</div></pre></td></tr></table></figure>
+</li>
+<li><p>dmesg</p>
+</li>
 <li>last_kmsg : <code>/proc/last_kmsg</code></li>
-<li>tombstones</li>
-<li>anr</li>
+<li><p>tombstones  </p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">产生异常信号的C/C++程序与debuggerd建立连接后，debuggerd将进程信息dump</div><div class="line">到tombstone_XX文件中保存到/data/tombstone/文件夹下。可通过</div><div class="line">查看tombstone_XX分析异常进程的堆栈信息。</div><div class="line">在控制台中以命令debuggerd -b [&lt;tid&gt;]启动。如果加上-b参数，则由tid指定的进</div><div class="line">程的信息将dump到控制台上，否则dump到tombstone文件中。控制台中运行</div><div class="line">命令callstack/dumpstate，进程信息会写入这两个命令指定的文件中。</div></pre></td></tr></table></figure>
+</li>
+<li><p>anr</p>
+</li>
 <li>bootprof : /proc/bootprof</li>
 <li>properties</li>
+<li>coredump   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由linux支持，进程崩溃时记录存储堆栈空间，寄存器等相关内容，保留致命现场数据，便于分析查找根源。</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h4 id="MTK"><a href="#MTK" class="headerlink" title="MTK"></a>MTK</h4><ul>
 <li>crash_log</li>
@@ -175,7 +206,11 @@
 <h4 id="bugreport"><a href="#bugreport" class="headerlink" title="bugreport"></a>bugreport</h4><p>记录dumpsys,dumpstat和logcat等信息，包括进程列表、内存信息、VM等，获取的内容相当丰富。</p>
 <h2 id="对Log分析，定位"><a href="#对Log分析，定位" class="headerlink" title="对Log分析，定位"></a>对Log分析，定位</h2><ul>
 <li>crash问题：通过搜索FATAL关键字，可以快速定位到错误点。</li>
-<li>anr&amp;fc:搜索<span class="highlight-text primary">am_anr</span> in event log and <span class="highlight-text primary">ANR in</span> main log.  </li>
+<li>anr&amp;fc:搜索<span class="highlight-text primary">am_anr</span> in event log and <span class="highlight-text primary">ANR in</span> main log.  <ul>
+<li>定位到log后，如果cpu使用率高，表明在进行大量计算或死循环，如果cpu使用率不高，说明处于IOWait状态。</li>
+<li>再结合data/anr/traces.txt分析</li>
+</ul>
+</li>
 </ul>
 <h2 id="Logs-for-different-Feature-Group"><a href="#Logs-for-different-Feature-Group" class="headerlink" title="Logs for different Feature Group"></a>Logs for different Feature Group</h2><ul>
 <li><p>Android AOSP  </p>
@@ -224,10 +259,30 @@
 <li>logcat -v threadtime -d *:v  </li>
 <li>logcat -b events -v threadtime -d *:v</li>
 </ul>
+<h2 id="ptrace"><a href="#ptrace" class="headerlink" title="ptrace"></a>ptrace</h2><p>ptrace 提供了一种父进程可以控制子进程运行，并可以检查和改变它的核心image。它主要用于实现断点调试。一个被跟踪的进程运行中，直到发生一个信号，则进程被中止，并且通知其父进程。在进程中止的状态下，进程的内存空间可以被读写。父进程还可以使子进程继续执行，并选择是否是否忽略引起中止的信号。</p>
 <h2 id="Log分析"><a href="#Log分析" class="headerlink" title="Log分析"></a>Log分析</h2><ul>
-<li>先确定错误发生时间，缩小log寻找范围<div class="alert info"><p>Log的打印顺序并不完全对应程序的执行顺序</p>
+<li>先确定错误发生时间，缩小log寻找范围</li>
+<li>通过进程id来抽取log<div class="alert info"><p>Log的打印顺序并不完全对应程序的执行顺序<br>c++层和java层返回的线程id并不是一样的概念</p>
 </div>
 </li>
+</ul>
+<h4 id="native-log分析"><a href="#native-log分析" class="headerlink" title="native log分析"></a>native log分析</h4><ul>
+<li>根据pid tid定位到进程id，然后根据id寻找上下文log</li>
+<li>查看backtrace，用add2line -f -e path来找到调用栈</li>
+</ul>
+<h4 id="FC"><a href="#FC" class="headerlink" title="FC"></a>FC</h4><ul>
+<li>常规FC，在Main LOG 关键字 “FATAL EXCEPTION”</li>
+<li>Native Crash，在Main LOG 关键字 “backtrace”</li>
+</ul>
+<h4 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h4><ul>
+<li>在Main LOG 中关键字“ANR IN”</li>
+<li>在EventLog中对应的关键字是“am_anr”</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ANR 主要原因有以下三种：</div><div class="line">　　1. KeyDispatchTimeout(5 seconds) --主要类型按键或触摸事件在特定时间内无响应；</div><div class="line">　　2. BroadcastTimeout(10 seconds)BroadcastReceiver在特定时间内无法处理完成；</div><div class="line">　　3. ServiceTimeout(20 seconds) --小概率类型Service在特定的时间内无法处理完成。</div></pre></td></tr></table></figure>
+<h4 id="REBOOT"><a href="#REBOOT" class="headerlink" title="REBOOT"></a>REBOOT</h4><p>Reboot：主要分Framwork层重启和底层重启。所有重启在Main LOG 中关键字”Entered the Android system server!”。</p>
+<ul>
+<li>Framework 层重启（快速重启，系统开机时间不变）：在Main/Sys.log 对应关键字“Watchdog killing system proces”/“system_server_crash”；</li>
+<li>底层重启（系统开机时间重置）；在Main/Sys.log 对应关键字“Kernel panic”</li>
 </ul>
 <h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
 <li><a href="https://source.android.com/source/read-bug-reports.html#anrs-deadlocks" target="_blank" rel="external">Reading Bug Reports</a></li>
