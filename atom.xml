@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2016-10-19T09:17:04.000Z</updated>
+  <updated>2016-10-25T14:03:02.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,45 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android系统属性</title>
+    <link href="http://joyflyaway.com/2016/10/24/Android%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7/"/>
+    <id>http://joyflyaway.com/2016/10/24/Android系统属性/</id>
+    <published>2016-10-24T13:06:21.000Z</published>
+    <updated>2016-10-25T14:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前缀必须用system\core\init\property_service.c中定义的前缀，<br>进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。<br>PS:不同前缀名权限不同。<br>如果apk不属于system或root用户，则需要在te文件里加入：<br>allow xxx system_prop:property_service { set };</p>
+<p>ctl.start xxx 可以开启rc配置的服务<br>启动带参数的服务：ctl.start xxx:parms<br>获取服务的运行状态：<br>init.svc.<name><br>   State of a named service (“stopped”, “running”, “restarting”)<br>SystemProperties.get(“init.svc.<name>“);</name></name></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前缀必须用system\core\init\property_service.c中定义的前缀，&lt;br&gt;进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。&lt;br&gt;PS:不同前缀名权限不同。&lt;br&gt;如果apk不属于system或root
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android设备温度节点</title>
+    <link href="http://joyflyaway.com/2016/10/20/Android%E8%AE%BE%E5%A4%87%E6%B8%A9%E5%BA%A6%E8%8A%82%E7%82%B9/"/>
+    <id>http://joyflyaway.com/2016/10/20/Android设备温度节点/</id>
+    <published>2016-10-20T08:51:17.000Z</published>
+    <updated>2016-10-20T13:01:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="QUIET-THERM"><a href="#QUIET-THERM" class="headerlink" title="QUIET_THERM"></a>QUIET_THERM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which is more or less a phone skin temperature sensor or</div><div class="line">overall temperature sensor.</div><div class="line">设备表面温度节点，这个最能体现人对手机的感知温度</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;QUIET-THERM&quot;&gt;&lt;a href=&quot;#QUIET-THERM&quot; class=&quot;headerlink&quot; title=&quot;QUIET_THERM&quot;&gt;&lt;/a&gt;QUIET_THERM&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tabl
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>CPU使用率监控</title>

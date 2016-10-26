@@ -255,6 +255,91 @@
     <section class="postShorten-group main-content-wrap">
     
     
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/10/24/Android系统属性/">
+                            Android系统属性
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-10-24T21:06:21+08:00">
+	
+		    10月 24, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>前缀必须用system\core\init\property_service.c中定义的前缀，<br>进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。<br>PS:不同前缀名权限不同。<br>如果apk不属于system或root用户，则需要在te文件里加入：<br>allow xxx system_prop:property_service { set };</p>
+<p>ctl.start xxx 可以开启rc配置的服务<br>启动带参数的服务：ctl.start xxx:parms<br>获取服务的运行状态：<br>init.svc.<name><br>   State of a named service (“stopped”, “running”, “restarting”)<br>SystemProperties.get(“init.svc.<name>“);</name></name></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/10/24/Android系统属性/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/10/20/Android设备温度节点/">
+                            Android设备温度节点
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-10-20T16:51:17+08:00">
+	
+		    10月 20, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="QUIET-THERM"><a href="#QUIET-THERM" class="headerlink" title="QUIET_THERM"></a>QUIET_THERM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which is more or less a phone skin temperature sensor or</div><div class="line">overall temperature sensor.</div><div class="line">设备表面温度节点，这个最能体现人对手机的感知温度</div></pre></td></tr></table></figure>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/10/20/Android设备温度节点/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
     <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
@@ -751,7 +836,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 14 篇文章
+                找到 16 篇文章
             </p>
         </div>
     </div>

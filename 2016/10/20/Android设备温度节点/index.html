@@ -6,22 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Joy">
-    <title>归档: 2016/9 - Joy</title>
+    <title>Android设备温度节点 - Joy</title>
     <meta name="author" content="Joy">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="haha">
+    <meta name="description" content="QUIET_THERM123which is more or less a phone skin temperature sensor oroverall temperature sensor.设备表面温度节点，这个最能体现人对手机的感知温度">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Joy">
-<meta property="og:url" content="http://joyflyaway.com/archives/2016/09/index.html">
+<meta property="og:title" content="Android设备温度节点">
+<meta property="og:url" content="http://joyflyaway.com/2016/10/20/Android设备温度节点/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="haha">
+<meta property="og:description" content="QUIET_THERM123which is more or less a phone skin temperature sensor oroverall temperature sensor.设备表面温度节点，这个最能体现人对手机的感知温度">
+<meta property="og:updated_time" content="2016-10-20T13:01:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Joy">
-<meta name="twitter:description" content="haha">
+<meta name="twitter:title" content="Android设备温度节点">
+<meta name="twitter:description" content="QUIET_THERM123which is more or less a phone skin temperature sensor oroverall temperature sensor.设备表面温度节点，这个最能体现人对手机的感知温度">
     
     
         
@@ -54,7 +55,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="2">
+<header id="header" data-behavior="5">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Joy</a>
@@ -78,7 +79,7 @@
         
     
 
-<nav id="sidebar" data-behavior="2">
+<nav id="sidebar" data-behavior="5">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -247,397 +248,150 @@
 </nav>
 
             
-            <div id="main" data-behavior="2"
+            <div id="main" data-behavior="5"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/30/Android Log系统/">
-                            Log系统
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-30T15:22:04+08:00">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Android设备温度节点
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2016-10-20T16:51:17+08:00">
 	
-		    9月 30, 2016
+		    10月 20, 2016
     	
     </time>
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>QC打开log入口：*#*#8888#*#*<br>MTK打开log入口：*#*#3646633#*#*<br>
-                    
-                        <a href="/2016/09/30/Android Log系统/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/28/SEAndroid-为APK添加权限/">
-                            SEAndroid:为APK添加权限
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-28T21:17:20+08:00">
-	
-		    9月 28, 2016
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/framework/">framework</a>
-
-
-    
 </div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h2 id="QUIET-THERM"><a href="#QUIET-THERM" class="headerlink" title="QUIET_THERM"></a>QUIET_THERM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which is more or less a phone skin temperature sensor or</div><div class="line">overall temperature sensor.</div><div class="line">设备表面温度节点，这个最能体现人对手机的感知温度</div></pre></td></tr></table></figure>
 
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br>
-                    
-                        <a href="/2016/09/28/SEAndroid-为APK添加权限/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/27/pic-2016-9/">
-                            九月所见
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-27T16:51:46+08:00">
-	
-		    9月 27, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>你好，九月！<br>
-                    
-                        <a href="/2016/09/27/pic-2016-9/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <a href="/2016/09/27/pic-2016-9/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://joyflyaway.com/2016/09/27/pic-2016-9/4.jpg"/>
-                </div>
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/24/Android系统属性/"  data-tooltip="Android系统属性">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/19/cpu使用率监控/" data-tooltip="CPU使用率监控">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
             </a>
-            
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/27/Framework层监听前台进程/">
-                            Framework层监听前台进程
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-27T16:13:50+08:00">
-	
-		    9月 27, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>ActivityStack$moveTaskToFrontLocked: 从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。<br>ActivityStackSupervisor$realStartActivityLocked: Activity创建的时候会被调用。<br>ActivityStack$destroyActivityLocked: Activity销毁的时候会被调用(按返回键)。<br>ActivityStack$completeResumeLocked: Activity resume的时候被调用。<br>
-                    
-                        <a href="/2016/09/27/Framework层监听前台进程/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/26/quick-solution/">
-                            快速解决问题思路
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-26T23:20:00+08:00">
-	
-		    9月 26, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>遇到一个未涉及的领域问题，首先google下，是否有相关答案(可能性较小)。没有的话，用现有知识分析定位问题，需要定位到代码的模块，然后找到模块的顶层代码，试着看，判断出代码的核心类，如有不懂，针对这些核心类google，最终定位到解决方案。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/26/quick-solution/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/25/SeAndroid/">
-                            SeAndroid
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-25T12:31:09+08:00">
-	
-		    9月 25, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/25/SeAndroid/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/18/GUI/">
-                            GUI
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-18T19:26:37+08:00">
-	
-		    9月 18, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>SurfaceFlinger<br>
-                    
-                        <a href="/2016/09/18/GUI/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <a href="/2016/09/18/GUI/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://joyflyaway.com/2016/09/18/GUI/ape_fwk_graphics.png"/>
-                </div>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-google-plus"></i>
             </a>
-            
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/15/water/">
-                            About Jamie
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-15T18:48:57+08:00">
-	
-		    9月 15, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>啦啦啦<br>介绍一位美女!<br>
-                    
-                        <a href="/2016/09/15/water/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-            <a href="/2016/09/15/water/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVOQjJkY0d4N0RPSDVOcU9DWE96bUVSUjZJeVJPQlBmSmhmZ2loSFdUMjJ3PT0.jpg?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg"/>
-                </div>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-facebook-official"></i>
             </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weixin"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
             
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
+                <a class="post-action-btn btn btn--default" href="#">
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/13/AndroidFgThread/">
-                            Android FgThread
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-13T11:22:02+08:00">
-	
-		    9月 13, 2016
-    	
-    </time>
-    
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/framework/">framework</a>
-
-
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>FgThread继承ServiceThread<br>
-                    
-                        <a href="/2016/09/13/AndroidFgThread/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">第 1 页 共 1 页</li>
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
+
+        
+            
+                <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-Android设备温度节点" data-title="Android设备温度节点" data-url="http://joyflyaway.com/2016/10/20/Android设备温度节点/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+    <!--
+    <div class="ds-share" data-thread-key="post-Android设备温度节点" data-title="Android设备温度节点" data-url="http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+      <div class="ds-share-inline">
+        <ul  class="ds-share-icons-16">
+      	   <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+           <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+           <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+           <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+           <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more"></div>
+      </div>
+    </div>-->
+    
 </section>
+
+            
+        
+    </div>
+</article>
 
 
 
@@ -648,6 +402,100 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/24/Android系统属性/"  data-tooltip="Android系统属性">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/10/19/cpu使用率监控/" data-tooltip="CPU使用率监控">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weixin"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weibo"></i><span>Share on weibo</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2016/10/20/Android设备温度节点/&amp;title=Android设备温度节点">
+                <i class="fa fa-weixin"></i><span>Share on weixin</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
             
         </div>
         
@@ -932,6 +780,20 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-uq6ckujehuymyfmbn8n8zsfxcoyigixyxp8h20unr7kwcn8ctosiwstqtaws.min.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'joyflyaway'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">
