@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2016/09/28/SEAndroid-为APK添加权限/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="背景：Apk为手机ROM内置apk。需求：Apk需要读取/proc/pid/stat文件。问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。">
-<meta property="og:updated_time" content="2016-11-04T05:27:58.000Z">
+<meta property="og:updated_time" content="2016-11-24T02:05:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SEAndroid:为APK添加权限">
 <meta name="twitter:description" content="背景：Apk为手机ROM内置apk。需求：Apk需要读取/proc/pid/stat文件。问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。">
@@ -88,7 +88,7 @@
                 </a>
                 <h4 class="sidebar-profile-name">Joy</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>等风来，随心走<br><a href="/about">ABOUT ME</a></p>
+                    <h5 class="sidebar-profile-bio"><p>现就职乐视，从事手机系统开发工作<br><a href="/about">个人简历</a></p>
 </h5>
                 
             </div>
@@ -285,9 +285,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type xxx_app, domain, mlstrustedsubject;app_domain(monitor_app)allow monitor_app xxx_service:service_manager xxx;r_dir_file(monitor_app, domain)</div></pre></td></tr></table></figure>
 <p>然后在device/factory/sepolicy/common/seapp_contexts下添加：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user=system seinfo=platform name=com.letv.android.monitor domain=monitor_app type=app_data_file</div></pre></td></tr></table></figure>
-<p>一般这时候打开apk是会报错：<span class="highlight-text danger">avc : denied</span><br>不用慌，根据提示，缺什么补什么，按下面格式添加即可:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">allow monitor_app xxx_service:service_manager xxx;</div></pre></td></tr></table></figure>
-<p>另外请注意，很多时候se权限不够时，并不会输出log，这时候：<br>1.关闭selinux，看守否是se的问题<br>2.如果是，找到所需se权限的context:<br>(file_contexts  property_contexts  seapp_contexts service_contexts)<br>3.在对应te文件里添加找到的权限</p>
+<p>一般这时候打开apk是会报错：<span class="highlight-text danger">avc : denied</span>
+不用慌，根据提示，缺什么补什么，按下面格式添加即可:
+
+undefined
+
+另外请注意，很多时候se权限不够时，并不会输出log，这时候：
+1.关闭selinux，看守否是se的问题  
+2.如果是，找到所需se权限的context:
+(file_contexts  property_contexts  seapp_contexts service_contexts)  
+3.在对应te文件里添加找到的权限
+
+<span class="highlight-text danger">如何查看selog呢？</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">logcat |grep avc</div><div class="line">dmsg |grep xxx</div></pre></td></tr></table></figure></p>
 
             
         </div>
@@ -534,7 +543,7 @@
         
             <h4 id="about-card-name">Joy</h4>
         
-            <div id="about-card-bio"><p>等风来，随心走<br><a href="/about">ABOUT ME</a></p>
+            <div id="about-card-bio"><p>现就职乐视，从事手机系统开发工作<br><a href="/about">个人简历</a></p>
 </div>
         
         
@@ -789,7 +798,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 18 篇文章
+                找到 21 篇文章
             </p>
         </div>
     </div>
