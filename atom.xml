@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-01-06T08:05:02.000Z</updated>
+  <updated>2017-01-06T09:24:02.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -20,12 +20,29 @@
     <link href="http://joyflyaway.com/2017/01/06/Android%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
     <id>http://joyflyaway.com/2017/01/06/Android中的异常处理机制/</id>
     <published>2017-01-06T08:05:02.000Z</published>
-    <updated>2017-01-06T08:05:02.000Z</updated>
+    <updated>2017-01-06T09:24:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>Apk第一次启动时,AMS通过socket发出请求，zygote接收消息，处理进程创建请求。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">zygoteInit</span><span class="params">(<span class="keyword">int</span> targetSdkVersion, String[] argv, ClassLoader classLoader)</span></span></div><div class="line">        <span class="keyword">throws</span> ZygoteInit.MethodAndArgsCaller &#123;</div><div class="line">    commonInit();</div><div class="line">    nativeZygoteInit();</div><div class="line">    applicationInit(targetSdkVersion, argv, classLoader);</div><div class="line">&#125;    </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</div><div class="line">    ......</div><div class="line">    <span class="comment">/* 线程默认异常处理handler */</span></div><div class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> UncaughtHandler());</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>zygote会对新的进程进行一些基础的初始化，包括了默认异常处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 当应用内部抛出未被处理的异常而退出时，将会抓取当前log */</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">UncaughtHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</div><div class="line">      <span class="comment">// 弹出错误对话框，等待用户选择需要的操作</span></div><div class="line">      ActivityManagerNative.getDefault().handleApplicationCrash(</div><div class="line">              mApplicationObject, <span class="keyword">new</span> ApplicationErrorReport.CrashInfo(e));</div><div class="line"></div><div class="line">      <span class="comment">// 确保进程完全退出</span></div><div class="line">      Process.killProcess(Process.myPid());</div><div class="line">      System.exit(<span class="number">10</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当异常发生后，如果应用没有捕获，则会调用默认UncaughtHandler来处理：<br>APK —&gt; Binder —&gt; AMS    </p>
+<ul>
+<li>handleApplicationCrash()   </li>
+<li>Error Dialog //弹出 error dialog</li>
+<li>wait         //等待用户选择</li>
+<li>exit         //程序完全退出</li>
+</ul>]]></content>
     
     <summary type="html">
     
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
     </summary>
     
+    
+      <category term="Debug" scheme="http://joyflyaway.com/tags/Debug/"/>
     
   </entry>
   
