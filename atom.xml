@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-01-06T09:24:02.000Z</updated>
+  <updated>2017-03-10T03:15:41.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,357 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>电源管理</title>
+    <link href="http://joyflyaway.com/2017/03/10/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
+    <id>http://joyflyaway.com/2017/03/10/电源管理/</id>
+    <published>2017-03-10T03:15:41.000Z</published>
+    <updated>2017-03-10T03:15:41.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查看内存信息</title>
+    <link href="http://joyflyaway.com/2017/03/09/%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF/"/>
+    <id>http://joyflyaway.com/2017/03/09/查看内存信息/</id>
+    <published>2017-03-09T05:28:15.000Z</published>
+    <updated>2017-03-09T08:07:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>除了free与vmstat之外，透过调阅<strong>/proc/meminfo</strong>的内容可以查阅进一步的统计信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">cat /proc/meminfo</div><div class="line">MemTotal:     12142744 kB</div><div class="line">MemFree:      10889316 kB</div><div class="line">Buffers:        391964 kB</div><div class="line">Cached:         522584 kB</div><div class="line">SwapCached:          0 kB</div><div class="line">Active:         407604 kB</div><div class="line">Inactive:       564460 kB</div><div class="line">HighTotal:           0 kB</div><div class="line">HighFree:            0 kB</div><div class="line">LowTotal:     12142744 kB</div><div class="line">LowFree:      10889316 kB</div><div class="line">SwapTotal:    20972816 kB</div><div class="line">SwapFree:     20972816 kB</div><div class="line">Dirty:             304 kB</div><div class="line">Writeback:           0 kB</div><div class="line">AnonPages:       57388 kB</div><div class="line">Mapped:          23556 kB</div><div class="line">Slab:           214100 kB</div><div class="line">PageTables:       7328 kB</div><div class="line">NFS_Unstable:        0 kB</div><div class="line">Bounce:              0 kB</div><div class="line">CommitLimit:  27044188 kB</div><div class="line">Committed_AS:   372876 kB</div><div class="line">VmallocTotal: 34359738367 kB</div><div class="line">VmallocUsed:    281368 kB</div><div class="line">VmallocChunk: 34359456975 kB</div><div class="line">HugePages_Total:     0</div><div class="line">HugePages_Free:      0</div><div class="line">HugePages_Rsvd:      0M</div><div class="line">Hugepagesize:     2048 kB</div></pre></td></tr></table></figure></p>
+<p>他的输出内容非常的多，但你可以分成几块来看：高阶、低阶的与內存统计信息。<br>高阶信息，基本上就等同于是在free看到的那些内容：<br>MemTotal是系统中可用的內存总量，但其实是扣掉了一些被kernel所保留的一点点空间。<br>MemFree是HighFree与LowFree的加总。<br>Buffers是buffer所占用的空间。<br>Cached是不包含SwapCached的cache空间。<br>比较低阶的信息有：<br>Active指的是那些最近或是经常被使用的page，而Inactive则是那些最近都没有被使用的page。当系统需要调用新的page空间时，会先从Inactive的部分下手，因为Active的部分比较有机会被再度使用。<br>HighTotal与HighFree代表的是user space所能使用的以及还剩馀多少的使用空间。<br>LowTotal与LowFree则是kernel space所能使用的以及还剩馀多少的使用空间。<br>SwapTotal与SwapFree指的是swap所能使用以及还剩馀多少空间。<br>Dirty指的是等待被写入disk的数据量。<br>Writeback则是正在被写入disk的数据量。<br>AnonPages为non-paged的空间。<br>Mapped为/dev设备所mapped的空间。<br>Slab是kernel所使用的buffer空间。<br>PageTables是page管理的index大小。<br>VmallocTotal是透过vmalloc（）可以调用的內存大小。<br>VmallocUsed是透过vmalloc（）所调用的內存大小。<br>VmallocChunk则是记录还剩多少连续的可调用的內存空间。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;除了free与vmstat之外，透过调阅&lt;strong&gt;/proc/meminfo&lt;/strong&gt;的内容可以查阅进一步的统计信息：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android便捷命令</title>
+    <link href="http://joyflyaway.com/2017/03/07/Android%E4%BE%BF%E6%8D%B7%E5%91%BD%E4%BB%A4/"/>
+    <id>http://joyflyaway.com/2017/03/07/Android便捷命令/</id>
+    <published>2017-03-07T08:20:18.000Z</published>
+    <updated>2017-03-09T08:07:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="pm"><a href="#pm" class="headerlink" title="pm"></a>pm</h2><p>  pm list package列出安装再设备上的应用：</p>
+<ul>
+<li>不带任何选项：列出所有的应用的包名：<br>pm list package</li>
+<li>-s:列出系统应用<br>pm list package -s</li>
+<li>-3:列出第三方应用<br>pm list package -3</li>
+<li>-f:列出应用包名及对应的apk名及存放位置<br>pm list package -f</li>
+<li>-i:列出应用包名及其安装来源<br>pm list package -i<br>例如：package:com.zhihu.android installer=com.xiaomi.market  </li>
+<li>参数组合使用，例如查找三方应用中知乎的包名、apk存放位置、安装来源：<br>pm list package -f -3 -i zhihu<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">package:/data/app/com.zhihu.android-1.apk=com.zhihu.android  installer=com.xiaomi.market</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>pm path 列出对应包名的.apk位置：</p>
+<ul>
+<li>pm path com.tencent.mobileqq<br>package:/data/app/com.tencent.mobileqq-1.apk</li>
+</ul>
+<p>pm dump，后跟包名，列出指定应用的dump信息，里面有各种信息：</p>
+<ul>
+<li>pm dump com.tencent.mobileqq<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">Packages:</div><div class="line">Package [com.tencent.mobileqq] (4397f810):</div><div class="line">userId=10091 gids=[3003, 3002, 3001, 1028, 1015]</div><div class="line">pkg=Package&#123;43851660 com.tencent.mobileqq&#125;</div><div class="line">codePath=/data/app/com.tencent.mobileqq-1.apk</div><div class="line">resourcePath=/data/app/com.tencent.mobileqq-1.apk</div><div class="line">nativeLibraryPath=/data/app-lib/com.tencent.mobileqq-1</div><div class="line">versionCode=242 targetSdk=9</div><div class="line">versionName=5.6.0</div><div class="line">applicationInfo=ApplicationInfo&#123;43842cc8 com.tencent.mobileqq&#125;</div><div class="line">flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]</div><div class="line">dataDir=/data/data/com.tencent.mobileqq</div><div class="line">supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]</div><div class="line">usesOptionalLibraries:</div><div class="line">com.google.android.media.effects</div><div class="line">com.motorola.hardware.frontcamera</div><div class="line">timeStamp=2015-05-13 14:04:24</div><div class="line">firstInstallTime=2015-04-03 20:50:07</div><div class="line">lastUpdateTime=2015-05-13 14:05:02</div><div class="line">installerPackageName=com.xiaomi.market</div><div class="line">signatures=PackageSignatures&#123;4397f8d8 [43980488]&#125;</div><div class="line">permissionsFixed=true haveGids=true installStatus=1</div><div class="line">pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]</div><div class="line">User 0:  installed=true blocked=false stopped=false notLaunched=false enabled=0</div><div class="line">grantedPermissions:</div><div class="line">android.permission.CHANGE_WIFI_MULTICAST_STATE</div><div class="line">com.tencent.qav.permission.broadcast</div><div class="line">com.tencent.photos.permission.DATA</div><div class="line">com.tencent.wifisdk.permission.disconnect</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>pm install，安装应用。目标apk存放与PC端，用adb install安装。目标apk存放于Android设备上，用pm install安装             </p>
+<p>pm uninstall，卸载应用，同adb uninstall,后面跟的参数都是应用的包名</p>
+<p>pm clear，清除应用数据</p>
+<h2 id="am"><a href="#am" class="headerlink" title="am"></a>am</h2><p>am start，启动一个Activity，以启动系统相机应用为例：   </p>
+<ul>
+<li>启动相机：<br>am start -n com.android.camera/.Camera</li>
+<li>先停止目标应用，再启动：<br>am start -S com.android.camera/.Camera</li>
+<li><p>等待应用完成启动：<br>am start -W com.android.camera/.Camera</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER]                           cmp=com.android.camera/.Camera &#125;</div><div class="line">   Status: ok</div><div class="line">   Activity: com.android.camera/.Camera</div><div class="line">   ThisTime: 500</div><div class="line">   TotalTime: 500</div><div class="line">   Complete</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动默认C页：<br>am start -a android.intent.action.VIEW -d <a href="http://testerhome.com" target="_blank" rel="external">http://testerhome.com</a></p>
+</li>
+<li>启动拨号器拨打10086<br>am start -a android.intent.action.CALL -d tel:10086</li>
+<li>am monitor，监控crash与ANR</li>
+<li>am force-stop，后跟包名，结束应用</li>
+<li>am startsevice，启动一个服务</li>
+<li>am broadcast，发送一个广播</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android名词释义</title>
+    <link href="http://joyflyaway.com/2017/03/07/Android%E5%90%8D%E8%AF%8D%E9%87%8A%E4%B9%89/"/>
+    <id>http://joyflyaway.com/2017/03/07/Android名词释义/</id>
+    <published>2017-03-07T03:19:14.000Z</published>
+    <updated>2017-03-09T08:07:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<ul>
+<li>provisioning(配置,服务开通)</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android双应用功能实现</title>
+    <link href="http://joyflyaway.com/2017/03/02/Android%E5%8F%8C%E5%BA%94%E7%94%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://joyflyaway.com/2017/03/02/Android双应用功能实现/</id>
+    <published>2017-03-02T02:58:33.000Z</published>
+    <updated>2017-03-02T02:58:33.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>linux常用命令</title>
+    <link href="http://joyflyaway.com/2017/02/28/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://joyflyaway.com/2017/02/28/linux常用命令/</id>
+    <published>2017-02-28T13:30:31.000Z</published>
+    <updated>2017-03-03T01:07:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --><br>目录下查找替换<br>sed -i “s/old/new/g” <code>grep old -rl /www</code></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>shell命令</title>
+    <link href="http://joyflyaway.com/2017/02/17/shell%E5%91%BD%E4%BB%A4/"/>
+    <id>http://joyflyaway.com/2017/02/17/shell命令/</id>
+    <published>2017-02-17T03:27:46.000Z</published>
+    <updated>2017-02-17T03:28:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --><br>列出你所有的僵尸进程:<br>ps -el | grep ‘Z</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Joy&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android资源查找</title>
+    <link href="http://joyflyaway.com/2017/02/03/Android%E8%B5%84%E6%BA%90%E6%9F%A5%E6%89%BE/"/>
+    <id>http://joyflyaway.com/2017/02/03/Android资源查找/</id>
+    <published>2017-02-03T13:12:06.000Z</published>
+    <updated>2017-02-16T09:40:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="Android-API-使用例子："><a href="#Android-API-使用例子：" class="headerlink" title="Android API 使用例子："></a>Android API 使用例子：</h2><p><a href="https://developer.android.com/samples/index.html" target="_blank" rel="external">https://developer.android.com/samples/index.html</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Joy&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查看Android系统历史使用数据</title>
+    <link href="http://joyflyaway.com/2017/02/03/%E6%9F%A5%E7%9C%8BAndroid%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE/"/>
+    <id>http://joyflyaway.com/2017/02/03/查看Android系统历史使用数据/</id>
+    <published>2017-02-03T12:31:20.000Z</published>
+    <updated>2017-02-16T09:41:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="应用使用情况统计信息"><a href="#应用使用情况统计信息" class="headerlink" title="应用使用情况统计信息"></a>应用使用情况统计信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">现在可以利用新增的 android.app.usage API 访问 Android 设备上的应用使用历史记录。此 API 提供比已弃用的 getRecentTasks() 方法更为详细的使用信息。要使用此 API，您必须先在清单中声明 &quot;android.permission.PACKAGE_USAGE_STATS&quot; 权限。用户还必须通过 Settings &gt; Security &gt; Apps 为该应用启用访问使用情况的权限。</div><div class="line"></div><div class="line">系统以应用为单位收集使用数据，按天、周、月和年汇总数据。系统保留这些数据的最长持续时间如下：</div><div class="line"></div><div class="line">每日数据：7 天</div><div class="line">每周数据：4 周</div><div class="line">每月数据：6 个月</div><div class="line">每年数据：2 年</div><div class="line">系统会为每个应用记录以下数据：</div><div class="line"></div><div class="line">最后一次使用应用的时间</div><div class="line">在该时间间隔（以天、周、月或年为单位）内应用位于前台的总时长</div><div class="line">一天之中当组件（以软件包和 Activity 名称标识）转入前台或后台时记录的时间戳</div><div class="line">设备配置发生变化（如设备屏幕方向因旋转而发生变化）时记录的时间戳</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Joy&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查看Android系统运行信息</title>
+    <link href="http://joyflyaway.com/2017/01/30/%E6%9F%A5%E7%9C%8BAndroid%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E4%BF%A1%E6%81%AF/"/>
+    <id>http://joyflyaway.com/2017/01/30/查看Android系统运行信息/</id>
+    <published>2017-01-30T04:16:03.000Z</published>
+    <updated>2017-02-17T03:28:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li><p>service list</p>
+<ul>
+<li>whether exist in system service</li>
+</ul>
+</li>
+<li><p>showmap -s [pid]</p>
+<ul>
+<li>Memory allocation dump</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;p&gt;service list&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;whether exist in system service&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;showmap -s [pid]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Memory allocatio
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android Native Tombstone/Crash 分析</title>
+    <link href="http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-%E5%88%86%E6%9E%90/"/>
+    <id>http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-分析/</id>
+    <published>2017-01-14T08:12:32.000Z</published>
+    <updated>2017-01-30T04:17:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>APK运行异常时，会闪退，然后弹出对话框“xxx应用已停止运行。。。”，造成这种现象的原因有两种：</p>
+<ul>
+<li>发生了未捕获的异常</li>
+<li>Native层运行异常</li>
+</ul>
+<p>Tombstone 是 Android 用来记录 native 进程崩溃的 core dump 日志</p>
+<h2 id="Tombstone-文件格式"><a href="#Tombstone-文件格式" class="headerlink" title="Tombstone 文件格式"></a>Tombstone 文件格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***</div><div class="line">Build fingerprint: &apos;LeEco/X7_CN/le_x7:6.0/KGXCNFN5961511291D/1480366802:userdebug/test-keys&apos;   </div><div class="line">Revision: &apos;0&apos;   </div><div class="line">ABI: &apos;arm64&apos;   </div><div class="line">pid: 2741, tid: 2832, name: L_UPDATE_ACTION  &gt;&gt;&gt; com.google.android.gms &lt;&lt;&lt;   </div><div class="line">    signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0</div><div class="line">    x0   0000000000000000  x1   0000000000000000  x2   0000000000000006     </div><div class="line">    x3   000000000000736d  x4   0000000000000003  x5   0000007f6b9c8090   </div><div class="line"></div><div class="line">backtrace:</div><div class="line">    #00 pc 000000000001cff4  /system/lib64/libc.so (strlen+16)</div><div class="line">    #01 pc 0000000000012e24  /system/lib64/libutils.so (_ZN7android7String8C2EPKc+24)</div><div class="line">    #02 pc 0000000000116518  /system/lib64/libandroid_runtime.so</div><div class="line">    #03 pc 00000000029a5438  /data/dalvik-cache/arm64/system@framework@boot.oat (offset 0x2696000)</div><div class="line"></div><div class="line">stack:</div><div class="line">         0000007f78421b60  0000000000000000</div></pre></td></tr></table></figure>
+<ul>
+<li>编译信息</li>
+<li>问题进程－问题线程－进程名－错误信号</li>
+<li>寄存器的值</li>
+<li>当前堆栈</li>
+<li>历史堆栈</li>
+</ul>
+<h3 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h3><ul>
+<li>越界访问</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;APK运行异常时，会闪退，然后弹出对话框“xxx应用已停止运行。。。”，造成这种现象的原因有两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;发生了未捕获的
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>LOG定位</title>
+    <link href="http://joyflyaway.com/2017/01/11/LOG%E5%AE%9A%E4%BD%8D/"/>
+    <id>http://joyflyaway.com/2017/01/11/LOG定位/</id>
+    <published>2017-01-11T11:52:24.000Z</published>
+    <updated>2017-01-11T11:52:24.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android存储系统</title>
+    <link href="http://joyflyaway.com/2017/01/11/Android%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://joyflyaway.com/2017/01/11/Android存储系统/</id>
+    <published>2017-01-11T01:54:36.000Z</published>
+    <updated>2017-01-30T04:17:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service installd /system/bin/installd</div><div class="line">    <span class="keyword">class</span> main</div><div class="line">    socket installd stream <span class="number">600</span> system system</div></pre></td></tr></table></figure>
+<h2 id="Log-分析"><a href="#Log-分析" class="headerlink" title="Log 分析"></a>Log 分析</h2><p>关键字搜索</p>
+<ul>
+<li>Storage manager</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android存储系统&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android双应用原理</title>
+    <link href="http://joyflyaway.com/2017/01/10/Android%E5%8F%8C%E5%BA%94%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+    <id>http://joyflyaway.com/2017/01/10/Android双应用原理/</id>
+    <published>2017-01-10T03:42:27.000Z</published>
+    <updated>2017-02-16T09:41:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="托管配置"><a href="#托管配置" class="headerlink" title="托管配置"></a>托管配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Android 5.0 提供了用于在企业环境内运行应用的新功能。如果用户已有个人帐户，则设备管理员可启动托管配置进程，向设备添加共存但独立的托管配置文件。与托管配置文件关联的应用与非托管应用一并出现在用户的启动器、最近使用的应用屏幕和通知中。</div><div class="line"></div><div class="line">要启动托管配置进程，请通过 Intent 发送 ACTION_PROVISION_MANAGED_PROFILE。如果调用成功，系统会触发 onProfileProvisioningComplete() 回调。然后您就可以调用 setProfileEnabled() 来启用此托管配置文件。</div><div class="line"></div><div class="line">默认情况下，托管配置文件中只启用了一小部分应用。您可以通过调用 enableSystemApp() 在托管配置文件中安装更多应用。</div><div class="line"></div><div class="line">如果您要开发启动器应用，可以使用新增的 LauncherApps 类获取可为当前用户启动的 Activity 以及任何关联托管配置文件的列表。您的启动器可通过向可绘制图标追加工作徽章，以醒目方式显示托管应用。要检索带徽章的图标，请调用 getUserBadgedIcon()。</div><div class="line"></div><div class="line">要查看如何使用新功能，请参阅此版本中的 BasicManagedProfile 实现示例。</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android中的多用户双应用原理&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android广播流程</title>
+    <link href="http://joyflyaway.com/2017/01/09/Android%E5%B9%BF%E6%92%AD%E6%B5%81%E7%A8%8B/"/>
+    <id>http://joyflyaway.com/2017/01/09/Android广播流程/</id>
+    <published>2017-01-09T07:41:38.000Z</published>
+    <updated>2017-01-30T04:17:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">framework/base/core/java/android/app/ContextImpl.java</div></pre></td></tr></table></figure>
+<h2 id="一、发送过程"><a href="#一、发送过程" class="headerlink" title="一、发送过程"></a>一、发送过程</h2><h3 id="1-1-ContextImpl-sendBroadcast"><a href="#1-1-ContextImpl-sendBroadcast" class="headerlink" title="1.1 ContextImpl#sendBroadcast"></a>1.1 ContextImpl#sendBroadcast</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// UID = system，直接调用sendBroadcast方法，会警告，应调用sendBroadcastAsUser   </span></div><div class="line">warnIfCallingFromSystemProcess();</div><div class="line"></div><div class="line"><span class="comment">// 获取所查询URI的MIME类型，如果没有类型则返回null，这里应该是返回null   </span></div><div class="line">String resolvedType = intent.resolveTypeIfNeeded(getContentResolver());</div><div class="line"></div><div class="line"><span class="comment">// 调用ActivityManagerService#broadcastIntent方法</span></div><div class="line">ActivityManagerNative.getDefault().broadcastIntent</div></pre></td></tr></table></figure>
+<h3 id="1-2-ActivityManagerService-broadcastIntent"><a href="#1-2-ActivityManagerService-broadcastIntent" class="headerlink" title="1.2 ActivityManagerService#broadcastIntent"></a>1.2 ActivityManagerService#broadcastIntent</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h2 id="二、注册过程"><a href="#二、注册过程" class="headerlink" title="二、注册过程"></a>二、注册过程</h2><h3 id="2-1-ActivityManagerService-registerReceiver"><a href="#2-1-ActivityManagerService-registerReceiver" class="headerlink" title="2.1 ActivityManagerService#registerReceiver"></a>2.1 ActivityManagerService#registerReceiver</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/*Keeps track of all IIntentReceivers that have been registered for    broadcasts.Hash keys are the receiver IBinder, hash value is a ReceiverList.*/</span></div><div class="line">mRegisteredReceivers.put(receiver.asBinder(), rl);</div><div class="line">BroadcastFilter bf = <span class="keyword">new</span> BroadcastFilter(filter,  rl, callerPackage,  permission, callingUid, userId);</div><div class="line">rl.add(bf);</div><div class="line">mReceiverResolver.addFilter(bf);</div><div class="line">queue.enqueueParallelBroadcastLocked(r);</div><div class="line">queue.scheduleBroadcastsLocked();</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;介绍Android广播的处理流程&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Android中的异常处理机制</title>
@@ -104,9 +455,10 @@
     <link href="http://joyflyaway.com/2016/12/21/dumpsys%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D/"/>
     <id>http://joyflyaway.com/2016/12/21/dumpsys参数介绍/</id>
     <published>2016-12-21T09:38:21.000Z</published>
-    <updated>2016-12-21T09:39:32.000Z</updated>
+    <updated>2017-01-30T04:17:07.000Z</updated>
     
     <content type="html"><![CDATA[<p>dumpsys -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">列出所有服务名</div></pre></td></tr></table></figure></p>
+<p>dumpsys gfxinfo [pid]<br>dumpsys meminfo [pid]</p>
 ]]></content>
     
     <summary type="html">
@@ -155,525 +507,6 @@
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Android系统属性</title>
-    <link href="http://joyflyaway.com/2016/10/24/Android%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7/"/>
-    <id>http://joyflyaway.com/2016/10/24/Android系统属性/</id>
-    <published>2016-10-24T13:06:21.000Z</published>
-    <updated>2016-10-25T14:03:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前缀必须用system\core\init\property_service.c中定义的前缀，<br>进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。<br>PS:不同前缀名权限不同。<br>如果apk不属于system或root用户，则需要在te文件里加入：<br>allow xxx system_prop:property_service { set };</p>
-<p>ctl.start xxx 可以开启rc配置的服务<br>启动带参数的服务：ctl.start xxx:parms<br>获取服务的运行状态：<br>init.svc.<name><br>   State of a named service (“stopped”, “running”, “restarting”)<br>SystemProperties.get(“init.svc.<name>“);</name></name></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前缀必须用system\core\init\property_service.c中定义的前缀，&lt;br&gt;进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。&lt;br&gt;PS:不同前缀名权限不同。&lt;br&gt;如果apk不属于system或root
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android设备温度节点</title>
-    <link href="http://joyflyaway.com/2016/10/20/Android%E8%AE%BE%E5%A4%87%E6%B8%A9%E5%BA%A6%E8%8A%82%E7%82%B9/"/>
-    <id>http://joyflyaway.com/2016/10/20/Android设备温度节点/</id>
-    <published>2016-10-20T08:51:17.000Z</published>
-    <updated>2016-10-20T13:01:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="QUIET-THERM"><a href="#QUIET-THERM" class="headerlink" title="QUIET_THERM"></a>QUIET_THERM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which is more or less a phone skin temperature sensor or</div><div class="line">overall temperature sensor.</div><div class="line">设备表面温度节点，这个最能体现人对手机的感知温度</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;QUIET-THERM&quot;&gt;&lt;a href=&quot;#QUIET-THERM&quot; class=&quot;headerlink&quot; title=&quot;QUIET_THERM&quot;&gt;&lt;/a&gt;QUIET_THERM&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;tabl
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CPU使用率监控</title>
-    <link href="http://joyflyaway.com/2016/10/19/cpu%E4%BD%BF%E7%94%A8%E7%8E%87%E7%9B%91%E6%8E%A7/"/>
-    <id>http://joyflyaway.com/2016/10/19/cpu使用率监控/</id>
-    <published>2016-10-19T08:49:27.000Z</published>
-    <updated>2016-10-19T09:17:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>核心类：ProcessCpuTracker<br><a id="more"></a><br><figure class="codeblock codeblock--tabbed"><figcaption><span>获取进程cpu使用率</span><ul class="tabs"><li class="tab active">java</li></ul></figcaption><div class="tabs-content"><figure class="highlight java" style="display: block;"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mProcessCpuTracker.update();</span><br><span class="line"><span class="keyword">int</span> num = mProcessCpuTracker.countWorkingStats();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num; i++) {</span><br><span class="line">  ProcessCpuTracker.Stats st = mProcessCpuTracker.getWorkingStats(i);</span><br><span class="line">  <span class="keyword">long</span> total = (st.rel_uptime + <span class="number">5</span>) / <span class="number">10</span>;</span><br><span class="line">  <span class="keyword">if</span> (total == <span class="number">0</span>) total = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">long</span> valid = st.rel_utime +  st.rel_stime;</span><br><span class="line">  <span class="keyword">long</span> thousands = (valid * <span class="number">1000</span>) / total;</span><br><span class="line">  <span class="keyword">long</span> hundreds = thousands / <span class="number">100</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure></div></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;核心类：ProcessCpuTracker&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>十一有感</title>
-    <link href="http://joyflyaway.com/2016/10/06/%E5%8D%81%E4%B8%80%E6%9C%89%E6%84%9F/"/>
-    <id>http://joyflyaway.com/2016/10/06/十一有感/</id>
-    <published>2016-10-06T03:18:34.000Z</published>
-    <updated>2016-10-07T02:27:09.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<ul>
-<li>纸上得来终觉浅 绝知此事要躬行</li>
-<li>要有计划</li>
-<li>要有备用方案</li>
-<li>养成洞察推理的习惯</li>
-<li>训练自己的思维方式：横纵时空，归纳演绎</li>
-<li>笑看世界</li>
-<li>幸福主要来自内心</li>
-<li>一个人也可以很快乐</li>
-<li>怀有感恩的心，与外界和谐共处</li>
-<li>对水保持敬畏之心</li>
-<li>不要在低电量下做事</li>
-<li>发展的眼光看问题</li>
-<li>在路上，就很美好</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;假期内的所见所感。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>滨海栈道</title>
-    <link href="http://joyflyaway.com/2016/10/03/%E6%BB%A8%E6%B5%B7%E6%A0%88%E9%81%93/"/>
-    <id>http://joyflyaway.com/2016/10/03/滨海栈道/</id>
-    <published>2016-10-03T08:55:41.000Z</published>
-    <updated>2016-10-03T14:28:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="1.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="1.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="2.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="2.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="3.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="3.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="4.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="4.jpg" alt=""></a></div><div style="clear:both;"></div>
-<div class="figure fig-33 nocaption" style="width:;"><a class="fancybox" href="7.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="7.jpg" alt=""></a></div>
-<div class="figure fig-33" style="width:;"><a class="fancybox" href="6.jpg" title="独轮车陪我走" data-fancybox-group="travel"><img class="fig-img" src="6.jpg" alt="独轮车陪我走"></a><span class="caption">独轮车陪我走</span></div>
-<div class="figure fig-33 nocaption" style="width:;"><a class="fancybox" href="8.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="8.jpg" alt=""></a></div><div style="clear:both;"></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="9.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="9.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="10.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="10.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="11.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="11.jpg" alt=""></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="12.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="12.jpg" alt=""></a></div><div style="clear:both;"></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;盐田滨海栈道随拍。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="徒步" scheme="http://joyflyaway.com/tags/%E5%BE%92%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>香港徒步线路</title>
-    <link href="http://joyflyaway.com/2016/10/02/%E9%A6%99%E6%B8%AF%E5%BE%92%E6%AD%A5%E7%BA%BF%E8%B7%AF/"/>
-    <id>http://joyflyaway.com/2016/10/02/香港徒步线路/</id>
-    <published>2016-10-02T05:28:01.000Z</published>
-    <updated>2016-10-02T06:34:06.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="麦理浩径"><a href="#麦理浩径" class="headerlink" title="麦理浩径"></a>麦理浩径</h2><h3 id="路程"><a href="#路程" class="headerlink" title="路程"></a>路程</h3><p>约14公里/ 徒步7小时</p>
-<h3 id="交通指示"><a href="#交通指示" class="headerlink" title="交通指示"></a>交通指示</h3><p>(旺角）东铁线到沙田站（8元），出地铁站在地面沙田  总公交站坐299巴士（10元），30站后到西贡市公交总站，转94专线巴士（5.8元）到北潭涌巴士站，往前走小段就能看到麦里浩经的牌子。</p>
-<h2 id="港岛径的第八段-又称作龙脊远足径"><a href="#港岛径的第八段-又称作龙脊远足径" class="headerlink" title="港岛径的第八段(又称作龙脊远足径)"></a>港岛径的第八段(又称作龙脊远足径)</h2><h3 id="路程-1"><a href="#路程-1" class="headerlink" title="路程"></a>路程</h3><p>约8.5公里/ 徒步4小时</p>
-<h3 id="交通指示-1"><a href="#交通指示-1" class="headerlink" title="交通指示"></a>交通指示</h3><p>从港铁筲箕湾站A3出口就是筲箕湾巴士总站，找到9号双层巴士，在石澳道土地湾巴士站下车。</p>
-<h2 id="凤凰径-三段"><a href="#凤凰径-三段" class="headerlink" title="凤凰径(三段)"></a>凤凰径(三段)</h2><h3 id="路程-2"><a href="#路程-2" class="headerlink" title="路程"></a>路程</h3><p>约4.5公里/ 徒步2小时</p>
-<h3 id="路线："><a href="#路线：" class="headerlink" title="路线："></a>路线：</h3><p>伯公坳&gt;&gt;凤凰山&gt;&gt;昂坪</p>
-<h3 id="交通指示-2"><a href="#交通指示-2" class="headerlink" title="交通指示"></a>交通指示</h3><p>由梅窝码头乘搭3号、3M号至伯公坳下车;由东涌市中心乘搭3号、3M号、11号、23号至伯公坳下车;回程搭乘23号巴士返回东涌市中心。</p>
-<h3 id="经验"><a href="#经验" class="headerlink" title="经验"></a>经验</h3><p>攀登凤凰山观日出，大概需要两小时，建议您在登山前一晚，入住昂坪的旅舍。次日凌晨4时从“心经简林”附近的“凤凰观日”牌坊出发，并按指示牌沿俗称“天梯”的一段凤凰径登山，在早上约6时前到达山顶，等待日出的一刻。</p>
-<h2 id="山顶环回步行径"><a href="#山顶环回步行径" class="headerlink" title="山顶环回步行径"></a>山顶环回步行径</h2><h3 id="路程-3"><a href="#路程-3" class="headerlink" title="路程"></a>路程</h3><p>约3.5公里/ 徒步1.5小时</p>
-<h3 id="交通指示-3"><a href="#交通指示-3" class="headerlink" title="交通指示"></a>交通指示</h3><p>由港铁中环站J2出口步行至花园道山下缆车总站，再乘山顶缆车登山，回程于凌霄阁山顶缆车站乘缆车至中环花园道山下缆车总站。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;分享香港有名的徒步线路。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>尼泊尔</title>
-    <link href="http://joyflyaway.com/2016/10/01/%E5%B0%BC%E6%B3%8A%E5%B0%94/"/>
-    <id>http://joyflyaway.com/2016/10/01/尼泊尔/</id>
-    <published>2016-10-01T05:23:12.000Z</published>
-    <updated>2016-10-02T05:28:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>徒步路线  </p>
-<ul>
-<li>大环ACT</li>
-<li>ABC+poonhill</li>
-<li>EBC</li>
-<li>ABC</li>
-<li>木斯塘(MUSTANG)</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;徒步路线  &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;大环ACT&lt;/li&gt;
-&lt;li&gt;ABC+poonhill&lt;/li&gt;
-&lt;li&gt;EBC&lt;/li&gt;
-&lt;li&gt;ABC&lt;/li&gt;
-&lt;li&gt;木斯塘(MUSTANG)&lt;/li&gt;
-&lt;/ul&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Log系统</title>
-    <link href="http://joyflyaway.com/2016/09/30/Android%20Log%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://joyflyaway.com/2016/09/30/Android Log系统/</id>
-    <published>2016-09-30T07:22:04.000Z</published>
-    <updated>2016-11-16T02:52:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="Log分类："><a href="#Log分类：" class="headerlink" title="Log分类："></a>Log分类：</h2><ul>
-<li><p>Mobile Log(也叫AP Log)</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">涉及到应用层相关的log:ARN,FC</div><div class="line">再细分包含：kernel,main,event,radio</div></pre></td></tr></table></figure>
-<ul>
-<li>events_log</li>
-<li>main_log</li>
-<li>sys_log</li>
-<li>radio_log</li>
-</ul>
-</li>
-<li>bugreport</li>
-<li>dropbox</li>
-<li><p>traceview</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Debug.startMethodTracingSamplingEx</div></pre></td></tr></table></figure>
-</li>
-<li><p>systrace  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">atrace -z gfx input view wm am sched freq idle</div><div class="line">-b 10480 -t 15 -c --async_start</div></pre></td></tr></table></figure>
-</li>
-<li><p>dmesg</p>
-</li>
-<li>last_kmsg : <code>/proc/last_kmsg</code></li>
-<li><p>tombstones  </p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">产生异常信号的C/C++程序与debuggerd建立连接后，debuggerd将进程信息dump</div><div class="line">到tombstone_XX文件中保存到/data/tombstone/文件夹下。可通过</div><div class="line">查看tombstone_XX分析异常进程的堆栈信息。</div><div class="line">在控制台中以命令debuggerd -b [&lt;tid&gt;]启动。如果加上-b参数，则由tid指定的进</div><div class="line">程的信息将dump到控制台上，否则dump到tombstone文件中。控制台中运行</div><div class="line">命令callstack/dumpstate，进程信息会写入这两个命令指定的文件中。</div></pre></td></tr></table></figure>
-</li>
-<li><p>anr</p>
-</li>
-<li>bootprof : /proc/bootprof</li>
-<li>properties</li>
-<li>coredump   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">由linux支持，进程崩溃时记录存储堆栈空间，寄存器等相关内容，保留致命现场数据，便于分析查找根源。</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="MTK"><a href="#MTK" class="headerlink" title="MTK"></a>MTK</h4><ul>
-<li>crash_log</li>
-</ul>
-<h2 id="Log分析工具："><a href="#Log分析工具：" class="headerlink" title="Log分析工具："></a>Log分析工具：</h2><h4 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a>logcat</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">参数：</div><div class="line">-c:清楚日志</div><div class="line">-v:设置输出格式（time，process，tag）</div><div class="line">-b:查看指定日至缓冲区(radio，events，main，all)</div></pre></td></tr></table></figure>
-<h4 id="bugreport"><a href="#bugreport" class="headerlink" title="bugreport"></a>bugreport</h4><p>记录dumpsys,dumpstat和logcat等信息，包括进程列表、内存信息、VM等，获取的内容相当丰富。</p>
-<h2 id="对Log分析，定位"><a href="#对Log分析，定位" class="headerlink" title="对Log分析，定位"></a>对Log分析，定位</h2><ul>
-<li>crash问题：通过搜索FATAL关键字，可以快速定位到错误点。</li>
-<li>anr&amp;fc:搜索<span class="highlight-text primary">am_anr</span> in event log and <span class="highlight-text primary">ANR in</span> main log.  <ul>
-<li>定位到log后，如果cpu使用率高，表明在进行大量计算或死循环，如果cpu使用率不高，说明处于IOWait状态。</li>
-<li>再结合data/anr/traces.txt分析</li>
-</ul>
-</li>
-</ul>
-<h2 id="Logs-for-different-Feature-Group"><a href="#Logs-for-different-Feature-Group" class="headerlink" title="Logs for different Feature Group"></a>Logs for different Feature Group</h2><ul>
-<li><p>Android AOSP  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">App, Framework, Kernel</div><div class="line">Wlan, BT, Camera, Audio, GPS, Sensor, TP, Fingerprints</div></pre></td></tr></table></figure>
-</li>
-<li><p>Platform BSP</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Qualcomm: System Crash, Memory Dump  </div><div class="line">Qualcomm + MTK: Media, Modem, Audio, TCP IP</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Logs-for-different-platform-MTK-and-Qualcomm"><a href="#Logs-for-different-platform-MTK-and-Qualcomm" class="headerlink" title="Logs for different platform - MTK and Qualcomm"></a>Logs for different platform - MTK and Qualcomm</h2><ul>
-<li><p>MTK:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. Generally for MTK platform, the Offline MTKLoger will be fully enough</div><div class="line">2. For some display issue, also need dumpsys and dumpstate</div><div class="line">   adb shell dumpsys &gt; DumpSys.txt &amp; adb shell dumpstate &gt; DumpState.txt</div></pre></td></tr></table></figure>
-</li>
-<li><p>Qualcomm:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. The Offline log is less than needed generally, especially for Modem related feature.</div><div class="line">   (The Offline Log should only be used for Daily Use scenario, or AP + Kernel + TCP log capture)</div><div class="line">2. Modem related, GPS, Audio, and some others feature, Its’ better to take trace log via QXDM</div><div class="line">3. Everything MTK needed for more info (dumpstate and dumpsys) is also needed for Qualcomm</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="Log获取方式"><a href="#Log获取方式" class="headerlink" title="Log获取方式"></a>Log获取方式</h2><ul>
-<li><p>开机log  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb shell dmesg &gt; dmesg.text</div></pre></td></tr></table></figure>
-</li>
-<li><p>kernel log(kernel缓冲区的log)  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb shell cat proc/kmsg &gt; kmsg.txt</div><div class="line">adb shell cat /proc/last_kmsg &gt;/local/file/name</div></pre></td></tr></table></figure>
-</li>
-<li><p>bugreport</p>
-</li>
-</ul>
-<h2 id="Log保存路径"><a href="#Log保存路径" class="headerlink" title="Log保存路径"></a>Log保存路径</h2><ul>
-<li>/data/anr<div class="alert info"><p>Some trace files seem to get here (Dalvik writes stack traces here on ANR, i.e. “Application Not Responding” aka “Force-Close”;</p>
-</div></li>
-<li>/data/tombstones<div class="alert info"><p>It may hold several tombstone_nn files (with nn being a serial, increased with every new file). As tombstones are placed for the dead, it is done here for “processes died by accident” (i.e. crashed) – and it is what is referred to as “core dumps” on Linux/Unix systems. However, not all apps create tombstones; this must be explicitly enabled by the developer  </p>
-</div></li>
-<li>/data/system/dropbox<div class="alert info"><p>dropbox日志文件的命名有一定的规则，其前缀都是一个特定的tag（标签）,<br>tag由两部分组成，合起来是“进程类型_事件类型”。<br>processClass函数返回该进程的类型，包括<code>system_server</code>,<code>system_app</code>和<code>data_app</code>。<br>eventType用于指定事件类型，目前也有3种类型：<code>crash</code>,<code>wtf</code>和<code>anr</code><br>如SYSTEM_BOOT、SYSTEM_TOMBSTONE等，这些都是由BootReceiver在收到BOOT_COMPLETE广播后收集相关信息并传递给DBMS而生成的日志文件。</p>
-</div>
-</li>
-</ul>
-<h2 id="Android-Tracing-–-App-App-FW-–-MTK-Qualcomm"><a href="#Android-Tracing-–-App-App-FW-–-MTK-Qualcomm" class="headerlink" title="Android Tracing – App, App FW – MTK + Qualcomm"></a>Android Tracing – App, App FW – MTK + Qualcomm</h2><ul>
-<li><p>Logcat, Kernel Log, Pull ANR, Tombstone, Dropbox out</p>
-</li>
-<li><p>ANR file is necessary log for “Application not responsible”<br>Force Close: FC logcat must Containing the keyword “fatal exception”</p>
-</li>
-<li><p>Most Feature (such as APK and display level) only need Logcat + Kernel Log</p>
-</li>
-</ul>
-<h2 id="logcat-1"><a href="#logcat-1" class="headerlink" title="logcat"></a>logcat</h2><ul>
-<li>logcat -v threadtime -d *:v  </li>
-<li>logcat -b events -v threadtime -d *:v</li>
-</ul>
-<h2 id="ptrace"><a href="#ptrace" class="headerlink" title="ptrace"></a>ptrace</h2><p>ptrace 提供了一种父进程可以控制子进程运行，并可以检查和改变它的核心image。它主要用于实现断点调试。一个被跟踪的进程运行中，直到发生一个信号，则进程被中止，并且通知其父进程。在进程中止的状态下，进程的内存空间可以被读写。父进程还可以使子进程继续执行，并选择是否是否忽略引起中止的信号。</p>
-<h2 id="Log分析"><a href="#Log分析" class="headerlink" title="Log分析"></a>Log分析</h2><ul>
-<li>先确定错误发生时间，缩小log寻找范围</li>
-<li>通过进程id来抽取log<div class="alert info"><p>Log的打印顺序并不完全对应程序的执行顺序<br>c++层和java层返回的线程id并不是一样的概念</p>
-</div>
-</li>
-</ul>
-<h4 id="native-log分析"><a href="#native-log分析" class="headerlink" title="native log分析"></a>native log分析</h4><ul>
-<li>根据pid tid定位到进程id，然后根据id寻找上下文log</li>
-<li>查看backtrace，用add2line -f -e path来找到调用栈</li>
-</ul>
-<h4 id="FC"><a href="#FC" class="headerlink" title="FC"></a>FC</h4><ul>
-<li>常规FC，在Main LOG 关键字 “FATAL EXCEPTION”</li>
-<li>Native Crash，在Main LOG 关键字 “backtrace”</li>
-</ul>
-<h4 id="ANR"><a href="#ANR" class="headerlink" title="ANR"></a>ANR</h4><ul>
-<li>在Main LOG 中关键字“ANR IN”</li>
-<li>在EventLog中对应的关键字是“am_anr”</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ANR 主要原因有以下三种：</div><div class="line">　　1. KeyDispatchTimeout(5 seconds) --主要类型按键或触摸事件在特定时间内无响应；</div><div class="line">　　2. BroadcastTimeout(10 seconds)BroadcastReceiver在特定时间内无法处理完成；</div><div class="line">　　3. ServiceTimeout(20 seconds) --小概率类型Service在特定的时间内无法处理完成。</div></pre></td></tr></table></figure>
-<h4 id="REBOOT"><a href="#REBOOT" class="headerlink" title="REBOOT"></a>REBOOT</h4><p>Reboot：主要分Framwork层重启和底层重启。所有重启在Main LOG 中关键字”Entered the Android system server!”。</p>
-<ul>
-<li>Framework 层重启（快速重启，系统开机时间不变）：在Main/Sys.log 对应关键字“Watchdog killing system proces”/“system_server_crash”；</li>
-<li>底层重启（系统开机时间重置）；在Main/Sys.log 对应关键字“Kernel panic”</li>
-</ul>
-<h3 id="dumpsys"><a href="#dumpsys" class="headerlink" title="dumpsys"></a>dumpsys</h3><p>查看activity开关状况：dumpsys activity -d list</p>
-<h2 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h2><ul>
-<li><a href="https://source.android.com/source/read-bug-reports.html#anrs-deadlocks" target="_blank" rel="external">Reading Bug Reports</a></li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;QC打开log入口：*#*#8888#*#*&lt;br&gt;MTK打开log入口：*#*#3646633#*#*&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SEAndroid:为APK添加权限</title>
-    <link href="http://joyflyaway.com/2016/09/28/SEAndroid-%E4%B8%BAAPK%E6%B7%BB%E5%8A%A0%E6%9D%83%E9%99%90/"/>
-    <id>http://joyflyaway.com/2016/09/28/SEAndroid-为APK添加权限/</id>
-    <published>2016-09-28T13:17:20.000Z</published>
-    <updated>2016-11-24T02:05:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br><a id="more"></a><br>解决方案：根据SeLinux规则，为Apk创建权限te文件。te默认文件路径：/source_root/external/sepolicy。一般厂家可以自己定制一套，目录：/source_root/device/factory/sepolicy/。我们选择厂家目录，新建apk.te文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type xxx_app, domain, mlstrustedsubject;app_domain(monitor_app)allow monitor_app xxx_service:service_manager xxx;r_dir_file(monitor_app, domain)</div></pre></td></tr></table></figure>
-<p>然后在device/factory/sepolicy/common/seapp_contexts下添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user=system seinfo=platform name=com.letv.android.monitor domain=monitor_app type=app_data_file</div></pre></td></tr></table></figure>
-<p>一般这时候打开apk是会报错：<span class="highlight-text danger">avc : denied</span>
-不用慌，根据提示，缺什么补什么，按下面格式添加即可:
-
-undefined
-
-另外请注意，很多时候se权限不够时，并不会输出log，这时候：
-1.关闭selinux，看守否是se的问题  
-2.如果是，找到所需se权限的context:
-(file_contexts  property_contexts  seapp_contexts service_contexts)  
-3.在对应te文件里添加找到的权限
-
-<span class="highlight-text danger">如何查看selog呢？</span><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">logcat |grep avc</div><div class="line">dmsg |grep xxx</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;背景：Apk为手机ROM内置apk。&lt;br&gt;需求：Apk需要读取/proc/pid/stat文件。&lt;br&gt;问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="framework" scheme="http://joyflyaway.com/categories/framework/"/>
-    
-    
-      <category term="SEAndroid" scheme="http://joyflyaway.com/tags/SEAndroid/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>九月所见</title>
-    <link href="http://joyflyaway.com/2016/09/27/pic-2016-9/"/>
-    <id>http://joyflyaway.com/2016/09/27/pic-2016-9/</id>
-    <published>2016-09-27T08:51:46.000Z</published>
-    <updated>2016-10-03T13:32:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<div class="figure fig-50 nocaption" style="width:1;"><a class="fancybox" href="1.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="1.jpg" style="width:1;" alt=""></a></div>
-<div class="figure fig-50 nocaption" style="width:9;"><a class="fancybox" href="9.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="9.jpg" style="width:9;" alt=""></a></div><div style="clear:both;"></div>
-<div class="figure fig-50 nocaption" style="width:3;"><a class="fancybox" href="3.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="3.jpg" style="width:3;" alt=""></a></div>
-<div class="figure fig-50 nocaption" style="width:7;"><a class="fancybox" href="clear" title="" data-fancybox-group="travel"><img class="fig-img" src="7.jpg" style="width:7;" alt=""></a></div>
-<div class="figure fig-33 nocaption" style="width:4;"><a class="fancybox" href="4.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="4.jpg" style="width:4;" alt=""></a></div>
-<div class="figure fig-33 nocaption" style="width:6;"><a class="fancybox" href="6.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="6.jpg" style="width:6;" alt=""></a></div>
-<div class="figure fig-33 nocaption" style="width:10;"><a class="fancybox" href="10.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="10.jpg" style="width:10;" alt=""></a></div><div style="clear:both;"></div>
-<div class="figure fig-50 nocaption" style="width:8;"><a class="fancybox" href="8.jpg" title="" data-fancybox-group="travel"><img class="fig-img" src="8.jpg" style="width:8;" alt=""></a></div>
-<div class="figure fig-50 nocaption" style="width:;"><a class="fancybox" href="2.jpg" title="clear 2" data-fancybox-group="travel"><img class="fig-img" src="2.jpg" alt="clear 2"></a></div>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;你好，九月！&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="九月" scheme="http://joyflyaway.com/tags/%E4%B9%9D%E6%9C%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Framework层监听前台进程</title>
-    <link href="http://joyflyaway.com/2016/09/27/Framework%E5%B1%82%E7%9B%91%E5%90%AC%E5%89%8D%E5%8F%B0%E8%BF%9B%E7%A8%8B/"/>
-    <id>http://joyflyaway.com/2016/09/27/Framework层监听前台进程/</id>
-    <published>2016-09-27T08:13:50.000Z</published>
-    <updated>2016-09-28T13:48:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>ActivityStack$moveTaskToFrontLocked: 从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。<br>ActivityStackSupervisor$realStartActivityLocked: Activity创建的时候会被调用。<br>ActivityStack$destroyActivityLocked: Activity销毁的时候会被调用(按返回键)。<br>ActivityStack$completeResumeLocked: Activity resume的时候被调用。<br><a id="more"></a></p>
-<h3 id="需要对前台进程的监听点："><a href="#需要对前台进程的监听点：" class="headerlink" title="需要对前台进程的监听点："></a>需要对前台进程的监听点：</h3><p>1.应用第一次启动<br>2.moveTaskToFrontLocked<br>3.completeResumeLocked</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;ActivityStack$moveTaskToFrontLocked: 从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。&lt;br&gt;ActivityStackSupervisor$realStartActivityLocked: Activity创建的时候会被调用。&lt;br&gt;ActivityStack$destroyActivityLocked: Activity销毁的时候会被调用(按返回键)。&lt;br&gt;ActivityStack$completeResumeLocked: Activity resume的时候被调用。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>快速解决问题思路</title>
-    <link href="http://joyflyaway.com/2016/09/26/quick-solution/"/>
-    <id>http://joyflyaway.com/2016/09/26/quick-solution/</id>
-    <published>2016-09-26T15:20:00.000Z</published>
-    <updated>2016-11-22T08:09:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>遇到一个未涉及的领域问题，首先google下，是否有相关答案(可能性较小)。<br>没有的话，用现有知识分析定位问题，需要定位到代码的模块，然后找到模块的顶层代码，<br>试着看，判断出代码的核心类，如有不懂，针对这些核心类google，最终定位到解决方案。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;遇到一个未涉及的领域问题，首先google下，是否有相关答案(可能性较小)。&lt;br&gt;没有的话，用现有知识分析定位问题，需要定位到代码的模块，然后找到模块的顶层代码，&lt;br&gt;试着看，判断出代码的核心类，如有不懂，针对这些核心类google，最终定位到解决方案。&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SeAndroid</title>
-    <link href="http://joyflyaway.com/2016/09/25/SeAndroid/"/>
-    <id>http://joyflyaway.com/2016/09/25/SeAndroid/</id>
-    <published>2016-09-25T04:31:09.000Z</published>
-    <updated>2016-09-25T04:31:09.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>GUI</title>
-    <link href="http://joyflyaway.com/2016/09/18/GUI/"/>
-    <id>http://joyflyaway.com/2016/09/18/GUI/</id>
-    <published>2016-09-18T11:26:37.000Z</published>
-    <updated>2016-09-18T13:40:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --><br><div class="figure center" style="width:;"><img class="fig-img" src="ape_fwk_graphics.png" alt="img"><span class="caption">img</span></div><div style="clear:both;"></div></p>
-<h3 id="SurfaceFlinger"><a href="#SurfaceFlinger" class="headerlink" title="SurfaceFlinger"></a>SurfaceFlinger</h3><p>SurfaceFlinger accepts buffers of data from multiple sources, composites them, and sends them to the display.</p>
-<p>WindowManager -&gt; SurfaceFlinger -&gt; Surface -&gt; Layer -&gt; BufferQueue</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;SurfaceFlinger&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Graphics" scheme="http://joyflyaway.com/tags/Graphics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>About Jamie</title>
-    <link href="http://joyflyaway.com/2016/09/15/water/"/>
-    <id>http://joyflyaway.com/2016/09/15/water/</id>
-    <published>2016-09-15T10:48:57.000Z</published>
-    <updated>2016-09-27T11:42:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>啦啦啦<br>介绍一位美女!<br><a id="more"></a></p>
-<div class="figure fig-100 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="A beautiful sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="A beautiful sunrise"></a></div><div style="clear:both;"></div>
-<div class="figure fig-50 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-50 nocaption" style="width:;"><a class="fancybox" href="clear" title="sunrise" data-fancybox-group="travel"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-33 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-33 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-33 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div><div style="clear:both;"></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-75 right nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div><div style="clear:both;"></div>
-<div class="figure fig-75 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="right" title="sunrise" data-fancybox-group="travel"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption nocaption right" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption right" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div><div style="clear:both;"></div>
-<div class="figure fig-50 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div><div style="clear:both;"></div>
-<div class="figure fig-25 nocaption left" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption left" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-50 nocaption right" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption right" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption right" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-25 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-20 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-20 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-20 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-20 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div>
-<div class="figure fig-20 nocaption" style="width:;"><a class="fancybox" href="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" title="sunrise" data-fancybox-group="travel" target="_blank" rel="external"><img class="fig-img" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVlYURHMWVpNDM3eW02ajl0R3dFS2xnSDlKOWVpcGRXMjk5SjZIV0pNNndBPT0.jpg?imageView&thumbnail=1680x0&quality=96&stripmeta=0&type=jpg" alt="sunrise"></a></div><div style="clear:both;"></div>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;啦啦啦&lt;br&gt;介绍一位美女!&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="媚子" scheme="http://joyflyaway.com/tags/%E5%AA%9A%E5%AD%90/"/>
     
   </entry>
   

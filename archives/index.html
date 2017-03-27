@@ -255,21 +255,105 @@
     <section class="postShorten-group main-content-wrap">
     
     
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/03/10/电源管理/">
+                            电源管理
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-03-10T11:15:41+08:00">
+	
+		    3月 10, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/03/10/电源管理/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/03/09/查看内存信息/">
+                            查看内存信息
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-03-09T13:28:15+08:00">
+	
+		    3月 09, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>除了free与vmstat之外，透过调阅<strong>/proc/meminfo</strong>的内容可以查阅进一步的统计信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">cat /proc/meminfo</div><div class="line">MemTotal:     12142744 kB</div><div class="line">MemFree:      10889316 kB</div><div class="line">Buffers:        391964 kB</div><div class="line">Cached:         522584 kB</div><div class="line">SwapCached:          0 kB</div><div class="line">Active:         407604 kB</div><div class="line">Inactive:       564460 kB</div><div class="line">HighTotal:           0 kB</div><div class="line">HighFree:            0 kB</div><div class="line">LowTotal:     12142744 kB</div><div class="line">LowFree:      10889316 kB</div><div class="line">SwapTotal:    20972816 kB</div><div class="line">SwapFree:     20972816 kB</div><div class="line">Dirty:             304 kB</div><div class="line">Writeback:           0 kB</div><div class="line">AnonPages:       57388 kB</div><div class="line">Mapped:          23556 kB</div><div class="line">Slab:           214100 kB</div><div class="line">PageTables:       7328 kB</div><div class="line">NFS_Unstable:        0 kB</div><div class="line">Bounce:              0 kB</div><div class="line">CommitLimit:  27044188 kB</div><div class="line">Committed_AS:   372876 kB</div><div class="line">VmallocTotal: 34359738367 kB</div><div class="line">VmallocUsed:    281368 kB</div><div class="line">VmallocChunk: 34359456975 kB</div><div class="line">HugePages_Total:     0</div><div class="line">HugePages_Free:      0</div><div class="line">HugePages_Rsvd:      0M</div><div class="line">Hugepagesize:     2048 kB</div></pre></td></tr></table></figure></p>
+<p>他的输出内容非常的多，但你可以分成几块来看：高阶、低阶的与內存统计信息。<br>高阶信息，基本上就等同于是在free看到的那些内容：<br>MemTotal是系统中可用的內存总量，但其实是扣掉了一些被kernel所保留的一点点空间。<br>MemFree是HighFree与LowFree的加总。<br>Buffers是buffer所占用的空间。<br>Cached是不包含SwapCached的cache空间。<br>比较低阶的信息有：<br>Active指的是那些最近或是经常被使用的page，而Inactive则是那些最近都没有被使用的page。当系统需要调用新的page空间时，会先从Inactive的部分下手，因为Active的部分比较有机会被再度使用。<br>HighTotal与HighFree代表的是user space所能使用的以及还剩馀多少的使用空间。<br>LowTotal与LowFree则是kernel space所能使用的以及还剩馀多少的使用空间。<br>SwapTotal与SwapFree指的是swap所能使用以及还剩馀多少空间。<br>Dirty指的是等待被写入disk的数据量。<br>Writeback则是正在被写入disk的数据量。<br>AnonPages为non-paged的空间。<br>Mapped为/dev设备所mapped的空间。<br>Slab是kernel所使用的buffer空间。<br>PageTables是page管理的index大小。<br>VmallocTotal是透过vmalloc（）可以调用的內存大小。<br>VmallocUsed是透过vmalloc（）所调用的內存大小。<br>VmallocChunk则是记录还剩多少连续的可调用的內存空间。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/03/09/查看内存信息/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
     <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/01/06/Android中的异常处理机制/">
-                            Android中的异常处理机制
+                        <a class="link-unstyled" href="/2017/03/07/Android便捷命令/">
+                            Android便捷命令
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-01-06T16:05:02+08:00">
+    <time itemprop="datePublished" datetime="2017-03-07T16:20:18+08:00">
 	
-		    1月 06, 2017
+		    3月 07, 2017
     	
     </time>
     
@@ -280,7 +364,7 @@
                 <div class="postShorten-excerpt" itemprop="articleBody">
                     <p>Author JOY.<br>
                     
-                        <a href="/2017/01/06/Android中的异常处理机制/" class="postShorten-excerpt_link link">
+                        <a href="/2017/03/07/Android便捷命令/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -298,15 +382,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/12/26/Java虚拟机/">
-                            Java虚拟机(笔记)
+                        <a class="link-unstyled" href="/2017/03/07/Android名词释义/">
+                            Android名词释义
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-12-26T15:19:53+08:00">
+    <time itemprop="datePublished" datetime="2017-03-07T11:19:14+08:00">
 	
-		    12月 26, 2016
+		    3月 07, 2017
     	
     </time>
     
@@ -315,9 +399,9 @@
             </div>
             
                 <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>对《深入理解java虚拟机》一书所做的笔记。<br>
+                    <p>Author JOY.<br>
                     
-                        <a href="/2016/12/26/Java虚拟机/" class="postShorten-excerpt_link link">
+                        <a href="/2017/03/07/Android名词释义/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -335,15 +419,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/12/21/dumpsys参数介绍/">
-                            dumpsys参数介绍
+                        <a class="link-unstyled" href="/2017/03/02/Android双应用功能实现/">
+                            Android双应用功能实现
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-12-21T17:38:21+08:00">
+    <time itemprop="datePublished" datetime="2017-03-02T10:58:33+08:00">
 	
-		    12月 21, 2016
+		    3月 02, 2017
     	
     </time>
     
@@ -352,183 +436,13 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <p>dumpsys -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">列出所有服务名</div></pre></td></tr></table></figure></p>
-
+                    
                     
                         
                     
                     
                         <p>
-                            <a href="/2016/12/21/dumpsys参数介绍/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/11/03/职位选择/">
-                            职位选择
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-11-03T12:24:30+08:00">
-	
-		    11月 03, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>薪资组成：<br>月薪，年薪，股票，其他<br>公司：<br>职位，发展机会</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/11/03/职位选择/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/10/31/对团队的一些理解/">
-                            对团队的一些理解
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-31T17:13:16+08:00">
-	
-		    10月 31, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>好的团队拥有的特质：<br>信任<br>互助<br>共进退<br>保持沟通，互相了解对方进度、问题<br>让每个成员都感觉到自己很重要</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/10/31/对团队的一些理解/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/10/24/Android系统属性/">
-                            Android系统属性
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-24T21:06:21+08:00">
-	
-		    10月 24, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>前缀必须用system\core\init\property_service.c中定义的前缀，<br>进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。<br>PS:不同前缀名权限不同。<br>如果apk不属于system或root用户，则需要在te文件里加入：<br>allow xxx system_prop:property_service { set };</p>
-<p>ctl.start xxx 可以开启rc配置的服务<br>启动带参数的服务：ctl.start xxx:parms<br>获取服务的运行状态：<br>init.svc.<name><br>   State of a named service (“stopped”, “running”, “restarting”)<br>SystemProperties.get(“init.svc.<name>“);</name></name></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/10/24/Android系统属性/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/10/20/Android设备温度节点/">
-                            Android设备温度节点
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-20T16:51:17+08:00">
-	
-		    10月 20, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="QUIET-THERM"><a href="#QUIET-THERM" class="headerlink" title="QUIET_THERM"></a>QUIET_THERM</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">which is more or less a phone skin temperature sensor or</div><div class="line">overall temperature sensor.</div><div class="line">设备表面温度节点，这个最能体现人对手机的感知温度</div></pre></td></tr></table></figure>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/10/20/Android设备温度节点/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2017/03/02/Android双应用功能实现/#post-footer" class="postShorten-excerpt_link link">
                                 注释和共享
                             </a>
                         </p>
@@ -546,15 +460,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/10/19/cpu使用率监控/">
-                            CPU使用率监控
+                        <a class="link-unstyled" href="/2017/02/28/linux常用命令/">
+                            linux常用命令
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-19T16:49:27+08:00">
+    <time itemprop="datePublished" datetime="2017-02-28T21:30:31+08:00">
 	
-		    10月 19, 2016
+		    2月 28, 2017
     	
     </time>
     
@@ -563,9 +477,9 @@
             </div>
             
                 <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>核心类：ProcessCpuTracker<br>
+                    <p>Author JOY.<br>
                     
-                        <a href="/2016/10/19/cpu使用率监控/" class="postShorten-excerpt_link link">
+                        <a href="/2017/02/28/linux常用命令/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -583,15 +497,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/10/06/十一有感/">
-                            十一有感
+                        <a class="link-unstyled" href="/2017/02/17/shell命令/">
+                            shell命令
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-06T11:18:34+08:00">
+    <time itemprop="datePublished" datetime="2017-02-17T11:27:46+08:00">
 	
-		    10月 06, 2016
+		    2月 17, 2017
     	
     </time>
     
@@ -600,9 +514,9 @@
             </div>
             
                 <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>假期内的所见所感。<br>
+                    <p>Joy<br>
                     
-                        <a href="/2016/10/06/十一有感/" class="postShorten-excerpt_link link">
+                        <a href="/2017/02/17/shell命令/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -620,15 +534,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/10/03/滨海栈道/">
-                            滨海栈道
+                        <a class="link-unstyled" href="/2017/02/03/Android资源查找/">
+                            Android资源查找
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-10-03T16:55:41+08:00">
+    <time itemprop="datePublished" datetime="2017-02-03T21:12:06+08:00">
 	
-		    10月 03, 2016
+		    2月 03, 2017
     	
     </time>
     
@@ -637,9 +551,9 @@
             </div>
             
                 <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>盐田滨海栈道随拍。<br>
+                    <p>Joy<br>
                     
-                        <a href="/2016/10/03/滨海栈道/" class="postShorten-excerpt_link link">
+                        <a href="/2017/02/03/Android资源查找/" class="postShorten-excerpt_link link">
                             阅读全文
                         </a>
                         
@@ -648,12 +562,95 @@
             
         </div>
         
-            <a href="/2016/10/03/滨海栈道/">
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://joyflyaway.com/2016/10/03/滨海栈道/thumb.jpg"/>
-                </div>
-            </a>
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
             
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/02/03/查看Android系统历史使用数据/">
+                            查看Android系统历史使用数据
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-02-03T20:31:20+08:00">
+	
+		    2月 03, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Joy<br>
+                    
+                        <a href="/2017/02/03/查看Android系统历史使用数据/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
+                        
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/01/30/查看Android系统运行信息/">
+                            查看Android系统运行信息
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-01-30T12:16:03+08:00">
+	
+		    1月 30, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <ul>
+<li><p>service list</p>
+<ul>
+<li>whether exist in system service</li>
+</ul>
+</li>
+<li><p>showmap -s [pid]</p>
+<ul>
+<li>Memory allocation dump</li>
+</ul>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/01/30/查看Android系统运行信息/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
         
     </article>
     
@@ -668,7 +665,7 @@
             </a>
         </li>
         
-        <li class="pagination-number">第 1 页 共 3 页</li>
+        <li class="pagination-number">第 1 页 共 4 页</li>
     </ul>
 </div>
 
@@ -957,7 +954,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 21 篇文章
+                找到 36 篇文章
             </p>
         </div>
     </div>

@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="SurfaceFlinger">
 <meta property="og:image" content="http://joyflyaway.com/ape_fwk_graphics.png">
-<meta property="og:updated_time" content="2016-09-18T13:40:33.000Z">
+<meta property="og:updated_time" content="2017-01-30T04:17:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GUI">
 <meta name="twitter:description" content="SurfaceFlinger">
@@ -283,6 +283,14 @@
             <!-- excerpt --><br><div class="figure center" style="width:;"><img class="fig-img" src="ape_fwk_graphics.png" alt="img"><span class="caption">img</span></div><div style="clear:both;"></div></p>
 <h3 id="SurfaceFlinger"><a href="#SurfaceFlinger" class="headerlink" title="SurfaceFlinger"></a>SurfaceFlinger</h3><p>SurfaceFlinger accepts buffers of data from multiple sources, composites them, and sends them to the display.</p>
 <p>WindowManager -&gt; SurfaceFlinger -&gt; Surface -&gt; Layer -&gt; BufferQueue</p>
+<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><p>How to check whether HWUI is enabled or not</p>
+<ul>
+<li>adb shell dumpsys SurfaceFlinger<ul>
+<li>mConnectedAPI=1 means the window is rendered by OpenGL, ie. Hwui</li>
+<li>mConnectedAPI=2 means the window is rendered by CPU, ie. skia</li>
+</ul>
+</li>
+</ul>
             
         </div>
     </div>
@@ -783,7 +791,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 21 篇文章
+                找到 36 篇文章
             </p>
         </div>
     </div>
