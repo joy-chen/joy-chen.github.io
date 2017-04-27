@@ -1,0 +1,836 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Joy">
+    <title>待机时，怎么看AP每次wake up起来的时长 - Joy</title>
+    <meta name="author" content="Joy">
+    
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Author JOY.">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="待机时，怎么看AP每次wake up起来的时长">
+<meta property="og:url" content="http://joyflyaway.com/2017/04/26/唤醒时长/index.html">
+<meta property="og:site_name" content="Joy">
+<meta property="og:description" content="Author JOY.">
+<meta property="og:updated_time" content="2017-04-26T08:33:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="待机时，怎么看AP每次wake up起来的时长">
+<meta name="twitter:description" content="Author JOY.">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/head.jpg?raw=true"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style-soaxvexojgmh2kuyewimt7taggxy45yl0ivorftngfsvhdostuwo6adhgahv.min.css">
+    <!--STYLES END-->
+    
+    
+    <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?ab155805a7e8cfd9f4ee00d605dd5926";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="5">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">Joy</a>
+    </div>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="#search">
+        
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="5">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/head.jpg?raw=true" alt="作者的图片"/>
+                </a>
+                <h4 class="sidebar-profile-name">Joy</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>现就职乐视，从事手机系统开发工作<br><a href="/about">个人简历</a></p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/ "
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+                        <span class="sidebar-button-desc">首页</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/technology"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-leanpub"></i>
+                        <span class="sidebar-button-desc">技术</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/life"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-heart"></i>
+                        <span class="sidebar-button-desc">生活</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/daily"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-inbox"></i>
+                        <span class="sidebar-button-desc">日记</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-categories"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+                        <span class="sidebar-button-desc">分类</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-tags"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+                        <span class="sidebar-button-desc">标签</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/all-archives"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+                        <span class="sidebar-button-desc">归档</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link st-search-show-outputs"
+                             href="#search"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                        <span class="sidebar-button-desc">搜索</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="#about"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+                        <span class="sidebar-button-desc">关于</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="mailto:joychendao@icloud.com" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-envelope-o"></i>
+                        <span class="sidebar-button-desc">邮箱</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link " href="https://github.com/joy-chen" target="_blank">
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a  class="sidebar-button-link "
+                             href="/atom.xml"
+                            
+                        >
+                    
+                        <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="5"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            待机时，怎么看AP每次wake up起来的时长
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" datetime="2017-04-26T10:51:20+08:00">
+	
+		    4月 26, 2017
+    	
+    </time>
+    
+</div>
+
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <!-- excerpt --></p>
+<h3 id="DESCRIPTION"><a href="#DESCRIPTION" class="headerlink" title="DESCRIPTION]"></a>DESCRIPTION]</h3><p>分析待机平均电流高的问题时，经常需要知道每次wake up起来的时间点，以及唤醒的时长，以此找到一些异常的唤醒</p>
+<h3 id="SOLUTION"><a href="#SOLUTION" class="headerlink" title="[SOLUTION]"></a>[SOLUTION]</h3><p>MT6572<br>（1）查找kernel log中的“Wakeup Succefully”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间就是唤醒的时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“[SPM] Kernel Suspend with”信息，跟“Wakeup Succefully”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;4&gt;[ 2497.698724]-(0)[789:kworker/u:3][PCM WAKEUP NORMAL]CPU WAKE UP BY: EINT :0x10000</div><div class="line">&lt;6&gt;[ 2497.901281] (0)[789:kworker/u:3]PM: suspend exit 2013-05-27 00:40:53.186864384 UTC</div><div class="line">&lt;2&gt;[ 2539.341088]-(0)[789:kworker/u:3][SPM] Kernel Suspend with cpu_pdn=1, infra_pdn=1</div><div class="line">唤醒时间点：00：40：53</div><div class="line">唤醒时长：2539-2497 = 42s</div></pre></td></tr></table></figure></p>
+<p>其他平台<br>（1）查找kernel log中的“wake up by XXX”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间加8小时就是真实的唤醒时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“wakesrc”信息，跟“wake up by XXX”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;5&gt;[  621.286161] (0)[53:kworker/u:2][Power/Sleep] wake up by EINT (0x20)(0x4)(41695)</div><div class="line">&lt;5&gt;[  621.626419] (0)[310:WindowManagerPo][request_suspend_state]: wakeup (3-&gt;0) at 612863283411 (2013-05-24 07:50:14.331687541 UTC)</div><div class="line">&lt;5&gt;[  665.287105] (0)[1218:kworker/u:3][Power/Sleep] sec = 300, wakesrc = 0x1ec</div><div class="line"></div><div class="line">唤醒时间点：07(+8)：50：14 = 15：50：14</div><div class="line">唤醒时长：665-621 = 44s</div></pre></td></tr></table></figure></p>
+<h2 id="待机电流问题，如何查找wakelock"><a href="#待机电流问题，如何查找wakelock" class="headerlink" title="待机电流问题，如何查找wakelock"></a>待机电流问题，如何查找wakelock</h2><p>【step1-找kernel层的wakelock】</p>
+<p>（1）先搜索从wake进入sleep的过程中打印出来的当前处于活动状态的wakelock<br>关键字“print_active_wakeup_sources”，类似于下面这样的log：</p>
+<p>  [print_active_wakeup_sources]: activity: PowerManagerService<br>  [print_active_wakeup_sources]: activity: syspb_149<br>  [print_active_wakeup_sources]: activity: EINT wakelock</p>
+<p>如果没有这样的log，可以把所有申请wakelock的代码搜出来，关键字“ws activate-&gt;”</p>
+<p>（2）然后往下搜索有没有这些wakelock释放的位置<br>关键字“ws deactivate-&gt;”类似如下log：</p>
+<pre><code>ws deactivate-&gt;  PowerManagerService
+ws deactivate-&gt;  EINT wakelock
+</code></pre><p>（3）那会出项两种情况<br>a. 根本没有找到释放某个wakelock的log<br>那就可以确实是这个wakelock导致（比如上面的syspb_149）<br>b. 有找到释放的log，但是中间间隔时间很长<br>这个就要看时间戳了，所以把申请释放的时间戳相减就是真实的wakelock锁住的时长</p>
+<p>（4）找到wakelock后，要做的就是去检查wakelock的使用者<br>          a. 如果发现出问题的不是PowerManagerService的wakelock，那么就直接找对应的驱动代码就行了<br>b. 如果是，就要继续看main log</p>
+<p>【step2-找user层的wakelock】</p>
+<p>（1）找到所有上层的wakelock申请的log<br>关键字“acquireWakeLockInternal”，会搜出来很多，类似下面的log：</p>
+<p>acquireWakeLockInternal: lock=1131418552, flags=0x1, tag=”GSM”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1131101696, flags=0x1, tag=”RILJ”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1130767880, flags=0x20, tag=”PhoneGlobals”, ws=null, uid=1001, pid=696</p>
+<p>但是不要担心，一般像 RILJ / ActivityManager / AlarmManager申请释放很频繁的就不用理会；flag的bit0不为1的也不用理会（bit0标识锁住底层不进sleep；但是有个例外，就是Psensor对应的wakelock，flags为0x20，在早期JB版本也会锁住底层）</p>
+<p>（2）找到这些wakelock释放的log<br>关键字“releaseWakeLockInternal”，但是你可能只能看到下面这样的log：</p>
+<p>releaseWakeLockInternal: lock=1131101696, flags=0x0<br>releaseWakeLockInternal: lock=1131418552, flags=0x0<br>releaseWakeLockInternal: lock=1130767880, flags=0x1(这个flag为1表示waitForNegativeProximity)</p>
+<p>跟acquire的log的对应关系就是看lock=后面的整数值，就知道wakelock是在哪个时间点释放的了，两个时间戳相减就是锁住的时间，抓住wakelock时间不长的就可以忽略，找到那个长时间锁住的wakelock就是系统无法休眠的罪魁祸首</p>
+<p>（3）找到wakelock后，就根据“tag”的字符串去找对应的代码</p>
+            
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/26/亮屏过程/"  data-tooltip="睡眠后按键无法唤醒的问题，如何看唤醒过程的log来定位问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/21/ANR分析/" data-tooltip="ANR分析">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weixin"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            
+                <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-唤醒时长" data-title="待机时，怎么看AP每次wake up起来的时长" data-url="http://joyflyaway.com/2017/04/26/唤醒时长/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'undefined'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+
+    <!--
+    <div class="ds-share" data-thread-key="post-唤醒时长" data-title="待机时，怎么看AP每次wake up起来的时长" data-url="http://joyflyaway.com/2017/04/26/唤醒时长/">
+      <div class="ds-share-inline">
+        <ul  class="ds-share-icons-16">
+      	   <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+           <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+           <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+           <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+           <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+        </ul>
+        <div class="ds-share-icons-more"></div>
+      </div>
+    </div>-->
+    
+</section>
+
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2017 Joy. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/26/亮屏过程/"  data-tooltip="睡眠后按键无法唤醒的问题，如何看唤醒过程的log来定位问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/21/ANR分析/" data-tooltip="ANR分析">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weixin"></i>
+            </a>
+        </li>
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#ds-thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weibo"></i><span>Share on weibo</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/04/26/唤醒时长/&amp;title=待机时，怎么看AP每次wake up起来的时长">
+                <i class="fa fa-weixin"></i><span>Share on weixin</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://joyflyaway.com/2017/04/26/唤醒时长/">
+                <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="https://github.com/joy-chen/joy-chen.github.io/blob/master/pic/head.jpg?raw=true" alt="作者的图片"/>
+        
+            <h4 id="about-card-name">Joy</h4>
+        
+            <div id="about-card-bio"><p>现就职乐视，从事手机系统开发工作<br><a href="/about">个人简历</a></p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Android全栈工程师</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                深圳
+            </div>
+        
+    </div>
+</div>
+
+        <div id="algolia-search-modal" class="modal-container">
+    <div class="modal">
+        <div class="modal-header">
+            <span class="close-button"><i class="fa fa-close"></i></span>
+            <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+                <span class="searchby-algolia-text text-color-light text-small">by</span>
+                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+            </a>
+            <i class="search-icon fa fa-search"></i>
+            <form id="algolia-search-form">
+                <input type="text" id="algolia-search-input" name="search"
+                    class="form-control input--large search-input" placeholder="Search "
+                    autofocus="autofocus"/>
+            </form>
+        </div>
+        <div class="modal-body">
+            <div class="no-result text-color-light text-center">没有找到文章</div>
+            <div class="results">
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/13/AndroidFgThread/">
+                            <h3 class="media-heading">Android FgThread</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月13日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>FgThread继承ServiceThread<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/15/water/">
+                            <img class="media-image" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVOQjJkY0d4N0RPSDVOcU9DWE96bUVSUjZJeVJPQlBmSmhmZ2loSFdUMjJ3PT0.jpg?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/15/water/">
+                            <h3 class="media-heading">About Jamie</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月15日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>啦啦啦<br>介绍一位美女!<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/18/GUI/">
+                            <img class="media-image" src="http://joyflyaway.com/2016/09/18/GUI/ape_fwk_graphics.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/18/GUI/">
+                            <h3 class="media-heading">GUI</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月18日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>SurfaceFlinger<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/25/SeAndroid/">
+                            <h3 class="media-heading">SeAndroid</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月25日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/26/quick-solution/">
+                            <h3 class="media-heading">快速解决问题思路</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月26日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/27/Framework层监听前台进程/">
+                            <h3 class="media-heading">Framework层监听前台进程</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月27日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>ActivityStack$moveTaskToFrontLocked: 从Launcher或RecentTasks列表里(非第一次启动)面点击，会被调用。<br>ActivityStackSupervisor$realStartActivityLocked: Activity创建的时候会被调用。<br>ActivityStack$destroyActivityLocked: Activity销毁的时候会被调用(按返回键)。<br>ActivityStack$completeResumeLocked: Activity resume的时候被调用。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/27/pic-2016-9/">
+                            <img class="media-image" src="http://joyflyaway.com/2016/09/27/pic-2016-9/4.jpg" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/27/pic-2016-9/">
+                            <h3 class="media-heading">九月所见</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月27日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>你好，九月！<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/28/SEAndroid-为APK添加权限/">
+                            <h3 class="media-heading">SEAndroid:为APK添加权限</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月28日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>背景：Apk为手机ROM内置apk。<br>需求：Apk需要读取/proc/pid/stat文件。<br>问题：Android4.4后引入了SeLinux模块，对资源的访问多了一层检查，apk默认情况下是读取不到/proc/pid/stat内容的。<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/30/Android Log系统/">
+                            <h3 class="media-heading">Log系统</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月30日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>QC打开log入口：*#*#8888#*#*<br>MTK打开log入口：*#*#3646633#*#*<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/10/01/尼泊尔/">
+                            <h3 class="media-heading">尼泊尔</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月1日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="results-count text-medium"
+                data-message-zero="没有找到文章"
+                data-message-one="找到 1 篇文章"
+                data-message-other="找到 {n} 篇文章">
+                找到 43 篇文章
+            </p>
+        </div>
+    </div>
+</div>
+        
+<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/script-uq6ckujehuymyfmbn8n8zsfxcoyigixyxp8h20unr7kwcn8ctosiwstqtaws.min.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script type="text/javascript">
+            var duoshuoQuery = {short_name:'joyflyaway'};
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';ds.async = true;
+                ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        </script>
+    
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+        _st('install','P6KKfD8mhR6XxzkqXTza','2.0.0');
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
+    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script>
+        var algoliaClient = algoliasearch('YYS6EZG4TU', '0947ec83c8a96067c3001a9eb715e67e');
+        var algoliaIndex = algoliaClient.initIndex('joyflyaway');
+    </script>
+
+
+    </body>
+</html>

@@ -316,7 +316,7 @@
             
                 <div class="postShorten-content" itemprop="articleBody">
                     <p>dumpsys -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">列出所有服务名</div></pre></td></tr></table></figure></p>
-<p>dumpsys gfxinfo [pid]<br>dumpsys meminfo [pid]</p>
+<p>dumpsys gfxinfo [pid]<br>dumpsys meminfo [pid]<br>dumpsys input<br>dumpsys netstats detail<br>dumpsys procstats –hours 3<br><code>系统内存使用状况，统计最近3小时的 minPSS-avgPSS-maxPSS/minUSS-avgUSS-maxUSS</code><br>dumpsys batterystats –checkin</p>
 
                     
                         
@@ -419,7 +419,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -441,20 +441,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>前缀必须用system\core\init\property_service.c中定义的前缀，<br>进行系统属性设置的程序也必须有system或root权限,因为selinux会检测属性权限。<br>PS:不同前缀名权限不同。<br>如果apk不属于system或root用户，则需要在te文件里加入：<br>allow xxx system_prop:property_service { set };</p>
-<p>ctl.start xxx 可以开启rc配置的服务<br>启动带参数的服务：ctl.start xxx:parms</p>
-<p>获取服务的运行状态：<br>init.svc.<name><br>   State of a named service (“stopped”, “running”, “restarting”)<br>SystemProperties.get(“init.svc.<name>“);</name></name></p>
-
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
+                        <a href="/2016/10/24/Android系统属性/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2016/10/24/Android系统属性/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -959,7 +952,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 36 篇文章
+                找到 43 篇文章
             </p>
         </div>
     </div>

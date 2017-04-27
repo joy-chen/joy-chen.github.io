@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-03-10T03:15:41.000Z</updated>
+  <updated>2017-04-27T05:56:42.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -16,13 +16,232 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>睡眠后按键无法唤醒的问题，如何看唤醒过程的log来定位问题</title>
+    <link href="http://joyflyaway.com/2017/04/26/%E4%BA%AE%E5%B1%8F%E8%BF%87%E7%A8%8B/"/>
+    <id>http://joyflyaway.com/2017/04/26/亮屏过程/</id>
+    <published>2017-04-26T08:32:40.000Z</published>
+    <updated>2017-04-27T05:56:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>【使用说明】<br>(1)  以下是列出的整个按键唤醒的log关键点，每条都有粗体字说明其含义以及该注意的关键字；<br>(2)  红色的是kernel log，其他都是main log；<br>(3)  一条一条依次检查，直到如果发现某条log找不到，那问题就出在这个地方；<br>(4)  仅限于JB2之后的Android版本，JB2之前流程相对比较简单；    </p>
+<p>kernel-Check Point【1】：按键中断<br> <5>[   78.721504] 1)[Power/PMIC] [pwrkey_int_handler] Press pwrkey</5></p>
+<p>Check Point【2】：上层收到按键事件<br>01-09 03:37:40.102   513   561 D WindowManager: interceptKeyTq keycode=26</p>
+<p>Check Point【3】：PMS的wakeUp被调用<br>01-09 03:37:40.171   513   531 D PowerManager_performance: wakeUpNoUpdateLocked: eventTime=78826</p>
+<p>Check Point【4】：发出MSG_BROADCAST<br>01-09 03:37:40.171   513   531 D PowerManagerNotifier: onWakeUpStarted</p>
+<p>Check Point【5】：发出第一个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.174   513   531 D PowerManagerDisplayController: sendMessage</p>
+<p>Check Point【6】：收到并处理MSG_BROADCAST，并且状态是从2变到1<br>01-09 03:37:40.194   513   530 D PowerManagerNotifier: sendNextBroadcast, mBroadcastedPowerState=2, mActualPowerState=1  </p>
+<p>Check Point【7】：开始绘制keyguard的流程，发出NOTIFY_SCREEN_ON，等windowToken<br>01-09 03:37:40.217   513   530 D KeyguardViewMediator: notifyScreenOnLocked</p>
+<p>Check Point【8】：收到并处理NOTIFY_SCREEN_ON<br>01-09 03:37:40.224   513   531 D KeyguardViewMediator: handleNotifyScreenOn</p>
+<p>Check Point【9】：完成绘制keyguard，拿到windowToken<br>01-09 03:37:40.370   513   531 I WindowManager: Lock screen displayed</p>
+<p>Check Point【10】：调用回调函数mSceenOnListener，解除Screen on Blocker，mNestCount必须是0<br>01-09 03:37:40.371   513   531 D PowerManagerService: Screen on unblocked: mNestCount=0  </p>
+<p>Check Point【11】：处理第一个MSG_UPDATE_POWER_STATE，这里会第一次scheduleScreenUpdate<br>01-09 03:37:40.254   513   546 D PowerManagerDisplayState: setScreenOn: on=true</p>
+<p>Check Point【12】：第一次执行scheduleScreenUpdate，进入setState<br>01-09 03:37:40.330   513   546 D PowerManagerDisplayState: Requesting new screen state: on=true, backlight=0</p>
+<p>Check Point【13】：发出第二个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.334   513   546 D PowerManagerDisplayController: sendMessage.  </p>
+<p>Check Point【14】：第一次执行mTask， on跟onChanged 必须都是true<br>01-09 03:37:40.334   513   546 D PowerManagerDisplayState: mTask: on = true, onChanged = true, backlightChanged = false</p>
+<p>kernel-Check Point【15】：进入unblankAllDisplays，开始底层late_resume流程<br>01-09 03:37:40.334   513   546 D PowerManagerService: unblankAllDisplays in …</p>
+<p>Check Point【16】：底层late_resume流程结束<br>01-09 03:37:40.673   513   546 D PowerManagerService-JNI: Excessive delay in autosuspend_disable() while turning screen on: 337ms  </p>
+<p>Check Point【17】：unblankAllDisplays流程结束<br>01-09 03:37:40.701   513   546 D PowerManager_performance: unblankAllDisplays out …  </p>
+<p>Check Point【18】：处理第二个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.702   513   546 D PowerManagerDisplayController: setScreenOn true  </p>
+<p>Check Point【19】：前面的Screen On Blocker被解除，才会调用这里<br>01-09 03:37:40.702   513   546 D PowerManagerDisplayController: Unblocked screen on after 447 ms  </p>
+<p>Check Point【20】：设置ElectronBeamLevel，值不为0才能点亮背光，并且这里会第二次scheduleScreenUpdate<br>01-09 03:37:40.704   513   546 D PowerManagerDisplayState: setElectronBeamLevel: level=1.0  </p>
+<p>Check Point【21】：第二次执行scheduleScreenUpdate，进入setState，注意backlight值不为0<br>01-09 03:37:40.718   513   546 D PowerManagerDisplayState: Requesting new screen state: on=true, backlight=86,  </p>
+<p>Check Point【22】：第二次执行mTask，backlightChanged必须是true<br>01-09 03:37:40.721   513   546 D PowerManagerDisplayState: mTask: on = true, onChanged = false, backlightChanged = true</p>
+<p>Check Point【23】：调用light service，写backlight节点，light 0表示backlight<br>01-09 03:37:40.721   513   546 D LightsService: setLight_native: light=0, colorARGB=0xff565656, flashMode=0,</p>
+<p>kernel-Check Point【24】：驱动底层背光生效</p>
+<p><4>[   79.447236] (1)[546:PowerManagerSer]mt65xx_leds_set_cust: set brightness, name:lcd-backlight, mode:6, level:86</4></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>待机时，怎么看AP每次wake up起来的时长</title>
+    <link href="http://joyflyaway.com/2017/04/26/%E5%94%A4%E9%86%92%E6%97%B6%E9%95%BF/"/>
+    <id>http://joyflyaway.com/2017/04/26/唤醒时长/</id>
+    <published>2017-04-26T02:51:20.000Z</published>
+    <updated>2017-04-26T08:33:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="DESCRIPTION"><a href="#DESCRIPTION" class="headerlink" title="DESCRIPTION]"></a>DESCRIPTION]</h3><p>分析待机平均电流高的问题时，经常需要知道每次wake up起来的时间点，以及唤醒的时长，以此找到一些异常的唤醒</p>
+<h3 id="SOLUTION"><a href="#SOLUTION" class="headerlink" title="[SOLUTION]"></a>[SOLUTION]</h3><p>MT6572<br>（1）查找kernel log中的“Wakeup Succefully”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间就是唤醒的时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“[SPM] Kernel Suspend with”信息，跟“Wakeup Succefully”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;4&gt;[ 2497.698724]-(0)[789:kworker/u:3][PCM WAKEUP NORMAL]CPU WAKE UP BY: EINT :0x10000</div><div class="line">&lt;6&gt;[ 2497.901281] (0)[789:kworker/u:3]PM: suspend exit 2013-05-27 00:40:53.186864384 UTC</div><div class="line">&lt;2&gt;[ 2539.341088]-(0)[789:kworker/u:3][SPM] Kernel Suspend with cpu_pdn=1, infra_pdn=1</div><div class="line">唤醒时间点：00：40：53</div><div class="line">唤醒时长：2539-2497 = 42s</div></pre></td></tr></table></figure></p>
+<p>其他平台<br>（1）查找kernel log中的“wake up by XXX”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间加8小时就是真实的唤醒时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“wakesrc”信息，跟“wake up by XXX”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;5&gt;[  621.286161] (0)[53:kworker/u:2][Power/Sleep] wake up by EINT (0x20)(0x4)(41695)</div><div class="line">&lt;5&gt;[  621.626419] (0)[310:WindowManagerPo][request_suspend_state]: wakeup (3-&gt;0) at 612863283411 (2013-05-24 07:50:14.331687541 UTC)</div><div class="line">&lt;5&gt;[  665.287105] (0)[1218:kworker/u:3][Power/Sleep] sec = 300, wakesrc = 0x1ec</div><div class="line"></div><div class="line">唤醒时间点：07(+8)：50：14 = 15：50：14</div><div class="line">唤醒时长：665-621 = 44s</div></pre></td></tr></table></figure></p>
+<h2 id="待机电流问题，如何查找wakelock"><a href="#待机电流问题，如何查找wakelock" class="headerlink" title="待机电流问题，如何查找wakelock"></a>待机电流问题，如何查找wakelock</h2><p>【step1-找kernel层的wakelock】</p>
+<p>（1）先搜索从wake进入sleep的过程中打印出来的当前处于活动状态的wakelock<br>关键字“print_active_wakeup_sources”，类似于下面这样的log：</p>
+<p>  [print_active_wakeup_sources]: activity: PowerManagerService<br>  [print_active_wakeup_sources]: activity: syspb_149<br>  [print_active_wakeup_sources]: activity: EINT wakelock</p>
+<p>如果没有这样的log，可以把所有申请wakelock的代码搜出来，关键字“ws activate-&gt;”</p>
+<p>（2）然后往下搜索有没有这些wakelock释放的位置<br>关键字“ws deactivate-&gt;”类似如下log：</p>
+<pre><code>ws deactivate-&gt;  PowerManagerService
+ws deactivate-&gt;  EINT wakelock
+</code></pre><p>（3）那会出项两种情况<br>a. 根本没有找到释放某个wakelock的log<br>那就可以确实是这个wakelock导致（比如上面的syspb_149）<br>b. 有找到释放的log，但是中间间隔时间很长<br>这个就要看时间戳了，所以把申请释放的时间戳相减就是真实的wakelock锁住的时长</p>
+<p>（4）找到wakelock后，要做的就是去检查wakelock的使用者<br>          a. 如果发现出问题的不是PowerManagerService的wakelock，那么就直接找对应的驱动代码就行了<br>b. 如果是，就要继续看main log</p>
+<p>【step2-找user层的wakelock】</p>
+<p>（1）找到所有上层的wakelock申请的log<br>关键字“acquireWakeLockInternal”，会搜出来很多，类似下面的log：</p>
+<p>acquireWakeLockInternal: lock=1131418552, flags=0x1, tag=”GSM”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1131101696, flags=0x1, tag=”RILJ”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1130767880, flags=0x20, tag=”PhoneGlobals”, ws=null, uid=1001, pid=696</p>
+<p>但是不要担心，一般像 RILJ / ActivityManager / AlarmManager申请释放很频繁的就不用理会；flag的bit0不为1的也不用理会（bit0标识锁住底层不进sleep；但是有个例外，就是Psensor对应的wakelock，flags为0x20，在早期JB版本也会锁住底层）</p>
+<p>（2）找到这些wakelock释放的log<br>关键字“releaseWakeLockInternal”，但是你可能只能看到下面这样的log：</p>
+<p>releaseWakeLockInternal: lock=1131101696, flags=0x0<br>releaseWakeLockInternal: lock=1131418552, flags=0x0<br>releaseWakeLockInternal: lock=1130767880, flags=0x1(这个flag为1表示waitForNegativeProximity)</p>
+<p>跟acquire的log的对应关系就是看lock=后面的整数值，就知道wakelock是在哪个时间点释放的了，两个时间戳相减就是锁住的时间，抓住wakelock时间不长的就可以忽略，找到那个长时间锁住的wakelock就是系统无法休眠的罪魁祸首</p>
+<p>（3）找到wakelock后，就根据“tag”的字符串去找对应的代码</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ANR分析</title>
+    <link href="http://joyflyaway.com/2017/04/21/ANR%E5%88%86%E6%9E%90/"/>
+    <id>http://joyflyaway.com/2017/04/21/ANR分析/</id>
+    <published>2017-04-21T08:50:37.000Z</published>
+    <updated>2017-04-26T02:51:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>ANR分为一下几类：</p>
+<ul>
+<li>广播ANR</li>
+<li>Service ANR</li>
+<li>ContentProvider ANR</li>
+<li>Input ANR</li>
+<li>WatchDog</li>
+</ul>
+<p>产生ANR原因：   </p>
+<ul>
+<li>耗时操作</li>
+<li>自身服务阻塞</li>
+<li>系统阻塞</li>
+<li>内存紧张</li>
+<li>CPU资源抢占</li>
+</ul>
+<p>对于这些ANR，给大家的推荐一下大致分析思路和相关日志，通常发生ANR时，首先去查找对应Trace日志，看看主线程是否在处理该广播或被阻塞，如果发现上述现象，那么恭喜你，已经很接近答案了。但如果发现堆栈完全处于空闲状态，那么很不幸，就需要扩大参考面了，需要结合log日志进行分析，日志包括logcat, kernel日志，cpuinfo以及meminfo等，参考顺序从前向后。<br>1、分析logcat思路：首先在日志中搜索（“anr in”，“low_memory”, “slow_operation”）等关键字，通过该类关键字主要是查看系统Cpu负载，如果是发现应用进程CPU明显过高，那么很有可能是该进程抢占CPU过多导致，系统调度不及时,误认为应用发生了超时行为。<br>2、分析kernel思路：在此类日志中直接搜索lowmemorykiller, 如果存在则查看发生时间和ANR时间是否大致对应，相差无几的话，可以从该日志中看到操作系统层面当前内存情况，Free Memory说明的是空闲物理内存，File Free说明的则是文件Cache，也就是应用或系统从硬盘读取文件，使用结束后，kernel并没有这正释放这类内存，加以缓存，目的是为了下次读写过程加快速度。当然，发现Free和Other整体数值都偏低时，Kernel会进行一定程度的内存交换，导致整个系统卡顿。同时这类现象也会体现在log日志“slow_operation”中，即系统进程的调度也会收到影响。<br>3、分析cpuinfo思路：这类日志一目了然，可以清晰的看到哪类进程CPU偏高，如果存在明显偏高进程，那么ANR和此进程抢占CPU有一定关系。当然，如发现Kswapd，emmc进程在top中，则说明遇到系统内存压力或文件IO开销。<br>4、分析meminfo思路：分析该类日志，主要是看哪类应用或系统占用内存偏高，如果应用内存占用比较正常，系统也没有发生过度内存使用，那么则说明系统中缓存了大量进程，并没有及时释放导致系统整体内存偏低。   </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>App启动过程</title>
+    <link href="http://joyflyaway.com/2017/04/19/App%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/"/>
+    <id>http://joyflyaway.com/2017/04/19/App启动过程/</id>
+    <published>2017-04-19T08:02:01.000Z</published>
+    <updated>2017-04-21T08:50:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h4 id="从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈"><a href="#从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈" class="headerlink" title="从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈"></a>从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈</h4><p>-&gt;com.android.launcher3.Launcher#onClick<br>&emsp;-&gt;Launcher#onClickAppShortcut<br>&emsp;&emsp;-&gt;Launcher#startAppShortcutOrInfoActivity<br>&emsp;&emsp;&emsp;-&gt;Launcher#startActivitySafely<br>&emsp;&emsp;&emsp;&emsp;-&gt;Launcher#startActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Activity#startActivity</p>
+<h4 id="从Activity-startActivity，到启动进程和launch-activity的调用堆栈"><a href="#从Activity-startActivity，到启动进程和launch-activity的调用堆栈" class="headerlink" title="从Activity#startActivity，到启动进程和launch activity的调用堆栈"></a>从Activity#startActivity，到启动进程和launch activity的调用堆栈</h4><p><code>1.调用堆栈</code><br><code>1-1.准备新的activity</code><br>-&gt;Activity#startActivity<br>&emsp;-&gt;Activity#startActivityForResult  //此时mInstrumentation变量为源activity的，即launcher3<br>&emsp;&emsp;-&gt;Instrumentation#execStartActivity<br>&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startActivity<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startActivityAsUser<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityMayWait<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityUncheckedLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#startActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#resumeTopActivitiesLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityInnerLocked  </p>
+<p><code>1-2.暂停旧的activity</code><br>&emsp;-&gt;ActivityStackSupervisor#pauseBackStacks<br>&emsp;&emsp;-&gt;ActivityStack#startPausingLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityThread#schedulePauseActivity<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handlePauseActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#activityPaused<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#activityPausedLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#completePauseLocked   </p>
+<p><code>1-3.启动进程</code><br>&emsp;-&gt;ActivityStackSupervisor#resumeTopActivitiesLocked<br>&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityInnerLocked<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startSpecificActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startProcessLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Process#start<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#main<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;从ActivityThread#attach<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#attachApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#attachApplicationLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread$ApplicationThread#bindApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handleBindApplication    </p>
+<p><code>1-4.启动新的activity，走ActivityStackSupervisor#attachApplicationLocked分支</code><br>&emsp;-&gt;ActivityManagerService#attachApplicationLocked<br>&emsp;&emsp;-&gt;ActivityStackSupervisor#attachApplicationLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#realStartActivityLocked<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread$ApplicationThread#scheduleLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handleLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#performLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;LoadedApk#makeApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Activity#attach   </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>编译问题</title>
+    <link href="http://joyflyaway.com/2017/04/19/%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/"/>
+    <id>http://joyflyaway.com/2017/04/19/编译问题/</id>
+    <published>2017-04-19T02:15:43.000Z</published>
+    <updated>2017-04-21T08:51:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="编译android-7-0-出现Try-increasing-heap-size-with-java-option-‘-Xmx‘错误解决方案"><a href="#编译android-7-0-出现Try-increasing-heap-size-with-java-option-‘-Xmx‘错误解决方案" class="headerlink" title="编译android 7.0 出现Try increasing heap size with java option ‘-Xmx‘错误解决方案"></a>编译android 7.0 出现Try increasing heap size with java option ‘-Xmx<size>‘错误解决方案</size></h3><p>出现这个错误是由于电脑内存不足，在命令行分别执行以下三条语句，然后继续编译<br>export JACK_SERVER_VM_ARGUMENTS=”-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g”<br>./prebuilts/sdk/tools/jack-admin kill-server<br>./prebuilts/sdk/tools/jack-admin start-server   </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MAT工具</title>
+    <link href="http://joyflyaway.com/2017/03/30/MAT%E5%B7%A5%E5%85%B7/"/>
+    <id>http://joyflyaway.com/2017/03/30/MAT工具/</id>
+    <published>2017-03-30T11:50:15.000Z</published>
+    <updated>2017-04-19T02:16:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="Shallow-Heap-Size"><a href="#Shallow-Heap-Size" class="headerlink" title="Shallow Heap Size:"></a>Shallow Heap Size:</h3><p>指对象自身所占用的内存大小，不包含其引用的对象所占的内存大小。<br>1、数组类型<br>数组元素对象所占内存的大小总和。<br>2、非数组类型<br>对象与它所有的成员变量大小的总和。当然这里面还会包括一些java语言特性的数据存储单元。   </p>
+<h3 id="Retained-Heap-Size"><a href="#Retained-Heap-Size" class="headerlink" title="Retained Heap Size:"></a>Retained Heap Size:</h3><p>前对象大小+当前对象可直接或间接引用到的对象的大小总和。<br>(间接引用的含义：A-&gt;B-&gt;C, C就是间接引用)<br>换句话说，Retained Size就是当前对象被GC后，从Heap上总共能释放掉的内存。<br>不过，释放的时候还要排除被GC Roots直接或间接引用的对象。他们暂时不会被被当做Garbage。</p>
+<h3 id="Java的内存泄露的特点"><a href="#Java的内存泄露的特点" class="headerlink" title="Java的内存泄露的特点"></a>Java的内存泄露的特点</h3><ul>
+<li>Java中的内存泄露主要特征：可达，无用</li>
+<li>无用指的是创建了但是不再使用之后没有释放</li>
+<li>能重用但是却创建了新的对象进行处理</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>高效代码</title>
+    <link href="http://joyflyaway.com/2017/03/30/%E9%AB%98%E6%95%88%E4%BB%A3%E7%A0%81/"/>
+    <id>http://joyflyaway.com/2017/03/30/高效代码/</id>
+    <published>2017-03-30T03:17:02.000Z</published>
+    <updated>2017-04-19T02:16:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>通常来说，高效的代码需要满足下面两个规则：</p>
+<ul>
+<li>不要做冗余的动作</li>
+<li>如果能避免，尽量不要分配内存</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>电源管理</title>
     <link href="http://joyflyaway.com/2017/03/10/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
     <id>http://joyflyaway.com/2017/03/10/电源管理/</id>
     <published>2017-03-10T03:15:41.000Z</published>
-    <updated>2017-03-10T03:15:41.000Z</updated>
+    <updated>2017-04-19T02:16:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android includes the following battery life enhancements:</p>
+<ul>
+<li>App Standby. The platform can place unused applications in App Standby mode, temporarily restricting network access and deferring syncs and jobs for those applications.</li>
+<li>Doze. The platform can enter a state of deep sleep (periodically resuming normal operations) if users have not actively used their device (screen off and stationary) for extended periods of time. Android 7.0 also enables Doze to trigger a lighter set of optimizations when users turn off the device screen yet continue to move around.</li>
+<li>Exemptions. System apps and cloud messaging services preloaded on a device are typically exempted from App Standby and Doze by default (although app developers can intent their applications into this setting). Users can exempt applications via the Settings menu.</li>
+</ul>
+]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;Android includes the following battery life enhancements:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;App Standby. The platform can place unused applications in App Sta
     
     </summary>
     
@@ -34,15 +253,16 @@
     <link href="http://joyflyaway.com/2017/03/09/%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF/"/>
     <id>http://joyflyaway.com/2017/03/09/查看内存信息/</id>
     <published>2017-03-09T05:28:15.000Z</published>
-    <updated>2017-03-09T08:07:42.000Z</updated>
+    <updated>2017-04-26T02:56:26.000Z</updated>
     
-    <content type="html"><![CDATA[<p>除了free与vmstat之外，透过调阅<strong>/proc/meminfo</strong>的内容可以查阅进一步的统计信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">cat /proc/meminfo</div><div class="line">MemTotal:     12142744 kB</div><div class="line">MemFree:      10889316 kB</div><div class="line">Buffers:        391964 kB</div><div class="line">Cached:         522584 kB</div><div class="line">SwapCached:          0 kB</div><div class="line">Active:         407604 kB</div><div class="line">Inactive:       564460 kB</div><div class="line">HighTotal:           0 kB</div><div class="line">HighFree:            0 kB</div><div class="line">LowTotal:     12142744 kB</div><div class="line">LowFree:      10889316 kB</div><div class="line">SwapTotal:    20972816 kB</div><div class="line">SwapFree:     20972816 kB</div><div class="line">Dirty:             304 kB</div><div class="line">Writeback:           0 kB</div><div class="line">AnonPages:       57388 kB</div><div class="line">Mapped:          23556 kB</div><div class="line">Slab:           214100 kB</div><div class="line">PageTables:       7328 kB</div><div class="line">NFS_Unstable:        0 kB</div><div class="line">Bounce:              0 kB</div><div class="line">CommitLimit:  27044188 kB</div><div class="line">Committed_AS:   372876 kB</div><div class="line">VmallocTotal: 34359738367 kB</div><div class="line">VmallocUsed:    281368 kB</div><div class="line">VmallocChunk: 34359456975 kB</div><div class="line">HugePages_Total:     0</div><div class="line">HugePages_Free:      0</div><div class="line">HugePages_Rsvd:      0M</div><div class="line">Hugepagesize:     2048 kB</div></pre></td></tr></table></figure></p>
-<p>他的输出内容非常的多，但你可以分成几块来看：高阶、低阶的与內存统计信息。<br>高阶信息，基本上就等同于是在free看到的那些内容：<br>MemTotal是系统中可用的內存总量，但其实是扣掉了一些被kernel所保留的一点点空间。<br>MemFree是HighFree与LowFree的加总。<br>Buffers是buffer所占用的空间。<br>Cached是不包含SwapCached的cache空间。<br>比较低阶的信息有：<br>Active指的是那些最近或是经常被使用的page，而Inactive则是那些最近都没有被使用的page。当系统需要调用新的page空间时，会先从Inactive的部分下手，因为Active的部分比较有机会被再度使用。<br>HighTotal与HighFree代表的是user space所能使用的以及还剩馀多少的使用空间。<br>LowTotal与LowFree则是kernel space所能使用的以及还剩馀多少的使用空间。<br>SwapTotal与SwapFree指的是swap所能使用以及还剩馀多少空间。<br>Dirty指的是等待被写入disk的数据量。<br>Writeback则是正在被写入disk的数据量。<br>AnonPages为non-paged的空间。<br>Mapped为/dev设备所mapped的空间。<br>Slab是kernel所使用的buffer空间。<br>PageTables是page管理的index大小。<br>VmallocTotal是透过vmalloc（）可以调用的內存大小。<br>VmallocUsed是透过vmalloc（）所调用的內存大小。<br>VmallocChunk则是记录还剩多少连续的可调用的內存空间。</p>
-]]></content>
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>除了free与vmstat之外，透过调阅<strong>/proc/meminfo</strong>的内容可以查阅进一步的统计信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">cat /proc/meminfo</div><div class="line">MemTotal:     12142744 kB</div><div class="line">MemFree:      10889316 kB</div><div class="line">Buffers:        391964 kB</div><div class="line">Cached:         522584 kB</div><div class="line">SwapCached:          0 kB</div><div class="line">Active:         407604 kB</div><div class="line">Inactive:       564460 kB</div><div class="line">HighTotal:           0 kB</div><div class="line">HighFree:            0 kB</div><div class="line">LowTotal:     12142744 kB</div><div class="line">LowFree:      10889316 kB</div><div class="line">SwapTotal:    20972816 kB</div><div class="line">SwapFree:     20972816 kB</div><div class="line">Dirty:             304 kB</div><div class="line">Writeback:           0 kB</div><div class="line">AnonPages:       57388 kB</div><div class="line">Mapped:          23556 kB</div><div class="line">Slab:           214100 kB</div><div class="line">PageTables:       7328 kB</div><div class="line">NFS_Unstable:        0 kB</div><div class="line">Bounce:              0 kB</div><div class="line">CommitLimit:  27044188 kB</div><div class="line">Committed_AS:   372876 kB</div><div class="line">VmallocTotal: 34359738367 kB</div><div class="line">VmallocUsed:    281368 kB</div><div class="line">VmallocChunk: 34359456975 kB</div><div class="line">HugePages_Total:     0</div><div class="line">HugePages_Free:      0</div><div class="line">HugePages_Rsvd:      0M</div><div class="line">Hugepagesize:     2048 kB</div></pre></td></tr></table></figure></p>
+<p>他的输出内容非常的多，但你可以分成几块来看：高阶、低阶的与內存统计信息。<br>高阶信息，基本上就等同于是在free看到的那些内容：<br>MemTotal是系统中可用的內存总量，但其实是扣掉了一些被kernel所保留的一点点空间。<br>MemFree是HighFree与LowFree的加总。<br>Buffers是buffer所占用的空间。// block 设备cache<br>Cached是不包含SwapCached的cache空间。// file cache<br>比较低阶的信息有：<br>Active指的是那些最近或是经常被使用的page，而Inactive则是那些最近都没有被使用的page。当系统需要调用新的page空间时，会先从Inactive的部分下手，因为Active的部分比较有机会被再度使用。<br>HighTotal与HighFree代表的是user space所能使用的以及还剩馀多少的使用空间。<br>LowTotal与LowFree则是kernel space所能使用的以及还剩馀多少的使用空间。<br>SwapTotal与SwapFree指的是swap所能使用以及还剩馀多少空间。<br>Dirty指的是等待被写入disk的数据量。<br>Writeback则是正在被写入disk的数据量。<br>AnonPages为non-paged的空间。<br>Mapped为/dev设备所mapped的空间。<br>Slab是kernel所使用的buffer空间。<br>PageTables是page管理的index大小。<br>VmallocTotal是透过vmalloc（）可以调用的內存大小。<br>VmallocUsed是透过vmalloc（）所调用的內存大小。<br>VmallocChunk则是记录还剩多少连续的可调用的內存空间。</p>
+<h2 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h2><p><code>A buffer</code> is something that has yet to be  “written”   to disk.<br>A cache` is something that has been  “read”   from the disk and stored  for   later use.</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;除了free与vmstat之外，透过调阅&lt;strong&gt;/proc/meminfo&lt;/strong&gt;的内容可以查阅进一步的统计信息：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -54,7 +274,7 @@
     <link href="http://joyflyaway.com/2017/03/07/Android%E4%BE%BF%E6%8D%B7%E5%91%BD%E4%BB%A4/"/>
     <id>http://joyflyaway.com/2017/03/07/Android便捷命令/</id>
     <published>2017-03-07T08:20:18.000Z</published>
-    <updated>2017-03-09T08:07:47.000Z</updated>
+    <updated>2017-04-19T02:16:17.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <h2 id="pm"><a href="#pm" class="headerlink" title="pm"></a>pm</h2><p>  pm list package列出安装再设备上的应用：</p>
@@ -67,6 +287,7 @@
 <li>参数组合使用，例如查找三方应用中知乎的包名、apk存放位置、安装来源：<br>pm list package -f -3 -i zhihu<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">package:/data/app/com.zhihu.android-1.apk=com.zhihu.android  installer=com.xiaomi.market</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>pm list permissions -g -d<br><code>列出系统所有危险权限</code></p>
 <p>pm path 列出对应包名的.apk位置：</p>
 <ul>
 <li>pm path com.tencent.mobileqq<br>package:/data/app/com.tencent.mobileqq-1.apk</li>
@@ -92,8 +313,9 @@
 <li>am monitor，监控crash与ANR</li>
 <li>am force-stop，后跟包名，结束应用</li>
 <li>am startsevice，启动一个服务</li>
-<li>am broadcast，发送一个广播</li>
-</ul>]]></content>
+<li>am broadcast，发送一个广播   </li>
+</ul>
+<h2 id="monkey"><a href="#monkey" class="headerlink" title="monkey"></a>monkey</h2><p>monkey -p com.jared.performancetool -v 500<br><code>-p表示包名，-v表示反馈级别 500就是500个伪随机事件,若在压力测试中程序崩溃或者接收到任何失控异常，就会自动停止。</code></p>]]></content>
     
     <summary type="html">
     
@@ -130,9 +352,13 @@
     <link href="http://joyflyaway.com/2017/03/02/Android%E5%8F%8C%E5%BA%94%E7%94%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/"/>
     <id>http://joyflyaway.com/2017/03/02/Android双应用功能实现/</id>
     <published>2017-03-02T02:58:33.000Z</published>
-    <updated>2017-03-02T02:58:33.000Z</updated>
+    <updated>2017-04-19T02:19:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --><br>UserManager:<br>  createProfileForUser()创建轮廓用户<br>DeleteNonRequiredAppsTask:<br>  配置用户应用<br>DevicePolicyManager：<br>  setActiveAdmin();<br>  setProfileOwner();<br>IActivityManager:<br>  startUserInBackground()开启用户</p>]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -293,9 +519,15 @@
     <link href="http://joyflyaway.com/2017/01/11/LOG%E5%AE%9A%E4%BD%8D/"/>
     <id>http://joyflyaway.com/2017/01/11/LOG定位/</id>
     <published>2017-01-11T11:52:24.000Z</published>
-    <updated>2017-01-11T11:52:24.000Z</updated>
+    <updated>2017-04-19T02:16:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>TEST BUILDE 定位：<br>grep “make.<em>Error” </em> -nr</p>
+]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;TEST BUILDE 定位：&lt;br&gt;grep “make.&lt;em&gt;Error” &lt;/em&gt; -nr&lt;/p&gt;
+
     
     </summary>
     
@@ -319,191 +551,6 @@
     <summary type="html">
     
       &lt;p&gt;Android存储系统&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android双应用原理</title>
-    <link href="http://joyflyaway.com/2017/01/10/Android%E5%8F%8C%E5%BA%94%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-    <id>http://joyflyaway.com/2017/01/10/Android双应用原理/</id>
-    <published>2017-01-10T03:42:27.000Z</published>
-    <updated>2017-02-16T09:41:08.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="托管配置"><a href="#托管配置" class="headerlink" title="托管配置"></a>托管配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Android 5.0 提供了用于在企业环境内运行应用的新功能。如果用户已有个人帐户，则设备管理员可启动托管配置进程，向设备添加共存但独立的托管配置文件。与托管配置文件关联的应用与非托管应用一并出现在用户的启动器、最近使用的应用屏幕和通知中。</div><div class="line"></div><div class="line">要启动托管配置进程，请通过 Intent 发送 ACTION_PROVISION_MANAGED_PROFILE。如果调用成功，系统会触发 onProfileProvisioningComplete() 回调。然后您就可以调用 setProfileEnabled() 来启用此托管配置文件。</div><div class="line"></div><div class="line">默认情况下，托管配置文件中只启用了一小部分应用。您可以通过调用 enableSystemApp() 在托管配置文件中安装更多应用。</div><div class="line"></div><div class="line">如果您要开发启动器应用，可以使用新增的 LauncherApps 类获取可为当前用户启动的 Activity 以及任何关联托管配置文件的列表。您的启动器可通过向可绘制图标追加工作徽章，以醒目方式显示托管应用。要检索带徽章的图标，请调用 getUserBadgedIcon()。</div><div class="line"></div><div class="line">要查看如何使用新功能，请参阅此版本中的 BasicManagedProfile 实现示例。</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android中的多用户双应用原理&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android广播流程</title>
-    <link href="http://joyflyaway.com/2017/01/09/Android%E5%B9%BF%E6%92%AD%E6%B5%81%E7%A8%8B/"/>
-    <id>http://joyflyaway.com/2017/01/09/Android广播流程/</id>
-    <published>2017-01-09T07:41:38.000Z</published>
-    <updated>2017-01-30T04:17:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">framework/base/core/java/android/app/ContextImpl.java</div></pre></td></tr></table></figure>
-<h2 id="一、发送过程"><a href="#一、发送过程" class="headerlink" title="一、发送过程"></a>一、发送过程</h2><h3 id="1-1-ContextImpl-sendBroadcast"><a href="#1-1-ContextImpl-sendBroadcast" class="headerlink" title="1.1 ContextImpl#sendBroadcast"></a>1.1 ContextImpl#sendBroadcast</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// UID = system，直接调用sendBroadcast方法，会警告，应调用sendBroadcastAsUser   </span></div><div class="line">warnIfCallingFromSystemProcess();</div><div class="line"></div><div class="line"><span class="comment">// 获取所查询URI的MIME类型，如果没有类型则返回null，这里应该是返回null   </span></div><div class="line">String resolvedType = intent.resolveTypeIfNeeded(getContentResolver());</div><div class="line"></div><div class="line"><span class="comment">// 调用ActivityManagerService#broadcastIntent方法</span></div><div class="line">ActivityManagerNative.getDefault().broadcastIntent</div></pre></td></tr></table></figure>
-<h3 id="1-2-ActivityManagerService-broadcastIntent"><a href="#1-2-ActivityManagerService-broadcastIntent" class="headerlink" title="1.2 ActivityManagerService#broadcastIntent"></a>1.2 ActivityManagerService#broadcastIntent</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<h2 id="二、注册过程"><a href="#二、注册过程" class="headerlink" title="二、注册过程"></a>二、注册过程</h2><h3 id="2-1-ActivityManagerService-registerReceiver"><a href="#2-1-ActivityManagerService-registerReceiver" class="headerlink" title="2.1 ActivityManagerService#registerReceiver"></a>2.1 ActivityManagerService#registerReceiver</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> <span class="comment">/*Keeps track of all IIntentReceivers that have been registered for    broadcasts.Hash keys are the receiver IBinder, hash value is a ReceiverList.*/</span></div><div class="line">mRegisteredReceivers.put(receiver.asBinder(), rl);</div><div class="line">BroadcastFilter bf = <span class="keyword">new</span> BroadcastFilter(filter,  rl, callerPackage,  permission, callingUid, userId);</div><div class="line">rl.add(bf);</div><div class="line">mReceiverResolver.addFilter(bf);</div><div class="line">queue.enqueueParallelBroadcastLocked(r);</div><div class="line">queue.scheduleBroadcastsLocked();</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;介绍Android广播的处理流程&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android中的异常处理机制</title>
-    <link href="http://joyflyaway.com/2017/01/06/Android%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    <id>http://joyflyaway.com/2017/01/06/Android中的异常处理机制/</id>
-    <published>2017-01-06T08:05:02.000Z</published>
-    <updated>2017-01-06T09:24:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>Apk第一次启动时,AMS通过socket发出请求，zygote接收消息，处理进程创建请求。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">zygoteInit</span><span class="params">(<span class="keyword">int</span> targetSdkVersion, String[] argv, ClassLoader classLoader)</span></span></div><div class="line">        <span class="keyword">throws</span> ZygoteInit.MethodAndArgsCaller &#123;</div><div class="line">    commonInit();</div><div class="line">    nativeZygoteInit();</div><div class="line">    applicationInit(targetSdkVersion, argv, classLoader);</div><div class="line">&#125;    </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</div><div class="line">    ......</div><div class="line">    <span class="comment">/* 线程默认异常处理handler */</span></div><div class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> UncaughtHandler());</div><div class="line">    ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>zygote会对新的进程进行一些基础的初始化，包括了默认异常处理。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 当应用内部抛出未被处理的异常而退出时，将会抓取当前log */</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">UncaughtHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</div><div class="line">      <span class="comment">// 弹出错误对话框，等待用户选择需要的操作</span></div><div class="line">      ActivityManagerNative.getDefault().handleApplicationCrash(</div><div class="line">              mApplicationObject, <span class="keyword">new</span> ApplicationErrorReport.CrashInfo(e));</div><div class="line"></div><div class="line">      <span class="comment">// 确保进程完全退出</span></div><div class="line">      Process.killProcess(Process.myPid());</div><div class="line">      System.exit(<span class="number">10</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当异常发生后，如果应用没有捕获，则会调用默认UncaughtHandler来处理：<br>APK —&gt; Binder —&gt; AMS    </p>
-<ul>
-<li>handleApplicationCrash()   </li>
-<li>Error Dialog //弹出 error dialog</li>
-<li>wait         //等待用户选择</li>
-<li>exit         //程序完全退出</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Debug" scheme="http://joyflyaway.com/tags/Debug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java虚拟机(笔记)</title>
-    <link href="http://joyflyaway.com/2016/12/26/Java%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
-    <id>http://joyflyaway.com/2016/12/26/Java虚拟机/</id>
-    <published>2016-12-26T07:19:53.000Z</published>
-    <updated>2016-12-31T04:41:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="Java内存-运行时区域"><a href="#Java内存-运行时区域" class="headerlink" title="Java内存 运行时区域"></a>Java内存 运行时区域</h2><h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><h3 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h3><h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">用于存放Class的相关信息，如类名、访问修饰符、常量池、字段描述、方法描述 等。</div></pre></td></tr></table></figure>
-<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>在Java语言中，可作为GC Roots的对象包括下面几种：</p>
-<ul>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
-<li>方法区中类静态属性引用的对象。</li>
-<li>方法区中常量引用的对象。</li>
-<li>本地方法栈中JNI（即一般说的Native方法）引用的对象。</li>
-</ul>
-<h2 id="类文件结构"><a href="#类文件结构" class="headerlink" title="类文件结构"></a>类文件结构</h2><h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>字面量（Literal）和符号引用（Symbolic References）。 字面量比较接近于Java语言层面的常量概念，如文本字符串、声明为final的常量值等。而符 号引用则属于编译原理方面的概念，包括了下面三类常量：</p>
-<ul>
-<li>类和接口的全限定名（Fully Qualified Name）</li>
-<li>字段的名称和描述符（Descriptor）</li>
-<li>方法的名称和描述符</li>
-</ul>
-<h2 id="字节码指令"><a href="#字节码指令" class="headerlink" title="字节码指令"></a>字节码指令</h2><h3 id="加载和存储指令"><a href="#加载和存储指令" class="headerlink" title="加载和存储指令"></a>加载和存储指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">加载和存储指令用于将数据在栈帧中的局部变量表和操作数栈之间来回传输</div></pre></td></tr></table></figure>
-<h3 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h3><h3 id="类型转换指令"><a href="#类型转换指令" class="headerlink" title="类型转换指令"></a>类型转换指令</h3><h3 id="对象创建与访问指令"><a href="#对象创建与访问指令" class="headerlink" title="对象创建与访问指令"></a>对象创建与访问指令</h3><h3 id="操作数栈管理指令"><a href="#操作数栈管理指令" class="headerlink" title="操作数栈管理指令"></a>操作数栈管理指令</h3><h3 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h3><h3 id="方法调用和返回指令"><a href="#方法调用和返回指令" class="headerlink" title="方法调用和返回指令"></a>方法调用和返回指令</h3><h3 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h3><h3 id="同步指令"><a href="#同步指令" class="headerlink" title="同步指令"></a>同步指令</h3><h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载（Loading）、</div><div class="line">验证（Verification）、准备（Preparation）、解析（Resolution）、</div><div class="line">初始化 （Initialization）、使用（Using）和卸载（Unloading）7个阶段。   </div><div class="line">其中验证、准备、解析3个 部分统称为连接（Linking）</div></pre></td></tr></table></figure>
-<p>虚拟机规范则 是严格规定了有且只有5种情况必须立即对类进行“初始化”（而加载、验证、准备自然需要 在此之前开始）:</p>
-<p>1）遇到new、getstatic、putstatic或invokestatic这4条字节码指令时，如果类没有进行过初 始化，则需要先触发其初始化。生成这4条指令的最常见的Java代码场景是：使用new关键字 实例化对象的时候、读取或设置一个类的静态字段（被final修饰、已在编译期把结果放入常 量池的静态字段除外）的时候，以及调用一个类的静态方法的时候。</p>
-<p>2）使用java.lang.reflect包的方法对类进行反射调用的时候，如果类没有进行过初始化， 则需要先触发其初始化。</p>
-<p>3）当初始化一个类的时候，如果发现其父类还没有进行过初始化，则需要先触发其父 类的初始化。</p>
-<p>4）当虚拟机启动时，用户需要指定一个要执行的主类（包含main（）方法的那个 类），虚拟机会先初始化这个主类。</p>
-<p>5）当使用JDK1.7的动态语言支持时，如果一个java.lang.invoke.MethodHandle实例最后 的解析结果REF_getStatic、REF_putStatic、REF_invokeStatic的方法句柄，并且这个方法句柄 所对应的类没有进行过初始化，则需要先触发其初始化。</p>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><ul>
-<li>文件格式验证</li>
-<li>元数据验证</li>
-<li>字节码验证</li>
-<li>符号引用验证</li>
-</ul>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存 都将在方法区中进行分配。</p>
-<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程</p>
-<ul>
-<li>类或接口的解析</li>
-<li>字段解析</li>
-<li>类方法解析</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;对《深入理解java虚拟机》一书所做的笔记。&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>dumpsys参数介绍</title>
-    <link href="http://joyflyaway.com/2016/12/21/dumpsys%E5%8F%82%E6%95%B0%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://joyflyaway.com/2016/12/21/dumpsys参数介绍/</id>
-    <published>2016-12-21T09:38:21.000Z</published>
-    <updated>2017-01-30T04:17:07.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>dumpsys -l<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">列出所有服务名</div></pre></td></tr></table></figure></p>
-<p>dumpsys gfxinfo [pid]<br>dumpsys meminfo [pid]</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;dumpsys -l&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pr
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>职位选择</title>
-    <link href="http://joyflyaway.com/2016/11/03/%E8%81%8C%E4%BD%8D%E9%80%89%E6%8B%A9/"/>
-    <id>http://joyflyaway.com/2016/11/03/职位选择/</id>
-    <published>2016-11-03T04:24:30.000Z</published>
-    <updated>2016-11-03T04:25:51.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>薪资组成：<br>月薪，年薪，股票，其他<br>公司：<br>职位，发展机会</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;薪资组成：&lt;br&gt;月薪，年薪，股票，其他&lt;br&gt;公司：&lt;br&gt;职位，发展机会&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>对团队的一些理解</title>
-    <link href="http://joyflyaway.com/2016/10/31/%E5%AF%B9%E5%9B%A2%E9%98%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/"/>
-    <id>http://joyflyaway.com/2016/10/31/对团队的一些理解/</id>
-    <published>2016-10-31T09:13:16.000Z</published>
-    <updated>2016-11-01T02:14:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>好的团队拥有的特质：<br>信任<br>互助<br>共进退<br>保持沟通，互相了解对方进度、问题<br>让每个成员都感觉到自己很重要</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;好的团队拥有的特质：&lt;br&gt;信任&lt;br&gt;互助&lt;br&gt;共进退&lt;br&gt;保持沟通，互相了解对方进度、问题&lt;br&gt;让每个成员都感觉到自己很重要&lt;/p&gt;
-
     
     </summary>
     

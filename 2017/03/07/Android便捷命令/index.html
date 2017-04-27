@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2017/03/07/Android便捷命令/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="Author JOY.">
-<meta property="og:updated_time" content="2017-03-09T08:07:47.000Z">
+<meta property="og:updated_time" content="2017-04-19T02:16:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android便捷命令">
 <meta name="twitter:description" content="Author JOY.">
@@ -286,6 +286,7 @@
 <li>参数组合使用，例如查找三方应用中知乎的包名、apk存放位置、安装来源：<br>pm list package -f -3 -i zhihu<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">package:/data/app/com.zhihu.android-1.apk=com.zhihu.android  installer=com.xiaomi.market</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>pm list permissions -g -d<br><code>列出系统所有危险权限</code></p>
 <p>pm path 列出对应包名的.apk位置：</p>
 <ul>
 <li>pm path com.tencent.mobileqq<br>package:/data/app/com.tencent.mobileqq-1.apk</li>
@@ -311,8 +312,9 @@
 <li>am monitor，监控crash与ANR</li>
 <li>am force-stop，后跟包名，结束应用</li>
 <li>am startsevice，启动一个服务</li>
-<li>am broadcast，发送一个广播</li>
+<li>am broadcast，发送一个广播   </li>
 </ul>
+<h2 id="monkey"><a href="#monkey" class="headerlink" title="monkey"></a>monkey</h2><p>monkey -p com.jared.performancetool -v 500<br><code>-p表示包名，-v表示反馈级别 500就是500个伪随机事件,若在压力测试中程序崩溃或者接收到任何失控异常，就会自动停止。</code></p>
             
         </div>
     </div>
@@ -806,7 +808,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 36 篇文章
+                找到 43 篇文章
             </p>
         </div>
     </div>
