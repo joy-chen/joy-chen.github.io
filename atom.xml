@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-04-27T05:56:42.000Z</updated>
+  <updated>2017-12-25T11:56:32.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,98 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rk3288_OTA</title>
+    <link href="http://joyflyaway.com/2017/12/25/rk3288-OTA/"/>
+    <id>http://joyflyaway.com/2017/12/25/rk3288-OTA/</id>
+    <published>2017-12-25T11:56:32.000Z</published>
+    <updated>2017-12-25T11:56:32.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>rk3288源码结构</title>
+    <link href="http://joyflyaway.com/2017/12/25/rk3288%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/"/>
+    <id>http://joyflyaway.com/2017/12/25/rk3288源码结构/</id>
+    <published>2017-12-25T09:11:54.000Z</published>
+    <updated>2017-12-25T09:11:54.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>RK3288编译介绍</title>
+    <link href="http://joyflyaway.com/2017/12/25/RK3288%E7%BC%96%E8%AF%91%E4%BB%8B%E7%BB%8D/"/>
+    <id>http://joyflyaway.com/2017/12/25/RK3288编译介绍/</id>
+    <published>2017-12-25T06:32:32.000Z</published>
+    <updated>2017-12-25T06:32:32.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>git常用命令</title>
+    <link href="http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://joyflyaway.com/2017/12/22/git常用命令/</id>
+    <published>2017-12-22T09:03:01.000Z</published>
+    <updated>2017-12-22T09:03:01.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>camera</title>
+    <link href="http://joyflyaway.com/2017/12/21/camera/"/>
+    <id>http://joyflyaway.com/2017/12/21/camera/</id>
+    <published>2017-12-21T10:49:21.000Z</published>
+    <updated>2017-12-21T10:49:21.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>自定义view</title>
+    <link href="http://joyflyaway.com/2017/10/30/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
+    <id>http://joyflyaway.com/2017/10/30/自定义view/</id>
+    <published>2017-10-30T04:30:35.000Z</published>
+    <updated>2017-11-03T09:33:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>view<br>1.分析view需要哪些属性，在构造方法里获取处理。<br>2.重写测量方法<br>3.重写ondraw方法</p>
+<p>viewgroup<br>1.测量<br>2.布局<br>3.事件处理 </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;view&lt;br&gt;1.分析view需要哪些属性，在构造方法里获取处理。&lt;br&gt;2.重写测量方法&lt;br&gt;3.重写ondraw方法&lt;/p&gt;
+&lt;p&gt;viewgroup&lt;br&gt;1.测量&lt;br&gt;2.布局&lt;br&gt;3.事件处理 &lt;/p&gt;
+
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>睡眠后按键无法唤醒的问题，如何看唤醒过程的log来定位问题</title>
@@ -102,7 +194,7 @@ ws deactivate-&gt;  EINT wakelock
     <link href="http://joyflyaway.com/2017/04/21/ANR%E5%88%86%E6%9E%90/"/>
     <id>http://joyflyaway.com/2017/04/21/ANR分析/</id>
     <published>2017-04-21T08:50:37.000Z</published>
-    <updated>2017-04-26T02:51:43.000Z</updated>
+    <updated>2017-11-04T03:03:19.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>ANR分为一下几类：</p>
@@ -119,7 +211,8 @@ ws deactivate-&gt;  EINT wakelock
 <li>自身服务阻塞</li>
 <li>系统阻塞</li>
 <li>内存紧张</li>
-<li>CPU资源抢占</li>
+<li>CPU资源抢占   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Service Timeout:比如前台服务在20s内未执行完成；</div><div class="line">BroadcastQueue Timeout：比如前台广播在10s内未执行完成</div><div class="line">ContentProvider Timeout：内容提供者,在publish过超时10s;</div><div class="line">InputDispatching Timeout: 输入事件分发超时5s，包括按键和触摸事件。</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <p>对于这些ANR，给大家的推荐一下大致分析思路和相关日志，通常发生ANR时，首先去查找对应Trace日志，看看主线程是否在处理该广播或被阻塞，如果发现上述现象，那么恭喜你，已经很接近答案了。但如果发现堆栈完全处于空闲状态，那么很不幸，就需要扩大参考面了，需要结合log日志进行分析，日志包括logcat, kernel日志，cpuinfo以及meminfo等，参考顺序从前向后。<br>1、分析logcat思路：首先在日志中搜索（“anr in”，“low_memory”, “slow_operation”）等关键字，通过该类关键字主要是查看系统Cpu负载，如果是发现应用进程CPU明显过高，那么很有可能是该进程抢占CPU过多导致，系统调度不及时,误认为应用发生了超时行为。<br>2、分析kernel思路：在此类日志中直接搜索lowmemorykiller, 如果存在则查看发生时间和ANR时间是否大致对应，相差无几的话，可以从该日志中看到操作系统层面当前内存情况，Free Memory说明的是空闲物理内存，File Free说明的则是文件Cache，也就是应用或系统从硬盘读取文件，使用结束后，kernel并没有这正释放这类内存，加以缓存，目的是为了下次读写过程加快速度。当然，发现Free和Other整体数值都偏低时，Kernel会进行一定程度的内存交换，导致整个系统卡顿。同时这类现象也会体现在log日志“slow_operation”中，即系统进程的调度也会收到影响。<br>3、分析cpuinfo思路：这类日志一目了然，可以清晰的看到哪类进程CPU偏高，如果存在明显偏高进程，那么ANR和此进程抢占CPU有一定关系。当然，如发现Kswapd，emmc进程在top中，则说明遇到系统内存压力或文件IO开销。<br>4、分析meminfo思路：分析该类日志，主要是看哪类应用或系统占用内存偏高，如果应用内存占用比较正常，系统也没有发生过度内存使用，那么则说明系统中缓存了大量进程，并没有及时释放导致系统整体内存偏低。   </p>]]></content>
     
@@ -395,162 +488,6 @@ ws deactivate-&gt;  EINT wakelock
     <summary type="html">
     
       &lt;p&gt;Joy&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android资源查找</title>
-    <link href="http://joyflyaway.com/2017/02/03/Android%E8%B5%84%E6%BA%90%E6%9F%A5%E6%89%BE/"/>
-    <id>http://joyflyaway.com/2017/02/03/Android资源查找/</id>
-    <published>2017-02-03T13:12:06.000Z</published>
-    <updated>2017-02-16T09:40:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="Android-API-使用例子："><a href="#Android-API-使用例子：" class="headerlink" title="Android API 使用例子："></a>Android API 使用例子：</h2><p><a href="https://developer.android.com/samples/index.html" target="_blank" rel="external">https://developer.android.com/samples/index.html</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Joy&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>查看Android系统历史使用数据</title>
-    <link href="http://joyflyaway.com/2017/02/03/%E6%9F%A5%E7%9C%8BAndroid%E7%B3%BB%E7%BB%9F%E5%8E%86%E5%8F%B2%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE/"/>
-    <id>http://joyflyaway.com/2017/02/03/查看Android系统历史使用数据/</id>
-    <published>2017-02-03T12:31:20.000Z</published>
-    <updated>2017-02-16T09:41:05.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="应用使用情况统计信息"><a href="#应用使用情况统计信息" class="headerlink" title="应用使用情况统计信息"></a>应用使用情况统计信息</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">现在可以利用新增的 android.app.usage API 访问 Android 设备上的应用使用历史记录。此 API 提供比已弃用的 getRecentTasks() 方法更为详细的使用信息。要使用此 API，您必须先在清单中声明 &quot;android.permission.PACKAGE_USAGE_STATS&quot; 权限。用户还必须通过 Settings &gt; Security &gt; Apps 为该应用启用访问使用情况的权限。</div><div class="line"></div><div class="line">系统以应用为单位收集使用数据，按天、周、月和年汇总数据。系统保留这些数据的最长持续时间如下：</div><div class="line"></div><div class="line">每日数据：7 天</div><div class="line">每周数据：4 周</div><div class="line">每月数据：6 个月</div><div class="line">每年数据：2 年</div><div class="line">系统会为每个应用记录以下数据：</div><div class="line"></div><div class="line">最后一次使用应用的时间</div><div class="line">在该时间间隔（以天、周、月或年为单位）内应用位于前台的总时长</div><div class="line">一天之中当组件（以软件包和 Activity 名称标识）转入前台或后台时记录的时间戳</div><div class="line">设备配置发生变化（如设备屏幕方向因旋转而发生变化）时记录的时间戳</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Joy&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>查看Android系统运行信息</title>
-    <link href="http://joyflyaway.com/2017/01/30/%E6%9F%A5%E7%9C%8BAndroid%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E4%BF%A1%E6%81%AF/"/>
-    <id>http://joyflyaway.com/2017/01/30/查看Android系统运行信息/</id>
-    <published>2017-01-30T04:16:03.000Z</published>
-    <updated>2017-02-17T03:28:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li><p>service list</p>
-<ul>
-<li>whether exist in system service</li>
-</ul>
-</li>
-<li><p>showmap -s [pid]</p>
-<ul>
-<li>Memory allocation dump</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;service list&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;whether exist in system service&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;showmap -s [pid]&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Memory allocatio
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android Native Tombstone/Crash 分析</title>
-    <link href="http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-%E5%88%86%E6%9E%90/"/>
-    <id>http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-分析/</id>
-    <published>2017-01-14T08:12:32.000Z</published>
-    <updated>2017-01-30T04:17:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>APK运行异常时，会闪退，然后弹出对话框“xxx应用已停止运行。。。”，造成这种现象的原因有两种：</p>
-<ul>
-<li>发生了未捕获的异常</li>
-<li>Native层运行异常</li>
-</ul>
-<p>Tombstone 是 Android 用来记录 native 进程崩溃的 core dump 日志</p>
-<h2 id="Tombstone-文件格式"><a href="#Tombstone-文件格式" class="headerlink" title="Tombstone 文件格式"></a>Tombstone 文件格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***</div><div class="line">Build fingerprint: &apos;LeEco/X7_CN/le_x7:6.0/KGXCNFN5961511291D/1480366802:userdebug/test-keys&apos;   </div><div class="line">Revision: &apos;0&apos;   </div><div class="line">ABI: &apos;arm64&apos;   </div><div class="line">pid: 2741, tid: 2832, name: L_UPDATE_ACTION  &gt;&gt;&gt; com.google.android.gms &lt;&lt;&lt;   </div><div class="line">    signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0</div><div class="line">    x0   0000000000000000  x1   0000000000000000  x2   0000000000000006     </div><div class="line">    x3   000000000000736d  x4   0000000000000003  x5   0000007f6b9c8090   </div><div class="line"></div><div class="line">backtrace:</div><div class="line">    #00 pc 000000000001cff4  /system/lib64/libc.so (strlen+16)</div><div class="line">    #01 pc 0000000000012e24  /system/lib64/libutils.so (_ZN7android7String8C2EPKc+24)</div><div class="line">    #02 pc 0000000000116518  /system/lib64/libandroid_runtime.so</div><div class="line">    #03 pc 00000000029a5438  /data/dalvik-cache/arm64/system@framework@boot.oat (offset 0x2696000)</div><div class="line"></div><div class="line">stack:</div><div class="line">         0000007f78421b60  0000000000000000</div></pre></td></tr></table></figure>
-<ul>
-<li>编译信息</li>
-<li>问题进程－问题线程－进程名－错误信号</li>
-<li>寄存器的值</li>
-<li>当前堆栈</li>
-<li>历史堆栈</li>
-</ul>
-<h3 id="SIGSEGV"><a href="#SIGSEGV" class="headerlink" title="SIGSEGV"></a>SIGSEGV</h3><ul>
-<li>越界访问</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;APK运行异常时，会闪退，然后弹出对话框“xxx应用已停止运行。。。”，造成这种现象的原因有两种：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;发生了未捕获的
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>LOG定位</title>
-    <link href="http://joyflyaway.com/2017/01/11/LOG%E5%AE%9A%E4%BD%8D/"/>
-    <id>http://joyflyaway.com/2017/01/11/LOG定位/</id>
-    <published>2017-01-11T11:52:24.000Z</published>
-    <updated>2017-04-19T02:16:21.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>TEST BUILDE 定位：<br>grep “make.<em>Error” </em> -nr</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;TEST BUILDE 定位：&lt;br&gt;grep “make.&lt;em&gt;Error” &lt;/em&gt; -nr&lt;/p&gt;
-
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android存储系统</title>
-    <link href="http://joyflyaway.com/2017/01/11/Android%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://joyflyaway.com/2017/01/11/Android存储系统/</id>
-    <published>2017-01-11T01:54:36.000Z</published>
-    <updated>2017-01-30T04:17:25.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service installd /system/bin/installd</div><div class="line">    <span class="keyword">class</span> main</div><div class="line">    socket installd stream <span class="number">600</span> system system</div></pre></td></tr></table></figure>
-<h2 id="Log-分析"><a href="#Log-分析" class="headerlink" title="Log 分析"></a>Log 分析</h2><p>关键字搜索</p>
-<ul>
-<li>Storage manager</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android存储系统&lt;br&gt;
     
     </summary>
     
