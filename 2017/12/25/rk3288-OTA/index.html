@@ -13,16 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="haha">
+    <meta name="description" content="系统升级分为OTA升级和固件包升级OTA方式：1)写如下字段到/cache/recovery/last_flagupdating$path=/mnt/internal_sd/update.zip2)写如下字段到/cache/recovery/command–update_package=/mnt/internal_sd/update.zip–locale=en_US3)在adb shell中运行r">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="rk3288_OTA">
 <meta property="og:url" content="http://joyflyaway.com/2017/12/25/rk3288-OTA/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="haha">
-<meta property="og:updated_time" content="2017-12-25T11:56:32.000Z">
+<meta property="og:description" content="系统升级分为OTA升级和固件包升级OTA方式：1)写如下字段到/cache/recovery/last_flagupdating$path=/mnt/internal_sd/update.zip2)写如下字段到/cache/recovery/command–update_package=/mnt/internal_sd/update.zip–locale=en_US3)在adb shell中运行r">
+<meta property="og:updated_time" content="2017-12-26T08:47:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rk3288_OTA">
-<meta name="twitter:description" content="haha">
+<meta name="twitter:description" content="系统升级分为OTA升级和固件包升级OTA方式：1)写如下字段到/cache/recovery/last_flagupdating$path=/mnt/internal_sd/update.zip2)写如下字段到/cache/recovery/command–update_package=/mnt/internal_sd/update.zip–locale=en_US3)在adb shell中运行r">
     
     
         
@@ -275,7 +275,12 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<p>固件包方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
+<p>OTA升级失败排查:<a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
+<p>dd命令：<br>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
+
             
         </div>
     </div>
