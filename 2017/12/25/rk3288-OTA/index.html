@@ -13,19 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成  APK(vendor/rockchip/common/apps/RKUpdateService)  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，  然后写入参数提供给recovery，然后重启进入recovery。
-系统升级分为OTA升级和固件包升级OTA方式：1)">
+    <meta name="description" content="Author JOY.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="rk3288_OTA">
 <meta property="og:url" content="http://joyflyaway.com/2017/12/25/rk3288-OTA/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成  APK(vendor/rockchip/common/apps/RKUpdateService)  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，  然后写入参数提供给recovery，然后重启进入recovery。
-系统升级分为OTA升级和固件包升级OTA方式：1)">
-<meta property="og:updated_time" content="2017-12-29T10:02:28.000Z">
+<meta property="og:description" content="Author JOY.">
+<meta property="og:updated_time" content="2017-12-29T10:13:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="rk3288_OTA">
-<meta name="twitter:description" content="OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成  APK(vendor/rockchip/common/apps/RKUpdateService)  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，  然后写入参数提供给recovery，然后重启进入recovery。
-系统升级分为OTA升级和固件包升级OTA方式：1)">
+<meta name="twitter:description" content="Author JOY.">
     
     
         
@@ -278,7 +275,7 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <!-- excerpt -->
+            <!-- excerpt --></p>
 <p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
 <p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
 <h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>

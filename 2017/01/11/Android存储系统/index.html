@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2017/01/11/Android存储系统/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="Android存储系统">
-<meta property="og:updated_time" content="2017-01-30T04:17:25.000Z">
+<meta property="og:updated_time" content="2017-12-29T10:13:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android存储系统">
 <meta name="twitter:description" content="Android存储系统">
@@ -281,6 +281,7 @@
 <ul>
 <li>Storage manager</li>
 </ul>
+<h2 id="查看存储空间的方法"><a href="#查看存储空间的方法" class="headerlink" title="查看存储空间的方法"></a>查看存储空间的方法</h2><h3 id="使用dump命令"><a href="#使用dump命令" class="headerlink" title="使用dump命令"></a>使用dump命令</h3><p>adb shell dumpsys devicestoragemonitor<br>Current DeviceStorageMonitor state:<br>mFreeMem=375 MB mTotalMemory=12.55 GB<br>mFreeMemAfterLastCacheClear=877 MB<br>mLastReportedFreeMem=375 MB mLastReportedFreeMemTime=-1h11m4s666ms<br>mLowMemFlag=false mMemFullFlag=false<br>mIsBootImageOnDisk=true mClearSucceeded=false mClearingCache=false<br>mMemLowThreshold=500 MB mMemFullThreshold=1.00 MB<br>mMemCacheStartTrimThreshold=375 MB mMemCacheTrimToThreshold=750 MB<br>mFreeMem较小时，比如为375 MB，证明手机内剩余存储空间较少。   </p>
             
         </div>
     </div>

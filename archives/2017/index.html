@@ -341,7 +341,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -363,37 +363,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
-<p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<h3 id="OTA升级失败排查"><a href="#OTA升级失败排查" class="headerlink" title="OTA升级失败排查:"></a>OTA升级失败排查:</h3><p><a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
-<h3 id="dd命令："><a href="#dd命令：" class="headerlink" title="dd命令："></a>dd命令：</h3><p>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
-<h3 id="recovery相关部分的代码路径"><a href="#recovery相关部分的代码路径" class="headerlink" title="recovery相关部分的代码路径"></a>recovery相关部分的代码路径</h3><p>  ${code_root}/bootable/recovery<br>  ${code_root}/bootable/recovery/recovery.cpp<br>  ${code_root}/bootable/recovery/rkimage.cpp<br>  ${code_root}/frameworks/base/core/java/android/os/RecoverySystem.java</p>
-<h3 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h3><p>The recovery tool communicates with the main system through /cache files.<br>/cache/recovery/command - INPUT - command line for tool, one arg per line<br>/cache/recovery/log - OUTPUT - combined log file from recovery run(s)<br>/cache/recovery/intent - OUTPUT - intent that was passed in</p>
-<p>The arguments which may be supplied in the recovery.command file:   </p>
-<ul>
-<li>–send_intent=anystring - write the text out to recovery.intent</li>
-<li>–update_package=path - verify install an OTA package file</li>
-<li>–wipe_data - erase user data (and cache), then reboot</li>
-<li>–wipe_cache - wipe cache (but not user data), then reboot</li>
-<li>–set_encrypted_filesystem=on|off - enables / diasables encrypted fs</li>
-<li>–just_exit - do nothing; exit and reboot<br>Arguments may also be supplied in the bootloader control block (BCB).</li>
-</ul>
-<p>After completing, we remove /cache/recovery/command and reboot.</p>
-<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>app执行安装/重置/清楚缓存操作调用代码文件<br>  frameworks/base/core/java/android/os/RecoverySystem.java<br>    installPackage<br>    rebootWipeUserData<br>    rebootWipeCache</p>
-<p>上面的所有操作都是往/cache/recovery/command文件中写入不同的命令，在进入recovery后（recovery.cpp）对command的关键字进行判断，执行相应的操作</p>
-<p>recovery.cpp<br>  -main()<br>   -&gt;install_package()<br>    install.cpp<br>      -&gt;install_package()<br>        -&gt;try_update_binary()</p>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
+                        <a href="/2017/12/25/rk3288-OTA/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/12/25/rk3288-OTA/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -402,7 +378,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -424,18 +400,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
+                        <a href="/2017/12/25/rk3288源码结构/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/12/25/rk3288源码结构/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             

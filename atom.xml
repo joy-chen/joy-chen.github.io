@@ -64,9 +64,9 @@
     <link href="http://joyflyaway.com/2017/12/25/rk3288-OTA/"/>
     <id>http://joyflyaway.com/2017/12/25/rk3288-OTA/</id>
     <published>2017-12-25T11:56:32.000Z</published>
-    <updated>2017-12-29T10:02:28.000Z</updated>
+    <updated>2017-12-29T10:13:22.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
+    <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
 <p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
 <h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
@@ -90,8 +90,7 @@
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成&lt;br&gt;  APK(vendor/rockchip/common/apps/RKUpdateService)&lt;br&gt;  RK只提供apk，没有源码。反
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -103,15 +102,14 @@
     <link href="http://joyflyaway.com/2017/12/25/rk3288%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/"/>
     <id>http://joyflyaway.com/2017/12/25/rk3288源码结构/</id>
     <published>2017-12-25T09:11:54.000Z</published>
-    <updated>2017-12-29T10:02:32.000Z</updated>
+    <updated>2017-12-29T10:12:57.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
+    <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;device/rockchip/rk3288：&lt;br&gt;板级配置&lt;br&gt;  device/rockchip/rk3288/rk3288.mk&lt;br&gt;    PRODUCT_NAME :=&lt;br&gt;    PRODUCT_BRAND :=&lt;br&gt;
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
