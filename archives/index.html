@@ -261,6 +261,92 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/12/28/MTK-OTA分析/">
+                            MTK_OTA分析
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-12-28T20:44:24+08:00">
+	
+		    12月 28, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <!-- excerpt -->
+<h3 id="SystemUpdate"><a href="#SystemUpdate" class="headerlink" title="SystemUpdate"></a>SystemUpdate</h3><p>MainEntry<br>  onStart()<br>    bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);<br>      onServiceConnected()<br>        queryPackagesInternal();<br>          mService.queryPackages();<br>            sQueryNewVersionThread.start();<br>              mHttpManager.queryNewVersion();<br>                checkNewVersion()</p>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/12/28/MTK-OTA分析/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/12/28/查看调用栈/">
+                            查看调用栈
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-12-28T20:18:14+08:00">
+	
+		    12月 28, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <!-- excerpt -->
+<ol>
+<li>Java中打印调用栈<br>比较简单，利用Throwable，直接log中打印出来：<br>Log.d(TAG, Log.getStackTraceString(new Throwable()));   </li>
+</ol>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/12/28/查看调用栈/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/12/25/rk3288-OTA/">
                             rk3288_OTA
                         </a>
@@ -278,12 +364,27 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<p>固件包方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+                    <!-- excerpt -->
 <p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
-<p>OTA升级失败排查:<a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
-<p>dd命令：<br>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
-
+<p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<h3 id="OTA升级失败排查"><a href="#OTA升级失败排查" class="headerlink" title="OTA升级失败排查:"></a>OTA升级失败排查:</h3><p><a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
+<h3 id="dd命令："><a href="#dd命令：" class="headerlink" title="dd命令："></a>dd命令：</h3><p>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
+<h3 id="recovery相关部分的代码路径"><a href="#recovery相关部分的代码路径" class="headerlink" title="recovery相关部分的代码路径"></a>recovery相关部分的代码路径</h3><p>  ${code_root}/bootable/recovery<br>  ${code_root}/bootable/recovery/recovery.cpp<br>  ${code_root}/bootable/recovery/rkimage.cpp<br>  ${code_root}/frameworks/base/core/java/android/os/RecoverySystem.java</p>
+<h3 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h3><p>The recovery tool communicates with the main system through /cache files.<br>/cache/recovery/command - INPUT - command line for tool, one arg per line<br>/cache/recovery/log - OUTPUT - combined log file from recovery run(s)<br>/cache/recovery/intent - OUTPUT - intent that was passed in</p>
+<p>The arguments which may be supplied in the recovery.command file:   </p>
+<ul>
+<li>–send_intent=anystring - write the text out to recovery.intent</li>
+<li>–update_package=path - verify install an OTA package file</li>
+<li>–wipe_data - erase user data (and cache), then reboot</li>
+<li>–wipe_cache - wipe cache (but not user data), then reboot</li>
+<li>–set_encrypted_filesystem=on|off - enables / diasables encrypted fs</li>
+<li>–just_exit - do nothing; exit and reboot<br>Arguments may also be supplied in the bootloader control block (BCB).</li>
+</ul>
+<p>After completing, we remove /cache/recovery/command and reboot.</p>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>app执行安装/重置/清楚缓存操作调用代码文件<br>  frameworks/base/core/java/android/os/RecoverySystem.java<br>    installPackage<br>    rebootWipeUserData<br>    rebootWipeCache</p>
+<p>上面的所有操作都是往/cache/recovery/command文件中写入不同的命令，在进入recovery后（recovery.cpp）对command的关键字进行判断，执行相应的操作</p>
+<p>recovery.cpp<br>  -main()<br>   -&gt;install_package()<br>    install.cpp<br>      -&gt;install_package()<br>        -&gt;try_update_binary()</p>
                     
                         
                     
@@ -324,8 +425,8 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>
-
+                    <!-- excerpt -->
+<p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>
                     
                         
                     
@@ -366,7 +467,8 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
+                    <!-- excerpt -->
+<p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool</div></pre></td></tr></table></figure>
 <p>烧写统一固件 update.img<br>sudo upgrade_tool uf update.img</p>
 <p>烧写分区镜像：<br>sudo upgrade_tool di -b /path/to/boot.img<br>sudo upgrade_tool di -k /path/to/kernel.img<br>sudo upgrade_tool di -s /path/to/system.img<br>sudo upgrade_tool di -r /path/to/recovery.img<br>sudo upgrade_tool di -m /path/to/misc.img<br>sudo upgrade_tool di resource /path/to/resource.img<br>sudo upgrade_tool di -p paramater   #烧写 parameter<br>sudo upgrade_tool ul bootloader.bin # 烧写 bootloader</p>
@@ -374,7 +476,6 @@
 <p>编译内核:<br>make -j${JOBS} -C kernel rockchip_defconfig<br>make -j${JOBS} -C kernel rk3288-${MODEL}.img</p>
 <p>编译Android:<br>. build.sh<br>make -j8<br>./mkimage.sh</p>
 <p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>
-
                     
                         
                     
@@ -415,8 +516,8 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <p>git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地<br>git diff –staged 查看未提交的更改</p>
-
+                    <!-- excerpt -->
+<p>git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地<br>git diff –staged 查看未提交的更改</p>
                     
                         
                     
@@ -441,7 +542,7 @@
                 <h1 class="postShorten-title" itemprop="headline">
                     
                         <a class="link-unstyled" href="/2017/12/21/camera/">
-                            camera
+                            Camera调试相关总结
                         </a>
                     
                 </h1>
@@ -457,7 +558,25 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    
+                    <!-- excerpt -->
+<p>1.获取设备的自然方向？<br>public int getDeviceDefaultOrientation() {<br>    WindowManager windowManager =  (WindowManager) getSystemService(Context.WINDOW_SERVICE);</p>
+<pre><code>Configuration config = getResources().getConfiguration();
+int rotation = windowManager.getDefaultDisplay().getRotation();
+
+if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;&amp;
+        config.orientation == Configuration.ORIENTATION_LANDSCAPE)
+    || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &amp;&amp;    
+        config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
+  return Configuration.ORIENTATION_LANDSCAPE;
+} else {
+  return Configuration.ORIENTATION_PORTRAIT;
+}
+</code></pre><p>}</p>
+<p>2.rk3288 摄像头显示改为前置？<br>cam_board.xml 里头有个front 和back配置<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
+<p>3.rk3288 摄像头向左翻转90%显示如何修改?<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
+<p>4.查看相机型号版本<br>getprop | grep sys_graphic</p>
+<p>5.camera配置文件path<br>hardware/rk29/camera/Config</p>
+<p>6.关键log点<br>CameraHal,</p>
                     
                         
                     
@@ -591,80 +710,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/21/ANR分析/">
-                            ANR分析
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-21T16:50:37+08:00">
-	
-		    4月 21, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>Author JOY.<br>
-                    
-                        <a href="/2017/04/21/ANR分析/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/19/App启动过程/">
-                            App启动过程
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-19T16:02:01+08:00">
-	
-		    4月 19, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>Author JOY.<br>
-                    
-                        <a href="/2017/04/19/App启动过程/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -676,7 +721,7 @@
             </a>
         </li>
         
-        <li class="pagination-number">第 1 页 共 5 页</li>
+        <li class="pagination-number">第 1 页 共 6 页</li>
     </ul>
 </div>
 
@@ -965,7 +1010,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 49 篇文章
+                找到 51 篇文章
             </p>
         </div>
     </div>

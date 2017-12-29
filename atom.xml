@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-12-26T08:47:37.000Z</updated>
+  <updated>2017-12-29T10:02:19.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -16,22 +16,82 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MTK_OTA分析</title>
+    <link href="http://joyflyaway.com/2017/12/28/MTK-OTA%E5%88%86%E6%9E%90/"/>
+    <id>http://joyflyaway.com/2017/12/28/MTK-OTA分析/</id>
+    <published>2017-12-28T12:44:24.000Z</published>
+    <updated>2017-12-29T10:02:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt -->
+<h3 id="SystemUpdate"><a href="#SystemUpdate" class="headerlink" title="SystemUpdate"></a>SystemUpdate</h3><p>MainEntry<br>  onStart()<br>    bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);<br>      onServiceConnected()<br>        queryPackagesInternal();<br>          mService.queryPackages();<br>            sQueryNewVersionThread.start();<br>              mHttpManager.queryNewVersion();<br>                checkNewVersion()</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- excerpt --&gt;
+&lt;h3 id=&quot;SystemUpdate&quot;&gt;&lt;a href=&quot;#SystemUpdate&quot; class=&quot;headerlink&quot; title=&quot;SystemUpdate&quot;&gt;&lt;/a&gt;SystemUpdate&lt;/h3&gt;&lt;p&gt;MainEntry&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查看调用栈</title>
+    <link href="http://joyflyaway.com/2017/12/28/%E6%9F%A5%E7%9C%8B%E8%B0%83%E7%94%A8%E6%A0%88/"/>
+    <id>http://joyflyaway.com/2017/12/28/查看调用栈/</id>
+    <published>2017-12-28T12:18:14.000Z</published>
+    <updated>2017-12-29T10:02:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt -->
+<ol>
+<li>Java中打印调用栈<br>比较简单，利用Throwable，直接log中打印出来：<br>Log.d(TAG, Log.getStackTraceString(new Throwable()));   </li>
+</ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;!-- excerpt --&gt;
+&lt;ol&gt;
+&lt;li&gt;Java中打印调用栈&lt;br&gt;比较简单，利用Throwable，直接log中打印出来：&lt;br&gt;Log.d(TAG, Log.getStackTraceString(new Throwable()));   &lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>rk3288_OTA</title>
     <link href="http://joyflyaway.com/2017/12/25/rk3288-OTA/"/>
     <id>http://joyflyaway.com/2017/12/25/rk3288-OTA/</id>
     <published>2017-12-25T11:56:32.000Z</published>
-    <updated>2017-12-26T08:47:37.000Z</updated>
+    <updated>2017-12-29T10:02:28.000Z</updated>
     
-    <content type="html"><![CDATA[<p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<p>固件包方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+    <content type="html"><![CDATA[<!-- excerpt -->
 <p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
-<p>OTA升级失败排查:<a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
-<p>dd命令：<br>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
-]]></content>
+<p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
+<h3 id="OTA升级失败排查"><a href="#OTA升级失败排查" class="headerlink" title="OTA升级失败排查:"></a>OTA升级失败排查:</h3><p><a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
+<h3 id="dd命令："><a href="#dd命令：" class="headerlink" title="dd命令："></a>dd命令：</h3><p>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
+<h3 id="recovery相关部分的代码路径"><a href="#recovery相关部分的代码路径" class="headerlink" title="recovery相关部分的代码路径"></a>recovery相关部分的代码路径</h3><p>  ${code_root}/bootable/recovery<br>  ${code_root}/bootable/recovery/recovery.cpp<br>  ${code_root}/bootable/recovery/rkimage.cpp<br>  ${code_root}/frameworks/base/core/java/android/os/RecoverySystem.java</p>
+<h3 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h3><p>The recovery tool communicates with the main system through /cache files.<br>/cache/recovery/command - INPUT - command line for tool, one arg per line<br>/cache/recovery/log - OUTPUT - combined log file from recovery run(s)<br>/cache/recovery/intent - OUTPUT - intent that was passed in</p>
+<p>The arguments which may be supplied in the recovery.command file:   </p>
+<ul>
+<li>–send_intent=anystring - write the text out to recovery.intent</li>
+<li>–update_package=path - verify install an OTA package file</li>
+<li>–wipe_data - erase user data (and cache), then reboot</li>
+<li>–wipe_cache - wipe cache (but not user data), then reboot</li>
+<li>–set_encrypted_filesystem=on|off - enables / diasables encrypted fs</li>
+<li>–just_exit - do nothing; exit and reboot<br>Arguments may also be supplied in the bootloader control block (BCB).</li>
+</ul>
+<p>After completing, we remove /cache/recovery/command and reboot.</p>
+<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>app执行安装/重置/清楚缓存操作调用代码文件<br>  frameworks/base/core/java/android/os/RecoverySystem.java<br>    installPackage<br>    rebootWipeUserData<br>    rebootWipeCache</p>
+<p>上面的所有操作都是往/cache/recovery/command文件中写入不同的命令，在进入recovery后（recovery.cpp）对command的关键字进行判断，执行相应的操作</p>
+<p>recovery.cpp<br>  -main()<br>   -&gt;install_package()<br>    install.cpp<br>      -&gt;install_package()<br>        -&gt;try_update_binary()</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;系统升级分为OTA升级和固件包升级&lt;br&gt;OTA方式：&lt;br&gt;1)写如下字段到/cache/recovery/last_flag&lt;br&gt;updating$path=/mnt/internal_sd/update.zip&lt;br&gt;2)写如下字段到/cache/recovery/
+      &lt;!-- excerpt --&gt;
+&lt;p&gt;OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成&lt;br&gt;  APK(vendor/rockchip/common/apps/RKUpdateService)&lt;br&gt;  RK只提供apk，没有源码。反
     
     </summary>
     
@@ -43,14 +103,15 @@
     <link href="http://joyflyaway.com/2017/12/25/rk3288%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/"/>
     <id>http://joyflyaway.com/2017/12/25/rk3288源码结构/</id>
     <published>2017-12-25T09:11:54.000Z</published>
-    <updated>2017-12-26T08:47:45.000Z</updated>
+    <updated>2017-12-29T10:02:32.000Z</updated>
     
-    <content type="html"><![CDATA[<p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>
-]]></content>
+    <content type="html"><![CDATA[<!-- excerpt -->
+<p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;device/rockchip/rk3288：&lt;br&gt;板级配置&lt;br&gt;  device/rockchip/rk3288/rk3288.mk&lt;br&gt;    PRODUCT_NAME :=&lt;br&gt;    PRODUCT_BRAND :=&lt;br&gt;    PRODUCT_DEVIC
+      &lt;!-- excerpt --&gt;
+&lt;p&gt;device/rockchip/rk3288：&lt;br&gt;板级配置&lt;br&gt;  device/rockchip/rk3288/rk3288.mk&lt;br&gt;    PRODUCT_NAME :=&lt;br&gt;    PRODUCT_BRAND :=&lt;br&gt;
     
     </summary>
     
@@ -62,21 +123,22 @@
     <link href="http://joyflyaway.com/2017/12/25/RK3288%E7%BC%96%E8%AF%91%E4%BB%8B%E7%BB%8D/"/>
     <id>http://joyflyaway.com/2017/12/25/RK3288编译介绍/</id>
     <published>2017-12-25T06:32:32.000Z</published>
-    <updated>2017-12-26T08:47:49.000Z</updated>
+    <updated>2017-12-29T10:02:40.000Z</updated>
     
-    <content type="html"><![CDATA[<p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
+    <content type="html"><![CDATA[<!-- excerpt -->
+<p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool</div></pre></td></tr></table></figure>
 <p>烧写统一固件 update.img<br>sudo upgrade_tool uf update.img</p>
 <p>烧写分区镜像：<br>sudo upgrade_tool di -b /path/to/boot.img<br>sudo upgrade_tool di -k /path/to/kernel.img<br>sudo upgrade_tool di -s /path/to/system.img<br>sudo upgrade_tool di -r /path/to/recovery.img<br>sudo upgrade_tool di -m /path/to/misc.img<br>sudo upgrade_tool di resource /path/to/resource.img<br>sudo upgrade_tool di -p paramater   #烧写 parameter<br>sudo upgrade_tool ul bootloader.bin # 烧写 bootloader</p>
 <p>如果因 flash 问题导致升级时出错，可以尝试低级格式化、擦除 nand flash：<br>sudo upgrade_tool lf   # 低级格式化<br>sudo upgrade_tool ef   # 擦除</p>
 <p>编译内核:<br>make -j${JOBS} -C kernel rockchip_defconfig<br>make -j${JOBS} -C kernel rk3288-${MODEL}.img</p>
 <p>编译Android:<br>. build.sh<br>make -j8<br>./mkimage.sh</p>
-<p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>
-]]></content>
+<p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;a href=&quot;http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wiki.t-firefly.com/i
+      &lt;!-- excerpt --&gt;
+&lt;p&gt;&lt;a href=&quot;http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://wik
     
     </summary>
     
@@ -88,15 +150,15 @@
     <link href="http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
     <id>http://joyflyaway.com/2017/12/22/git常用命令/</id>
     <published>2017-12-22T09:03:01.000Z</published>
-    <updated>2017-12-26T08:47:42.000Z</updated>
+    <updated>2017-12-29T10:02:13.000Z</updated>
     
-    <content type="html"><![CDATA[<p>git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地<br>git diff –staged 查看未提交的更改</p>
-]]></content>
+    <content type="html"><![CDATA[<!-- excerpt -->
+<p>git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地<br>git diff –staged 查看未提交的更改</p>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地&lt;br&gt;git diff –staged 查看未提交的更改&lt;/p&gt;
-
+      &lt;!-- excerpt --&gt;
+&lt;p&gt;git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地&lt;br&gt;git diff –staged 查看未提交的更改&lt;/p&gt;
     
     </summary>
     
@@ -104,13 +166,36 @@
   </entry>
   
   <entry>
-    <title>camera</title>
+    <title>Camera调试相关总结</title>
     <link href="http://joyflyaway.com/2017/12/21/camera/"/>
     <id>http://joyflyaway.com/2017/12/21/camera/</id>
     <published>2017-12-21T10:49:21.000Z</published>
-    <updated>2017-12-21T10:49:21.000Z</updated>
+    <updated>2017-12-29T10:02:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt -->
+<p>1.获取设备的自然方向？<br>public int getDeviceDefaultOrientation() {<br>    WindowManager windowManager =  (WindowManager) getSystemService(Context.WINDOW_SERVICE);</p>
+<pre><code>Configuration config = getResources().getConfiguration();
+int rotation = windowManager.getDefaultDisplay().getRotation();
+
+if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;&amp;
+        config.orientation == Configuration.ORIENTATION_LANDSCAPE)
+    || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &amp;&amp;    
+        config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
+  return Configuration.ORIENTATION_LANDSCAPE;
+} else {
+  return Configuration.ORIENTATION_PORTRAIT;
+}
+</code></pre><p>}</p>
+<p>2.rk3288 摄像头显示改为前置？<br>cam_board.xml 里头有个front 和back配置<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
+<p>3.rk3288 摄像头向左翻转90%显示如何修改?<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
+<p>4.查看相机型号版本<br>getprop | grep sys_graphic</p>
+<p>5.camera配置文件path<br>hardware/rk29/camera/Config</p>
+<p>6.关键log点<br>CameraHal,</p>]]></content>
     
     <summary type="html">
+    
+      &lt;!-- excerpt --&gt;
+&lt;p&gt;1.获取设备的自然方向？&lt;br&gt;public int getDeviceDefaultOrientation() {&lt;br&gt;    WindowManager windowManager =  (WindowManager) getSyst
     
     </summary>
     
@@ -226,7 +311,7 @@ ws deactivate-&gt;  EINT wakelock
     <link href="http://joyflyaway.com/2017/04/21/ANR%E5%88%86%E6%9E%90/"/>
     <id>http://joyflyaway.com/2017/04/21/ANR分析/</id>
     <published>2017-04-21T08:50:37.000Z</published>
-    <updated>2017-11-04T03:03:19.000Z</updated>
+    <updated>2017-12-29T10:02:52.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>ANR分为一下几类：</p>
@@ -243,8 +328,7 @@ ws deactivate-&gt;  EINT wakelock
 <li>自身服务阻塞</li>
 <li>系统阻塞</li>
 <li>内存紧张</li>
-<li>CPU资源抢占   <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Service Timeout:比如前台服务在20s内未执行完成；</div><div class="line">BroadcastQueue Timeout：比如前台广播在10s内未执行完成</div><div class="line">ContentProvider Timeout：内容提供者,在publish过超时10s;</div><div class="line">InputDispatching Timeout: 输入事件分发超时5s，包括按键和触摸事件。</div></pre></td></tr></table></figure>
-</li>
+<li>CPU资源抢占</li>
 </ul>
 <p>对于这些ANR，给大家的推荐一下大致分析思路和相关日志，通常发生ANR时，首先去查找对应Trace日志，看看主线程是否在处理该广播或被阻塞，如果发现上述现象，那么恭喜你，已经很接近答案了。但如果发现堆栈完全处于空闲状态，那么很不幸，就需要扩大参考面了，需要结合log日志进行分析，日志包括logcat, kernel日志，cpuinfo以及meminfo等，参考顺序从前向后。<br>1、分析logcat思路：首先在日志中搜索（“anr in”，“low_memory”, “slow_operation”）等关键字，通过该类关键字主要是查看系统Cpu负载，如果是发现应用进程CPU明显过高，那么很有可能是该进程抢占CPU过多导致，系统调度不及时,误认为应用发生了超时行为。<br>2、分析kernel思路：在此类日志中直接搜索lowmemorykiller, 如果存在则查看发生时间和ANR时间是否大致对应，相差无几的话，可以从该日志中看到操作系统层面当前内存情况，Free Memory说明的是空闲物理内存，File Free说明的则是文件Cache，也就是应用或系统从硬盘读取文件，使用结束后，kernel并没有这正释放这类内存，加以缓存，目的是为了下次读写过程加快速度。当然，发现Free和Other整体数值都偏低时，Kernel会进行一定程度的内存交换，导致整个系统卡顿。同时这类现象也会体现在log日志“slow_operation”中，即系统进程的调度也会收到影响。<br>3、分析cpuinfo思路：这类日志一目了然，可以清晰的看到哪类进程CPU偏高，如果存在明显偏高进程，那么ANR和此进程抢占CPU有一定关系。当然，如发现Kswapd，emmc进程在top中，则说明遇到系统内存压力或文件IO开销。<br>4、分析meminfo思路：分析该类日志，主要是看哪类应用或系统占用内存偏高，如果应用内存占用比较正常，系统也没有发生过度内存使用，那么则说明系统中缓存了大量进程，并没有及时释放导致系统整体内存偏低。   </p>]]></content>
     
@@ -484,42 +568,6 @@ ws deactivate-&gt;  EINT wakelock
     <summary type="html">
     
       &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>linux常用命令</title>
-    <link href="http://joyflyaway.com/2017/02/28/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://joyflyaway.com/2017/02/28/linux常用命令/</id>
-    <published>2017-02-28T13:30:31.000Z</published>
-    <updated>2017-03-03T01:07:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --><br>目录下查找替换<br>sed -i “s/old/new/g” <code>grep old -rl /www</code></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>shell命令</title>
-    <link href="http://joyflyaway.com/2017/02/17/shell%E5%91%BD%E4%BB%A4/"/>
-    <id>http://joyflyaway.com/2017/02/17/shell命令/</id>
-    <published>2017-02-17T03:27:46.000Z</published>
-    <updated>2017-02-17T03:28:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --><br>列出你所有的僵尸进程:<br>ps -el | grep ‘Z</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Joy&lt;br&gt;
     
     </summary>
     

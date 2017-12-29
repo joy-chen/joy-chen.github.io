@@ -16,7 +16,7 @@
     <meta name="description" content="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux
 1upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool
 烧写统一固件 update.imgsudo upgrade_tool uf update.img
-烧写分区镜像：sudo upgra">
+烧写分区镜像：sudo upgr">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="RK3288编译介绍">
 <meta property="og:url" content="http://joyflyaway.com/2017/12/25/RK3288编译介绍/index.html">
@@ -24,14 +24,14 @@
 <meta property="og:description" content="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux
 1upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool
 烧写统一固件 update.imgsudo upgrade_tool uf update.img
-烧写分区镜像：sudo upgra">
-<meta property="og:updated_time" content="2017-12-26T08:47:49.000Z">
+烧写分区镜像：sudo upgr">
+<meta property="og:updated_time" content="2017-12-29T10:02:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RK3288编译介绍">
 <meta name="twitter:description" content="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux
 1upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool
 烧写统一固件 update.imgsudo upgrade_tool uf update.img
-烧写分区镜像：sudo upgra">
+烧写分区镜像：sudo upgr">
     
     
         
@@ -284,7 +284,8 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
+            <!-- excerpt -->
+<p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool</div></pre></td></tr></table></figure>
 <p>烧写统一固件 update.img<br>sudo upgrade_tool uf update.img</p>
 <p>烧写分区镜像：<br>sudo upgrade_tool di -b /path/to/boot.img<br>sudo upgrade_tool di -k /path/to/kernel.img<br>sudo upgrade_tool di -s /path/to/system.img<br>sudo upgrade_tool di -r /path/to/recovery.img<br>sudo upgrade_tool di -m /path/to/misc.img<br>sudo upgrade_tool di resource /path/to/resource.img<br>sudo upgrade_tool di -p paramater   #烧写 parameter<br>sudo upgrade_tool ul bootloader.bin # 烧写 bootloader</p>
@@ -292,7 +293,6 @@
 <p>编译内核:<br>make -j${JOBS} -C kernel rockchip_defconfig<br>make -j${JOBS} -C kernel rk3288-${MODEL}.img</p>
 <p>编译Android:<br>. build.sh<br>make -j8<br>./mkimage.sh</p>
 <p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>
-
             
         </div>
     </div>
@@ -786,7 +786,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 49 篇文章
+                找到 51 篇文章
             </p>
         </div>
     </div>
