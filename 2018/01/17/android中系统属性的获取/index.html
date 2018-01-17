@@ -13,16 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="haha">
+    <meta name="description" content="Author JOY.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="android中系统属性的获取">
 <meta property="og:url" content="http://joyflyaway.com/2018/01/17/android中系统属性的获取/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="haha">
-<meta property="og:updated_time" content="2018-01-17T09:16:09.000Z">
+<meta property="og:description" content="Author JOY.">
+<meta property="og:updated_time" content="2018-01-17T09:57:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android中系统属性的获取">
-<meta name="twitter:description" content="haha">
+<meta name="twitter:description" content="Author JOY.">
     
     
         
@@ -275,7 +275,11 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <!-- excerpt --></p>
+<h3 id="获取java属性："><a href="#获取java属性：" class="headerlink" title="获取java属性："></a>获取java属性：</h3><p>System.getProperty(“user.name”)；</p>
+<h3 id="三方应用获取系统属性："><a href="#三方应用获取系统属性：" class="headerlink" title="三方应用获取系统属性："></a>三方应用获取系统属性：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> String <span class="title">getAndroidOsSystemProperties</span><span class="params">(String key)</span> </span>&#123;</div><div class="line">    String ret;</div><div class="line">    Method systemProperties_get = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        systemProperties_get = Class.forName(<span class="string">"android.os.SystemProperties"</span>).getMethod(<span class="string">"get"</span>, String.class);</div><div class="line">        <span class="keyword">if</span> ((ret = (String) systemProperties_get.invoke(<span class="keyword">null</span>, key)) != <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> ret;</div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        e.printStackTrace();</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="内置应用获取系统属性："><a href="#内置应用获取系统属性：" class="headerlink" title="内置应用获取系统属性："></a>内置应用获取系统属性：</h3><p>SystemProperties.get(“property_name”))</p>
+<p><a href="http://joyflyaway.com/2016/10/24/Android系统属性/">相关参考</a></p>
             
         </div>
     </div>

@@ -255,7 +255,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -277,17 +277,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
-                    
+                        <a href="/2018/01/17/android中系统属性的获取/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2018/01/17/android中系统属性的获取/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -333,7 +329,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -355,17 +351,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
-                    
+                        <a href="/2018/01/14/gradle相关用法/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2018/01/14/gradle相关用法/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -374,7 +366,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -396,17 +388,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
-                    
+                        <a href="/2018/01/10/Android之Alarm框架/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2018/01/10/Android之Alarm框架/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -415,7 +403,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -437,17 +425,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY<br>
                     
-                    
+                        <a href="/2018/01/04/Android问题定位总结/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2018/01/04/Android问题定位总结/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             
@@ -616,7 +600,7 @@
     </article>
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -638,25 +622,13 @@
 
             </div>
             
-                <div class="postShorten-content" itemprop="articleBody">
-                    <!-- excerpt -->
-<p><a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool</div></pre></td></tr></table></figure>
-<p>烧写统一固件 update.img<br>sudo upgrade_tool uf update.img</p>
-<p>烧写分区镜像：<br>sudo upgrade_tool di -b /path/to/boot.img<br>sudo upgrade_tool di -k /path/to/kernel.img<br>sudo upgrade_tool di -s /path/to/system.img<br>sudo upgrade_tool di -r /path/to/recovery.img<br>sudo upgrade_tool di -m /path/to/misc.img<br>sudo upgrade_tool di resource /path/to/resource.img<br>sudo upgrade_tool di -p paramater   #烧写 parameter<br>sudo upgrade_tool ul bootloader.bin # 烧写 bootloader</p>
-<p>如果因 flash 问题导致升级时出错，可以尝试低级格式化、擦除 nand flash：<br>sudo upgrade_tool lf   # 低级格式化<br>sudo upgrade_tool ef   # 擦除</p>
-<p>编译内核:<br>make -j${JOBS} -C kernel rockchip_defconfig<br>make -j${JOBS} -C kernel rk3288-${MODEL}.img</p>
-<p>编译Android:<br>. build.sh<br>make -j8<br>./mkimage.sh</p>
-<p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    <p>Author JOY.<br>
                     
+                        <a href="/2017/12/25/RK3288编译介绍/" class="postShorten-excerpt_link link">
+                            阅读全文
+                        </a>
                         
-                    
-                    
-                        <p>
-                            <a href="/2017/12/25/RK3288编译介绍/#post-footer" class="postShorten-excerpt_link link">
-                                注释和共享
-                            </a>
-                        </p>
                     
                 </div>
             

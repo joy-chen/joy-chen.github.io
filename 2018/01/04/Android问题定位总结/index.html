@@ -13,16 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="haha">
+    <meta name="description" content="Author JOY">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Android问题定位总结">
 <meta property="og:url" content="http://joyflyaway.com/2018/01/04/Android问题定位总结/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="haha">
-<meta property="og:updated_time" content="2018-01-04T08:27:05.000Z">
+<meta property="og:description" content="Author JOY">
+<meta property="og:updated_time" content="2018-01-17T10:00:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android问题定位总结">
-<meta name="twitter:description" content="haha">
+<meta name="twitter:description" content="Author JOY">
     
     
         
@@ -275,7 +275,9 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <!-- excerpt --></p>
+<h3 id="Android进程终止和重启问题"><a href="#Android进程终止和重启问题" class="headerlink" title="Android进程终止和重启问题"></a>Android进程终止和重启问题</h3><p>原因是：虚拟机捕获了一些unchecked异常，如空指针异常等<br>在ddms或logcat或bugreport的log中搜索FATAL关键字，或者在/data/system/dropbox目录中找对应生成的crash字段的文件</p>
+<h3 id="异常相关的log目录"><a href="#异常相关的log目录" class="headerlink" title="异常相关的log目录"></a>异常相关的log目录</h3><p>/data/anr<br>/data/system/dropbox<br>/data/dontpanic/<br>/data/tombstones/</p>
             
         </div>
     </div>
