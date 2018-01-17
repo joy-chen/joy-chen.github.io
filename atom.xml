@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2017-12-29T10:02:19.000Z</updated>
+  <updated>2018-01-17T09:16:09.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,80 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>android中系统属性的获取</title>
+    <link href="http://joyflyaway.com/2018/01/17/android%E4%B8%AD%E7%B3%BB%E7%BB%9F%E5%B1%9E%E6%80%A7%E7%9A%84%E8%8E%B7%E5%8F%96/"/>
+    <id>http://joyflyaway.com/2018/01/17/android中系统属性的获取/</id>
+    <published>2018-01-17T09:16:09.000Z</published>
+    <updated>2018-01-17T09:16:09.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>C本质</title>
+    <link href="http://joyflyaway.com/2018/01/17/C%E6%9C%AC%E8%B4%A8/"/>
+    <id>http://joyflyaway.com/2018/01/17/C本质/</id>
+    <published>2018-01-17T07:01:56.000Z</published>
+    <updated>2018-01-17T07:02:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>gradle相关用法</title>
+    <link href="http://joyflyaway.com/2018/01/14/gradle%E7%9B%B8%E5%85%B3%E7%94%A8%E6%B3%95/"/>
+    <id>http://joyflyaway.com/2018/01/14/gradle相关用法/</id>
+    <published>2018-01-14T10:46:21.000Z</published>
+    <updated>2018-01-14T10:46:21.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android之Alarm框架</title>
+    <link href="http://joyflyaway.com/2018/01/10/Android%E4%B9%8BAlarm%E6%A1%86%E6%9E%B6/"/>
+    <id>http://joyflyaway.com/2018/01/10/Android之Alarm框架/</id>
+    <published>2018-01-10T07:29:48.000Z</published>
+    <updated>2018-01-10T07:29:48.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android问题定位总结</title>
+    <link href="http://joyflyaway.com/2018/01/04/Android%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E6%80%BB%E7%BB%93/"/>
+    <id>http://joyflyaway.com/2018/01/04/Android问题定位总结/</id>
+    <published>2018-01-04T08:27:05.000Z</published>
+    <updated>2018-01-04T08:27:05.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>MTK_OTA分析</title>
@@ -419,149 +493,6 @@ ws deactivate-&gt;  EINT wakelock
 <li>不要做冗余的动作</li>
 <li>如果能避免，尽量不要分配内存</li>
 </ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>电源管理</title>
-    <link href="http://joyflyaway.com/2017/03/10/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/"/>
-    <id>http://joyflyaway.com/2017/03/10/电源管理/</id>
-    <published>2017-03-10T03:15:41.000Z</published>
-    <updated>2017-04-19T02:16:27.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Android includes the following battery life enhancements:</p>
-<ul>
-<li>App Standby. The platform can place unused applications in App Standby mode, temporarily restricting network access and deferring syncs and jobs for those applications.</li>
-<li>Doze. The platform can enter a state of deep sleep (periodically resuming normal operations) if users have not actively used their device (screen off and stationary) for extended periods of time. Android 7.0 also enables Doze to trigger a lighter set of optimizations when users turn off the device screen yet continue to move around.</li>
-<li>Exemptions. System apps and cloud messaging services preloaded on a device are typically exempted from App Standby and Doze by default (although app developers can intent their applications into this setting). Users can exempt applications via the Settings menu.</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Android includes the following battery life enhancements:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;App Standby. The platform can place unused applications in App Sta
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>查看内存信息</title>
-    <link href="http://joyflyaway.com/2017/03/09/%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF/"/>
-    <id>http://joyflyaway.com/2017/03/09/查看内存信息/</id>
-    <published>2017-03-09T05:28:15.000Z</published>
-    <updated>2017-04-26T02:56:26.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>除了free与vmstat之外，透过调阅<strong>/proc/meminfo</strong>的内容可以查阅进一步的统计信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">cat /proc/meminfo</div><div class="line">MemTotal:     12142744 kB</div><div class="line">MemFree:      10889316 kB</div><div class="line">Buffers:        391964 kB</div><div class="line">Cached:         522584 kB</div><div class="line">SwapCached:          0 kB</div><div class="line">Active:         407604 kB</div><div class="line">Inactive:       564460 kB</div><div class="line">HighTotal:           0 kB</div><div class="line">HighFree:            0 kB</div><div class="line">LowTotal:     12142744 kB</div><div class="line">LowFree:      10889316 kB</div><div class="line">SwapTotal:    20972816 kB</div><div class="line">SwapFree:     20972816 kB</div><div class="line">Dirty:             304 kB</div><div class="line">Writeback:           0 kB</div><div class="line">AnonPages:       57388 kB</div><div class="line">Mapped:          23556 kB</div><div class="line">Slab:           214100 kB</div><div class="line">PageTables:       7328 kB</div><div class="line">NFS_Unstable:        0 kB</div><div class="line">Bounce:              0 kB</div><div class="line">CommitLimit:  27044188 kB</div><div class="line">Committed_AS:   372876 kB</div><div class="line">VmallocTotal: 34359738367 kB</div><div class="line">VmallocUsed:    281368 kB</div><div class="line">VmallocChunk: 34359456975 kB</div><div class="line">HugePages_Total:     0</div><div class="line">HugePages_Free:      0</div><div class="line">HugePages_Rsvd:      0M</div><div class="line">Hugepagesize:     2048 kB</div></pre></td></tr></table></figure></p>
-<p>他的输出内容非常的多，但你可以分成几块来看：高阶、低阶的与內存统计信息。<br>高阶信息，基本上就等同于是在free看到的那些内容：<br>MemTotal是系统中可用的內存总量，但其实是扣掉了一些被kernel所保留的一点点空间。<br>MemFree是HighFree与LowFree的加总。<br>Buffers是buffer所占用的空间。// block 设备cache<br>Cached是不包含SwapCached的cache空间。// file cache<br>比较低阶的信息有：<br>Active指的是那些最近或是经常被使用的page，而Inactive则是那些最近都没有被使用的page。当系统需要调用新的page空间时，会先从Inactive的部分下手，因为Active的部分比较有机会被再度使用。<br>HighTotal与HighFree代表的是user space所能使用的以及还剩馀多少的使用空间。<br>LowTotal与LowFree则是kernel space所能使用的以及还剩馀多少的使用空间。<br>SwapTotal与SwapFree指的是swap所能使用以及还剩馀多少空间。<br>Dirty指的是等待被写入disk的数据量。<br>Writeback则是正在被写入disk的数据量。<br>AnonPages为non-paged的空间。<br>Mapped为/dev设备所mapped的空间。<br>Slab是kernel所使用的buffer空间。<br>PageTables是page管理的index大小。<br>VmallocTotal是透过vmalloc（）可以调用的內存大小。<br>VmallocUsed是透过vmalloc（）所调用的內存大小。<br>VmallocChunk则是记录还剩多少连续的可调用的內存空间。</p>
-<h2 id="术语解释"><a href="#术语解释" class="headerlink" title="术语解释"></a>术语解释</h2><p><code>A buffer</code> is something that has yet to be  “written”   to disk.<br>A cache` is something that has been  “read”   from the disk and stored  for   later use.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android便捷命令</title>
-    <link href="http://joyflyaway.com/2017/03/07/Android%E4%BE%BF%E6%8D%B7%E5%91%BD%E4%BB%A4/"/>
-    <id>http://joyflyaway.com/2017/03/07/Android便捷命令/</id>
-    <published>2017-03-07T08:20:18.000Z</published>
-    <updated>2017-04-19T02:16:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="pm"><a href="#pm" class="headerlink" title="pm"></a>pm</h2><p>  pm list package列出安装再设备上的应用：</p>
-<ul>
-<li>不带任何选项：列出所有的应用的包名：<br>pm list package</li>
-<li>-s:列出系统应用<br>pm list package -s</li>
-<li>-3:列出第三方应用<br>pm list package -3</li>
-<li>-f:列出应用包名及对应的apk名及存放位置<br>pm list package -f</li>
-<li>-i:列出应用包名及其安装来源<br>pm list package -i<br>例如：package:com.zhihu.android installer=com.xiaomi.market  </li>
-<li>参数组合使用，例如查找三方应用中知乎的包名、apk存放位置、安装来源：<br>pm list package -f -3 -i zhihu<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">package:/data/app/com.zhihu.android-1.apk=com.zhihu.android  installer=com.xiaomi.market</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>pm list permissions -g -d<br><code>列出系统所有危险权限</code></p>
-<p>pm path 列出对应包名的.apk位置：</p>
-<ul>
-<li>pm path com.tencent.mobileqq<br>package:/data/app/com.tencent.mobileqq-1.apk</li>
-</ul>
-<p>pm dump，后跟包名，列出指定应用的dump信息，里面有各种信息：</p>
-<ul>
-<li>pm dump com.tencent.mobileqq<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">Packages:</div><div class="line">Package [com.tencent.mobileqq] (4397f810):</div><div class="line">userId=10091 gids=[3003, 3002, 3001, 1028, 1015]</div><div class="line">pkg=Package&#123;43851660 com.tencent.mobileqq&#125;</div><div class="line">codePath=/data/app/com.tencent.mobileqq-1.apk</div><div class="line">resourcePath=/data/app/com.tencent.mobileqq-1.apk</div><div class="line">nativeLibraryPath=/data/app-lib/com.tencent.mobileqq-1</div><div class="line">versionCode=242 targetSdk=9</div><div class="line">versionName=5.6.0</div><div class="line">applicationInfo=ApplicationInfo&#123;43842cc8 com.tencent.mobileqq&#125;</div><div class="line">flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]</div><div class="line">dataDir=/data/data/com.tencent.mobileqq</div><div class="line">supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]</div><div class="line">usesOptionalLibraries:</div><div class="line">com.google.android.media.effects</div><div class="line">com.motorola.hardware.frontcamera</div><div class="line">timeStamp=2015-05-13 14:04:24</div><div class="line">firstInstallTime=2015-04-03 20:50:07</div><div class="line">lastUpdateTime=2015-05-13 14:05:02</div><div class="line">installerPackageName=com.xiaomi.market</div><div class="line">signatures=PackageSignatures&#123;4397f8d8 [43980488]&#125;</div><div class="line">permissionsFixed=true haveGids=true installStatus=1</div><div class="line">pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ]</div><div class="line">User 0:  installed=true blocked=false stopped=false notLaunched=false enabled=0</div><div class="line">grantedPermissions:</div><div class="line">android.permission.CHANGE_WIFI_MULTICAST_STATE</div><div class="line">com.tencent.qav.permission.broadcast</div><div class="line">com.tencent.photos.permission.DATA</div><div class="line">com.tencent.wifisdk.permission.disconnect</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>pm install，安装应用。目标apk存放与PC端，用adb install安装。目标apk存放于Android设备上，用pm install安装             </p>
-<p>pm uninstall，卸载应用，同adb uninstall,后面跟的参数都是应用的包名</p>
-<p>pm clear，清除应用数据</p>
-<h2 id="am"><a href="#am" class="headerlink" title="am"></a>am</h2><p>am start，启动一个Activity，以启动系统相机应用为例：   </p>
-<ul>
-<li>启动相机：<br>am start -n com.android.camera/.Camera</li>
-<li>先停止目标应用，再启动：<br>am start -S com.android.camera/.Camera</li>
-<li><p>等待应用完成启动：<br>am start -W com.android.camera/.Camera</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Starting: Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER]                           cmp=com.android.camera/.Camera &#125;</div><div class="line">   Status: ok</div><div class="line">   Activity: com.android.camera/.Camera</div><div class="line">   ThisTime: 500</div><div class="line">   TotalTime: 500</div><div class="line">   Complete</div></pre></td></tr></table></figure>
-</li>
-<li><p>启动默认C页：<br>am start -a android.intent.action.VIEW -d <a href="http://testerhome.com" target="_blank" rel="external">http://testerhome.com</a></p>
-</li>
-<li>启动拨号器拨打10086<br>am start -a android.intent.action.CALL -d tel:10086</li>
-<li>am monitor，监控crash与ANR</li>
-<li>am force-stop，后跟包名，结束应用</li>
-<li>am startsevice，启动一个服务</li>
-<li>am broadcast，发送一个广播   </li>
-</ul>
-<h2 id="monkey"><a href="#monkey" class="headerlink" title="monkey"></a>monkey</h2><p>monkey -p com.jared.performancetool -v 500<br><code>-p表示包名，-v表示反馈级别 500就是500个伪随机事件,若在压力测试中程序崩溃或者接收到任何失控异常，就会自动停止。</code></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android名词释义</title>
-    <link href="http://joyflyaway.com/2017/03/07/Android%E5%90%8D%E8%AF%8D%E9%87%8A%E4%B9%89/"/>
-    <id>http://joyflyaway.com/2017/03/07/Android名词释义/</id>
-    <published>2017-03-07T03:19:14.000Z</published>
-    <updated>2017-03-09T08:07:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<ul>
-<li>provisioning(配置,服务开通)</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android双应用功能实现</title>
-    <link href="http://joyflyaway.com/2017/03/02/Android%E5%8F%8C%E5%BA%94%E7%94%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/"/>
-    <id>http://joyflyaway.com/2017/03/02/Android双应用功能实现/</id>
-    <published>2017-03-02T02:58:33.000Z</published>
-    <updated>2017-04-19T02:19:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --><br>UserManager:<br>  createProfileForUser()创建轮廓用户<br>DeleteNonRequiredAppsTask:<br>  配置用户应用<br>DevicePolicyManager：<br>  setActiveAdmin();<br>  setProfileOwner();<br>IActivityManager:<br>  startUserInBackground()开启用户</p>]]></content>
     
     <summary type="html">
     
