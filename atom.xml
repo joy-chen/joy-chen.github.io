@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2018-01-17T09:57:06.000Z</updated>
+  <updated>2018-02-23T09:28:09.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,205 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MTK之lcm架构</title>
+    <link href="http://joyflyaway.com/2018/02/22/MTK%E4%B9%8Blcm%E6%9E%B6%E6%9E%84/"/>
+    <id>http://joyflyaway.com/2018/02/22/MTK之lcm架构/</id>
+    <published>2018-02-22T09:24:36.000Z</published>
+    <updated>2018-02-23T09:28:09.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>Linux kernel有一些总线，比如USB、I2C等。对于每一个总线都会有一些设备和驱动挂在上面。驱动服务于匹配的设备，使Linux正确的操作硬件设备。当一个设备或者驱动注册到特定的总线上的时候就会触发总线匹配函数，比如一个设备注册到了总线，所有的该总线的驱动都会被枚举，判断是不是可以服务于新添加的设备（一般通过name来匹配），反之亦然。<br>如果总线匹配成功，就会调用驱动的probe函数，检查指定的硬件确实存在，然后确定是否所需的资源都能够从系统申请。<br>事实上，设备或者驱动能够正确的合作，在probe之后，模块初始化顺序决定于probe的执行顺序，可以由BSP函数中注册设备的顺序控制。MT6572平台，L版本的BSP文件放在kernel/arch/arm/mach-mt6572/mt_devs.c,mt_board_init()函数控制着probe的顺序。<br>platform虚拟总线，关联在该总线的设备和驱动通过name来匹配。</p>
+<h3 id="源码路径"><a href="#源码路径" class="headerlink" title="源码路径"></a>源码路径</h3><p>drivers/misc/mediatek/lcm/mt65xx_lcm_list.c<br>arch/arm64/configs/tx6735_65c_xz_l1_defconfig</p>
+<p>arch/arm64/configs/tx6735_65c_xz_l1_defconfig<br>CUSTOM_KERNEL_LCM = xxx  //对应lcm目录驱动的子目录名<br>配置驱动</p>
+<h3 id="drivers-misc-mediatek-mach-mt6735-mt-devs-c"><a href="#drivers-misc-mediatek-mach-mt6735-mt-devs-c" class="headerlink" title="drivers/misc/mediatek/mach/mt6735/mt_devs.c"></a>drivers/misc/mediatek/mach/mt6735/mt_devs.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">__init int mt_board_init(void) &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="drivers-misc-mediatek-videox-mt6735-mtkfb-c"><a href="#drivers-misc-mediatek-videox-mt6735-mtkfb-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/mtkfb.c"></a>./drivers/misc/mediatek/videox/mt6735/mtkfb.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">static struct fb_ops mtkfb_ops = &#123;</div><div class="line">    .owner          = THIS_MODULE,</div><div class="line">    .fb_open        = mtkfb_open,</div><div class="line">    .fb_release     = mtkfb_release,</div><div class="line">    .fb_setcolreg   = mtkfb_setcolreg,</div><div class="line">    .fb_pan_display = mtkfb_pan_display_proxy,</div><div class="line">    .fb_fillrect    = cfb_fillrect,</div><div class="line">    .fb_copyarea    = cfb_copyarea,</div><div class="line">    .fb_imageblit   = cfb_imageblit,</div><div class="line">    .fb_cursor      = mtkfb_soft_cursor,</div><div class="line">    .fb_check_var   = mtkfb_check_var,</div><div class="line">    .fb_set_par     = mtkfb_set_par,</div><div class="line">    .fb_ioctl       = mtkfb_ioctl,</div><div class="line">#ifdef CONFIG_COMPAT</div><div class="line">	.fb_compat_ioctl = mtkfb_compat_ioctl,</div><div class="line">#endif    </div><div class="line">#ifdef CONFIG_DMA_SHARED_BUFFER</div><div class="line">    .fb_dmabuf_export = mtkfb_dmabuf_export,</div><div class="line">#endif</div><div class="line">&#125;;</div><div class="line"></div><div class="line">static struct platform_driver mtkfb_driver =</div><div class="line">&#123;</div><div class="line">    .driver = &#123;</div><div class="line">        .name    = MTKFB_DRIVER,</div><div class="line">#ifdef CONFIG_PM</div><div class="line">        .pm     = &amp;mtkfb_pm_ops,</div><div class="line">#endif</div><div class="line">        .bus     = &amp;platform_bus_type,</div><div class="line">        .probe   = mtkfb_probe,</div><div class="line">        .remove  = mtkfb_remove,</div><div class="line">        .suspend = mtkfb_suspend,</div><div class="line">        .resume  = mtkfb_resume,</div><div class="line">	.shutdown = mtkfb_shutdown,</div><div class="line">	.of_match_table = mtkfb_of_ids,</div><div class="line">    &#125;,</div><div class="line">&#125;;</div><div class="line">static int mtkfb_probe(struct device *dev) ｛</div><div class="line">  primary_display_init(mtkfb_find_lcm_driver(), lcd_fps);</div><div class="line">  mtkfb_fbinfo_init(fbi);</div><div class="line">  mtkfb_register_sysfs(fbdev);</div><div class="line">  register_framebuffer(fbi);</div><div class="line">｝</div><div class="line">mtk_fb_probe函数主要做的工作如下：</div><div class="line">Called by LDM binding to probe andattach a new device.</div><div class="line"> * Initialization sequence:</div><div class="line"> *   1.allocate system fb_info structure</div><div class="line"> *     select panel type according to machine type</div><div class="line"> *   2.init LCD panel</div><div class="line"> *   3.init LCD controller and LCD DMA</div><div class="line"> *   4.init system fb_info structure</div><div class="line"> *   5.init gfx DMA</div><div class="line"> *   6.enable LCD panel</div><div class="line">       start LCD frame transfer</div><div class="line"> *   7.register system fb_info structure</div></pre></td></tr></table></figure>
+<h3 id="drivers-misc-mediatek-videox-mt6735-primary-display-c"><a href="#drivers-misc-mediatek-videox-mt6735-primary-display-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/primary_display.c"></a>./drivers/misc/mediatek/videox/mt6735/primary_display.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int primary_display_init(char *lcm_name, unsigned int lcm_fps) &#123;</div><div class="line">  disp_lcm_probe( lcm_name, LCM_INTERFACE_NOTDEFINED);</div><div class="line">  disp_lcm_init(pgc-&gt;plcm, 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="drivers-misc-mediatek-videox-mt6735-disp-lcm-c"><a href="#drivers-misc-mediatek-videox-mt6735-disp-lcm-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/disp_lcm.c"></a>./drivers/misc/mediatek/videox/mt6735/disp_lcm.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">disp_lcm_handle* disp_lcm_probe(char* plcm_name, LCM_INTERFACE_ID lcm_id)</div><div class="line">&#123;</div><div class="line">  lcm_drv = lcm_driver_list[0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="drivers-misc-mediatek-lcm-mt65xx-lcm-list-c"><a href="#drivers-misc-mediatek-lcm-mt65xx-lcm-list-c" class="headerlink" title="drivers/misc/mediatek/lcm/mt65xx_lcm_list.c"></a>drivers/misc/mediatek/lcm/mt65xx_lcm_list.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">驱动列表</div><div class="line">LCM_DRIVER* lcm_driver_list[] = &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android之gradle</title>
+    <link href="http://joyflyaway.com/2018/02/01/Android%E4%B9%8Bgradle/"/>
+    <id>http://joyflyaway.com/2018/02/01/Android之gradle/</id>
+    <published>2018-02-01T09:54:00.000Z</published>
+    <updated>2018-02-05T13:05:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>构建规则语言：Gradle 选择了 Groovy，Groovy 基于 Java 并拓展了 Java。 Java 程序员可以无缝切换到使用 Groovy 开发程序。Groovy 说白了就是把写 Java 程序变得像写脚本一样简单。写完就可以执行，Groovy 内部会将其编译成 Java class 然后启动虚拟机来执行。</p>
+<h3 id="Gradle基础知识："><a href="#Gradle基础知识：" class="headerlink" title="Gradle基础知识："></a>Gradle基础知识：</h3><ul>
+<li>Groovy，由于它基于 Java，所以我们仅介绍 Java 之外的东西。了解 Groovy 语言是掌握 Gradle 的基础。</li>
+<li>Gradle 作为一个工具，它的行话和它“为人处事”的原则。</li>
+</ul>
+<p>Gradle中，每一个待编译的工程都叫一个Project。每一个 Project 在构建的时候都包含一系列的Task。比如一个 Android APK 的编译可能包含：Java 源码编译Task、资源编译Task、JNI编译Task、lint检查Task、打包生成APK的Task、签名 Task 等。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android之Sensor</title>
+    <link href="http://joyflyaway.com/2018/01/29/Android%E4%B9%8BSensor/"/>
+    <id>http://joyflyaway.com/2018/01/29/Android之Sensor/</id>
+    <published>2018-01-29T06:05:00.000Z</published>
+    <updated>2018-02-01T10:29:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="TYPE-ORIENTATION"><a href="#TYPE-ORIENTATION" class="headerlink" title="TYPE_ORIENTATION"></a>TYPE_ORIENTATION</h3><p>This constant is deprecated.  use SensorManager.getOrientation() instead. ”也就是说，这种方式已经被取消，要开发者使用 SensorManager.getOrientation()来获取原来的数据。实际上，android获取方向是通过磁场感应器和加速度感应器共同获得的，至于具体的算法SDK已经封装好了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>YUV编码</title>
+    <link href="http://joyflyaway.com/2018/01/25/YUV%E7%BC%96%E7%A0%81/"/>
+    <id>http://joyflyaway.com/2018/01/25/YUV编码/</id>
+    <published>2018-01-25T02:54:41.000Z</published>
+    <updated>2018-02-01T10:26:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>二进制查看工具：bless<br>yuv码流查看工具：vooya</p>
+<h3 id="YUV"><a href="#YUV" class="headerlink" title="YUV"></a>YUV</h3><p>YUV，分为三个分量，“Y”表示明亮度（Luminance或Luma），也就是灰度值；而“U”和“V” 表示的则是色度（Chrominance或Chroma），作用是描述影像色彩及饱和度，用于指定像素的颜色。</p>
+<h3 id="YUV444"><a href="#YUV444" class="headerlink" title="YUV444"></a>YUV444</h3><p>既无损YUV色彩空间.一个Y带一个Cb一个Cr,即YCbCr.</p>
+<h3 id="YUV422"><a href="#YUV422" class="headerlink" title="YUV422"></a>YUV422</h3><p>采样即从YUV444基础上,从第一个Y开始只保留Cb,剔去Cr,第二个Y只保留Cr剔去Cb……这样交替采样,长度大小为width<em>height</em>2,Y:U:V=4:2:2,一个色彩分量占一个字节.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">YUYV、YVYU、UYVY、VYUY，都是YUV422的打包格式——即在内存中，Y、U、V都是挨着排序的。   </div><div class="line">它们的名称就表示了Y、U、V的顺序。像YUYV，就是Y、U、Y、V、Y、U、Y、V。</div></pre></td></tr></table></figure></p>
+<h3 id="YUV420"><a href="#YUV420" class="headerlink" title="YUV420"></a>YUV420</h3><p>即从YUV422基础上进行隔行采样,例如第一行只保留Cb,第二行只保留Cr……这样交替进行,Y:U:V=4:2:0并不是没有V分量,也可以是Y:U:V=4:0:2.相信这样大家容易理解.最后在这个基础上,把Y,U,V三种分量打包排列,即如上图,长度大小为width<em>height</em>3/2.</p>
+<h3 id="YUV422P"><a href="#YUV422P" class="headerlink" title="YUV422P"></a>YUV422P</h3><p>YUV422P也属于YUV422的一种，它是一种Plane模式，即平面模式，并不是将YUV数据交错存储，而是先存放所有的Y分量，然后存储所有的U（Cb）分量，最后存储所有的V（Cr）分量，如上图所示。其每一个像素点的YUV值提取方法也是遵循YUV422格式的最基本提取方法，即两个Y共用一个UV。比如，对于像素点Y’00、Y’01 而言，其Cb、Cr的值均为 Cb00、Cr00。</p>
+<h3 id="YV12，YU12"><a href="#YV12，YU12" class="headerlink" title="YV12，YU12"></a>YV12，YU12</h3><p>YU12和YV12属于YUV420格式，也是一种Plane模式，将Y、U、V分量分别打包，依次存储。其每一个像素点的YUV数据提取遵循YUV420格式的提取方式，即4个Y分量共用一组UV。注意，上图中，Y’00、Y’01、Y’10、Y’11共用Cr00、Cb00，其他依次类推。</p>
+<h3 id="NV12、NV21"><a href="#NV12、NV21" class="headerlink" title="NV12、NV21"></a>NV12、NV21</h3><p>NV12和NV21属于YUV420格式，是一种two-plane模式，即Y和UV分为两个Plane，但是UV（CbCr）为交错存储，而不是分为三个plane。其提取方式与上一种类似，即Y’00、Y’01、Y’10、Y’11共用Cr00、Cb00</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android底层图形系统</title>
+    <link href="http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://joyflyaway.com/2018/01/19/Android底层图形系统/</id>
+    <published>2018-01-19T09:46:14.000Z</published>
+    <updated>2018-01-19T10:40:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="OpenGL-ES"><a href="#OpenGL-ES" class="headerlink" title="OpenGL ES"></a>OpenGL ES</h2><h3 id="什么是OpenGL？"><a href="#什么是OpenGL？" class="headerlink" title="什么是OpenGL？"></a>什么是OpenGL？</h3><p>OpenGL是和编程语言、平台无关的一套interface ，主要是为了渲染 2D 和 3D图形等。一般这套接口是用来和GPU进行交互的，使用GPU进行硬件加速。</p>
+<h3 id="什么是OpenGL-ES？"><a href="#什么是OpenGL-ES？" class="headerlink" title="什么是OpenGL ES？"></a>什么是OpenGL ES？</h3><p>OpenGL ES就是专为嵌入式设备设计的，OpenGL ES和OpenGL中的函数接口有一些是不一样，因为嵌入式设备和pc等的硬件处理能力有差距的。</p>
+<p>既然OpenGL ES只是一组函数接口，Android平台提供了两种类型的实现：软件实现，硬件实现。</p>
+<p>a.硬件实现，前面提到这组函数接口主要是为了和GPU这个硬件进行打交道的。所以各个硬件厂商会提供相关的实现，例如高通平台的adreno解决方案；</p>
+<p>b.软件实现，Android自身也提供了一套OpenGL ES的软件实现，不使用GPU，完全用软件实现画图的相关功能，也就是libagl</p>
+<h3 id="EGL"><a href="#EGL" class="headerlink" title="EGL"></a>EGL</h3><p>那么什么是EGL？EGL是OpenGL ES和底层的native window system之间的接口，承上启下。</p>
+<p><img src="https://github.com/joy-chen/ResourceForBlog/blob/master/android/graph/egl.png?raw=true" alt="架构"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;OpenGL-ES&quot;&gt;&lt;a href=&quot;#OpenGL-ES&quot; class=&quot;headerlink&quot; title=&quot;OpenGL ES&quot;&gt;&lt;/a&gt;OpenGL ES&lt;/h2&gt;&lt;h3 id=&quot;什么是OpenGL？&quot;&gt;&lt;a href=&quot;#什么是OpenGL？&quot; cla
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android_NDK开发之build.gradle</title>
+    <link href="http://joyflyaway.com/2018/01/18/Android-NDK%E5%BC%80%E5%8F%91%E4%B9%8Bbuild-gradle/"/>
+    <id>http://joyflyaway.com/2018/01/18/Android-NDK开发之build-gradle/</id>
+    <published>2018-01-18T03:28:17.000Z</published>
+    <updated>2018-01-19T09:46:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">  sourceSets &#123;</div><div class="line">    main &#123;</div><div class="line">       <span class="comment">//通过设置 jni 目录为空，我们可不使用 apk 插件的 jni 编译功能。在jni目录下编写Android.mk即可</span></div><div class="line">      jniLibs.srcDir <span class="string">'src/main/libs'</span></div><div class="line">      jni.srcDirs = [] <span class="comment">// 设置使用自己编写的Android.mk</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">tasks.withType(JavaCompile) &#123;</div><div class="line">    compileTask -&gt; compileTask.dependsOn ndkBuild</div><div class="line">&#125;</div><div class="line"><span class="function">String <span class="title">getNdkBuildPath</span><span class="params">()</span> </span>&#123;</div><div class="line">    Properties properties = <span class="keyword">new</span> Properties()</div><div class="line">    properties.load(project.rootProject.file(<span class="string">'local.properties'</span>).newDataInputStream())</div><div class="line">    def ndkBuildingDir = properties.getProperty(<span class="string">"ndk.dir"</span>)</div><div class="line">    def ndkBuildPath = <span class="function">ndkBuildingDir</span></div><div class="line">    <span class="title">if</span> <span class="params">(Os.isFamily(Os.FAMILY_WINDOWS)</span>) &#123;</div><div class="line">        ndkBuildPath = ndkBuildingDir + <span class="string">'/ndk-build.cmd'</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        ndkBuildPath = ndkBuildingDir + <span class="string">'/ndk-build'</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ndkBuildPath</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">task <span class="title">ndkBuild</span><span class="params">(type: Exec, description: <span class="string">'Compile JNI source via NDK'</span>)</span> </span>&#123;</div><div class="line">    println(<span class="string">'executing ndkBuild'</span>)</div><div class="line">    def ndkBuildPath = getNdkBuildPath();</div><div class="line">    commandLine ndkBuildPath, <span class="string">'-j8'</span>, <span class="string">'-C'</span>, file(<span class="string">'src/main'</span>).absolutePath</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function">task <span class="title">ndkClean</span><span class="params">(type: Exec, description: <span class="string">'clean JNI libraries'</span>)</span> </span>&#123;</div><div class="line">    println(<span class="string">'executing ndkBuild clean'</span>)</div><div class="line">    def ndkBuildPath = getNdkBuildPath();</div><div class="line">    commandLine ndkBuildPath, <span class="string">'clean'</span>, <span class="string">'-C'</span>, file(<span class="string">'src/main'</span>).absolutePath</div><div class="line">&#125;</div><div class="line"></div><div class="line">clean.dependsOn <span class="string">'ndkClean'</span></div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android_NDK开发之Android.mk</title>
+    <link href="http://joyflyaway.com/2018/01/17/Android-NDK%E5%BC%80%E5%8F%91/"/>
+    <id>http://joyflyaway.com/2018/01/17/Android-NDK开发/</id>
+    <published>2018-01-17T10:07:59.000Z</published>
+    <updated>2018-01-19T09:46:39.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>native代码目录结构：</p>
+<ul>
+<li>project   <ul>
+<li>jni   <ul>
+<li>Android.mk   </li>
+<li>Application.mk   </li>
+</ul>
+</li>
+<li>libs   <ul>
+<li>armeabi   </li>
+<li>armeabi-v7a   </li>
+<li>xxx.jar   </li>
+</ul>
+</li>
+<li>res   </li>
+<li>src   </li>
+<li>Android.mk   </li>
+<li>AndroidManifest.xml</li>
+</ul>
+</li>
+</ul>
+<p>添加三方so库：<br>project/Android.mk:<br>  LOCAL_PREBUILT_JNI_LIBS += xxx.so</p>
+<p>project/jni/Application.mk<br>  APP_ABI：设置编译哪些平台库（armeabi armeabi-v7a x86)</p>
+<p>project/jni/Android.mk<br>  LOCAL_LDFLAGS 链接库<br>  include $(BUILD_SHARED_LIBRARY) 编译成动态库</p>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><p>打印变量的值：<br>$(warning “the value of LOCAL_PATH is$(LOCAL_PATH)”)  </p>
+<p>示例1:</p>
+<ul>
+<li>project   <ul>
+<li>lib   <ul>
+<li>armeabi   <ul>
+<li>xxx.so   </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Android.mk   </li>
+<li>xxx.apk   </li>
+</ul>
+</li>
+</ul>
+<p>Android.mk写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH := $(call my-dir)</div><div class="line">include $(CLEAR_VARS)M</div><div class="line"></div><div class="line">LOCAL_MODULE := xxx</div><div class="line">LOCAL_MODULE_TAGS := optional</div><div class="line">LOCAL_SRC_FILES := xxx.apk</div><div class="line">LOCAL_MODULE_CLASS := APPS</div><div class="line">LOCAL_CERTIFICATE := PRESIGNED</div><div class="line">LOCAL_PREBUILT_JNI_LIBS:= \</div><div class="line">lib/armeabi/xxx.so</div><div class="line"></div><div class="line">include $(BUILD_PREBUILT)</div></pre></td></tr></table></figure></p>
+<h2 id="Android-mk"><a href="#Android-mk" class="headerlink" title="Android.mk"></a>Android.mk</h2><h3 id="LOCAL-EXPORT-C-INCLUDES"><a href="#LOCAL-EXPORT-C-INCLUDES" class="headerlink" title="LOCAL_EXPORT_C_INCLUDES"></a>LOCAL_EXPORT_C_INCLUDES</h3><p>定义确保了任何依赖这个预编译库的模块会自动在自己的 LOCAL_C_INCLUDES 变量中增加到这个预编译库的include目录的路径，从而能够找到其中的头文件。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>android中系统属性的获取</title>
@@ -130,15 +329,14 @@
     <link href="http://joyflyaway.com/2017/12/28/MTK-OTA%E5%88%86%E6%9E%90/"/>
     <id>http://joyflyaway.com/2017/12/28/MTK-OTA分析/</id>
     <published>2017-12-28T12:44:24.000Z</published>
-    <updated>2017-12-29T10:02:19.000Z</updated>
+    <updated>2018-02-22T09:26:19.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
+    <content type="html"><![CDATA[<!-- excerpt --></p>
 <h3 id="SystemUpdate"><a href="#SystemUpdate" class="headerlink" title="SystemUpdate"></a>SystemUpdate</h3><p>MainEntry<br>  onStart()<br>    bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);<br>      onServiceConnected()<br>        queryPackagesInternal();<br>          mService.queryPackages();<br>            sQueryNewVersionThread.start();<br>              mHttpManager.queryNewVersion();<br>                checkNewVersion()</p>]]></content>
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;h3 id=&quot;SystemUpdate&quot;&gt;&lt;a href=&quot;#SystemUpdate&quot; class=&quot;headerlink&quot; title=&quot;SystemUpdate&quot;&gt;&lt;/a&gt;SystemUpdate&lt;/h3&gt;&lt;p&gt;MainEntry&lt;br&gt;
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -277,9 +475,9 @@
     <link href="http://joyflyaway.com/2017/12/21/camera/"/>
     <id>http://joyflyaway.com/2017/12/21/camera/</id>
     <published>2017-12-21T10:49:21.000Z</published>
-    <updated>2017-12-29T10:02:46.000Z</updated>
+    <updated>2018-02-01T10:29:41.000Z</updated>
     
-    <content type="html"><![CDATA[<!-- excerpt -->
+    <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>1.获取设备的自然方向？<br>public int getDeviceDefaultOrientation() {<br>    WindowManager windowManager =  (WindowManager) getSystemService(Context.WINDOW_SERVICE);</p>
 <pre><code>Configuration config = getResources().getConfiguration();
 int rotation = windowManager.getDefaultDisplay().getRotation();
@@ -301,8 +499,7 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
     
     <summary type="html">
     
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;1.获取设备的自然方向？&lt;br&gt;public int getDeviceDefaultOrientation() {&lt;br&gt;    WindowManager windowManager =  (WindowManager) getSyst
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -325,213 +522,6 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
       &lt;p&gt;view&lt;br&gt;1.分析view需要哪些属性，在构造方法里获取处理。&lt;br&gt;2.重写测量方法&lt;br&gt;3.重写ondraw方法&lt;/p&gt;
 &lt;p&gt;viewgroup&lt;br&gt;1.测量&lt;br&gt;2.布局&lt;br&gt;3.事件处理 &lt;/p&gt;
 
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>睡眠后按键无法唤醒的问题，如何看唤醒过程的log来定位问题</title>
-    <link href="http://joyflyaway.com/2017/04/26/%E4%BA%AE%E5%B1%8F%E8%BF%87%E7%A8%8B/"/>
-    <id>http://joyflyaway.com/2017/04/26/亮屏过程/</id>
-    <published>2017-04-26T08:32:40.000Z</published>
-    <updated>2017-04-27T05:56:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>【使用说明】<br>(1)  以下是列出的整个按键唤醒的log关键点，每条都有粗体字说明其含义以及该注意的关键字；<br>(2)  红色的是kernel log，其他都是main log；<br>(3)  一条一条依次检查，直到如果发现某条log找不到，那问题就出在这个地方；<br>(4)  仅限于JB2之后的Android版本，JB2之前流程相对比较简单；    </p>
-<p>kernel-Check Point【1】：按键中断<br> <5>[   78.721504] 1)[Power/PMIC] [pwrkey_int_handler] Press pwrkey</5></p>
-<p>Check Point【2】：上层收到按键事件<br>01-09 03:37:40.102   513   561 D WindowManager: interceptKeyTq keycode=26</p>
-<p>Check Point【3】：PMS的wakeUp被调用<br>01-09 03:37:40.171   513   531 D PowerManager_performance: wakeUpNoUpdateLocked: eventTime=78826</p>
-<p>Check Point【4】：发出MSG_BROADCAST<br>01-09 03:37:40.171   513   531 D PowerManagerNotifier: onWakeUpStarted</p>
-<p>Check Point【5】：发出第一个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.174   513   531 D PowerManagerDisplayController: sendMessage</p>
-<p>Check Point【6】：收到并处理MSG_BROADCAST，并且状态是从2变到1<br>01-09 03:37:40.194   513   530 D PowerManagerNotifier: sendNextBroadcast, mBroadcastedPowerState=2, mActualPowerState=1  </p>
-<p>Check Point【7】：开始绘制keyguard的流程，发出NOTIFY_SCREEN_ON，等windowToken<br>01-09 03:37:40.217   513   530 D KeyguardViewMediator: notifyScreenOnLocked</p>
-<p>Check Point【8】：收到并处理NOTIFY_SCREEN_ON<br>01-09 03:37:40.224   513   531 D KeyguardViewMediator: handleNotifyScreenOn</p>
-<p>Check Point【9】：完成绘制keyguard，拿到windowToken<br>01-09 03:37:40.370   513   531 I WindowManager: Lock screen displayed</p>
-<p>Check Point【10】：调用回调函数mSceenOnListener，解除Screen on Blocker，mNestCount必须是0<br>01-09 03:37:40.371   513   531 D PowerManagerService: Screen on unblocked: mNestCount=0  </p>
-<p>Check Point【11】：处理第一个MSG_UPDATE_POWER_STATE，这里会第一次scheduleScreenUpdate<br>01-09 03:37:40.254   513   546 D PowerManagerDisplayState: setScreenOn: on=true</p>
-<p>Check Point【12】：第一次执行scheduleScreenUpdate，进入setState<br>01-09 03:37:40.330   513   546 D PowerManagerDisplayState: Requesting new screen state: on=true, backlight=0</p>
-<p>Check Point【13】：发出第二个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.334   513   546 D PowerManagerDisplayController: sendMessage.  </p>
-<p>Check Point【14】：第一次执行mTask， on跟onChanged 必须都是true<br>01-09 03:37:40.334   513   546 D PowerManagerDisplayState: mTask: on = true, onChanged = true, backlightChanged = false</p>
-<p>kernel-Check Point【15】：进入unblankAllDisplays，开始底层late_resume流程<br>01-09 03:37:40.334   513   546 D PowerManagerService: unblankAllDisplays in …</p>
-<p>Check Point【16】：底层late_resume流程结束<br>01-09 03:37:40.673   513   546 D PowerManagerService-JNI: Excessive delay in autosuspend_disable() while turning screen on: 337ms  </p>
-<p>Check Point【17】：unblankAllDisplays流程结束<br>01-09 03:37:40.701   513   546 D PowerManager_performance: unblankAllDisplays out …  </p>
-<p>Check Point【18】：处理第二个MSG_UPDATE_POWER_STATE<br>01-09 03:37:40.702   513   546 D PowerManagerDisplayController: setScreenOn true  </p>
-<p>Check Point【19】：前面的Screen On Blocker被解除，才会调用这里<br>01-09 03:37:40.702   513   546 D PowerManagerDisplayController: Unblocked screen on after 447 ms  </p>
-<p>Check Point【20】：设置ElectronBeamLevel，值不为0才能点亮背光，并且这里会第二次scheduleScreenUpdate<br>01-09 03:37:40.704   513   546 D PowerManagerDisplayState: setElectronBeamLevel: level=1.0  </p>
-<p>Check Point【21】：第二次执行scheduleScreenUpdate，进入setState，注意backlight值不为0<br>01-09 03:37:40.718   513   546 D PowerManagerDisplayState: Requesting new screen state: on=true, backlight=86,  </p>
-<p>Check Point【22】：第二次执行mTask，backlightChanged必须是true<br>01-09 03:37:40.721   513   546 D PowerManagerDisplayState: mTask: on = true, onChanged = false, backlightChanged = true</p>
-<p>Check Point【23】：调用light service，写backlight节点，light 0表示backlight<br>01-09 03:37:40.721   513   546 D LightsService: setLight_native: light=0, colorARGB=0xff565656, flashMode=0,</p>
-<p>kernel-Check Point【24】：驱动底层背光生效</p>
-<p><4>[   79.447236] (1)[546:PowerManagerSer]mt65xx_leds_set_cust: set brightness, name:lcd-backlight, mode:6, level:86</4></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>待机时，怎么看AP每次wake up起来的时长</title>
-    <link href="http://joyflyaway.com/2017/04/26/%E5%94%A4%E9%86%92%E6%97%B6%E9%95%BF/"/>
-    <id>http://joyflyaway.com/2017/04/26/唤醒时长/</id>
-    <published>2017-04-26T02:51:20.000Z</published>
-    <updated>2017-04-26T08:33:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h3 id="DESCRIPTION"><a href="#DESCRIPTION" class="headerlink" title="DESCRIPTION]"></a>DESCRIPTION]</h3><p>分析待机平均电流高的问题时，经常需要知道每次wake up起来的时间点，以及唤醒的时长，以此找到一些异常的唤醒</p>
-<h3 id="SOLUTION"><a href="#SOLUTION" class="headerlink" title="[SOLUTION]"></a>[SOLUTION]</h3><p>MT6572<br>（1）查找kernel log中的“Wakeup Succefully”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间就是唤醒的时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“[SPM] Kernel Suspend with”信息，跟“Wakeup Succefully”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;4&gt;[ 2497.698724]-(0)[789:kworker/u:3][PCM WAKEUP NORMAL]CPU WAKE UP BY: EINT :0x10000</div><div class="line">&lt;6&gt;[ 2497.901281] (0)[789:kworker/u:3]PM: suspend exit 2013-05-27 00:40:53.186864384 UTC</div><div class="line">&lt;2&gt;[ 2539.341088]-(0)[789:kworker/u:3][SPM] Kernel Suspend with cpu_pdn=1, infra_pdn=1</div><div class="line">唤醒时间点：00：40：53</div><div class="line">唤醒时长：2539-2497 = 42s</div></pre></td></tr></table></figure></p>
-<p>其他平台<br>（1）查找kernel log中的“wake up by XXX”信息<br>（2）“往下”查找离这条log最近的带“UTC”的log，UTC log中显示的时间加8小时就是真实的唤醒时间（跟main log的时间一致）<br>（3）往下查找离这条log最近的“wakesrc”信息，跟“wake up by XXX”的时间戳相减就是wake up的时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">eg：</div><div class="line">&lt;5&gt;[  621.286161] (0)[53:kworker/u:2][Power/Sleep] wake up by EINT (0x20)(0x4)(41695)</div><div class="line">&lt;5&gt;[  621.626419] (0)[310:WindowManagerPo][request_suspend_state]: wakeup (3-&gt;0) at 612863283411 (2013-05-24 07:50:14.331687541 UTC)</div><div class="line">&lt;5&gt;[  665.287105] (0)[1218:kworker/u:3][Power/Sleep] sec = 300, wakesrc = 0x1ec</div><div class="line"></div><div class="line">唤醒时间点：07(+8)：50：14 = 15：50：14</div><div class="line">唤醒时长：665-621 = 44s</div></pre></td></tr></table></figure></p>
-<h2 id="待机电流问题，如何查找wakelock"><a href="#待机电流问题，如何查找wakelock" class="headerlink" title="待机电流问题，如何查找wakelock"></a>待机电流问题，如何查找wakelock</h2><p>【step1-找kernel层的wakelock】</p>
-<p>（1）先搜索从wake进入sleep的过程中打印出来的当前处于活动状态的wakelock<br>关键字“print_active_wakeup_sources”，类似于下面这样的log：</p>
-<p>  [print_active_wakeup_sources]: activity: PowerManagerService<br>  [print_active_wakeup_sources]: activity: syspb_149<br>  [print_active_wakeup_sources]: activity: EINT wakelock</p>
-<p>如果没有这样的log，可以把所有申请wakelock的代码搜出来，关键字“ws activate-&gt;”</p>
-<p>（2）然后往下搜索有没有这些wakelock释放的位置<br>关键字“ws deactivate-&gt;”类似如下log：</p>
-<pre><code>ws deactivate-&gt;  PowerManagerService
-ws deactivate-&gt;  EINT wakelock
-</code></pre><p>（3）那会出项两种情况<br>a. 根本没有找到释放某个wakelock的log<br>那就可以确实是这个wakelock导致（比如上面的syspb_149）<br>b. 有找到释放的log，但是中间间隔时间很长<br>这个就要看时间戳了，所以把申请释放的时间戳相减就是真实的wakelock锁住的时长</p>
-<p>（4）找到wakelock后，要做的就是去检查wakelock的使用者<br>          a. 如果发现出问题的不是PowerManagerService的wakelock，那么就直接找对应的驱动代码就行了<br>b. 如果是，就要继续看main log</p>
-<p>【step2-找user层的wakelock】</p>
-<p>（1）找到所有上层的wakelock申请的log<br>关键字“acquireWakeLockInternal”，会搜出来很多，类似下面的log：</p>
-<p>acquireWakeLockInternal: lock=1131418552, flags=0x1, tag=”GSM”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1131101696, flags=0x1, tag=”RILJ”, ws=null, uid=1001, pid=696<br>acquireWakeLockInternal: lock=1130767880, flags=0x20, tag=”PhoneGlobals”, ws=null, uid=1001, pid=696</p>
-<p>但是不要担心，一般像 RILJ / ActivityManager / AlarmManager申请释放很频繁的就不用理会；flag的bit0不为1的也不用理会（bit0标识锁住底层不进sleep；但是有个例外，就是Psensor对应的wakelock，flags为0x20，在早期JB版本也会锁住底层）</p>
-<p>（2）找到这些wakelock释放的log<br>关键字“releaseWakeLockInternal”，但是你可能只能看到下面这样的log：</p>
-<p>releaseWakeLockInternal: lock=1131101696, flags=0x0<br>releaseWakeLockInternal: lock=1131418552, flags=0x0<br>releaseWakeLockInternal: lock=1130767880, flags=0x1(这个flag为1表示waitForNegativeProximity)</p>
-<p>跟acquire的log的对应关系就是看lock=后面的整数值，就知道wakelock是在哪个时间点释放的了，两个时间戳相减就是锁住的时间，抓住wakelock时间不长的就可以忽略，找到那个长时间锁住的wakelock就是系统无法休眠的罪魁祸首</p>
-<p>（3）找到wakelock后，就根据“tag”的字符串去找对应的代码</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ANR分析</title>
-    <link href="http://joyflyaway.com/2017/04/21/ANR%E5%88%86%E6%9E%90/"/>
-    <id>http://joyflyaway.com/2017/04/21/ANR分析/</id>
-    <published>2017-04-21T08:50:37.000Z</published>
-    <updated>2017-12-29T10:02:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>ANR分为一下几类：</p>
-<ul>
-<li>广播ANR</li>
-<li>Service ANR</li>
-<li>ContentProvider ANR</li>
-<li>Input ANR</li>
-<li>WatchDog</li>
-</ul>
-<p>产生ANR原因：   </p>
-<ul>
-<li>耗时操作</li>
-<li>自身服务阻塞</li>
-<li>系统阻塞</li>
-<li>内存紧张</li>
-<li>CPU资源抢占</li>
-</ul>
-<p>对于这些ANR，给大家的推荐一下大致分析思路和相关日志，通常发生ANR时，首先去查找对应Trace日志，看看主线程是否在处理该广播或被阻塞，如果发现上述现象，那么恭喜你，已经很接近答案了。但如果发现堆栈完全处于空闲状态，那么很不幸，就需要扩大参考面了，需要结合log日志进行分析，日志包括logcat, kernel日志，cpuinfo以及meminfo等，参考顺序从前向后。<br>1、分析logcat思路：首先在日志中搜索（“anr in”，“low_memory”, “slow_operation”）等关键字，通过该类关键字主要是查看系统Cpu负载，如果是发现应用进程CPU明显过高，那么很有可能是该进程抢占CPU过多导致，系统调度不及时,误认为应用发生了超时行为。<br>2、分析kernel思路：在此类日志中直接搜索lowmemorykiller, 如果存在则查看发生时间和ANR时间是否大致对应，相差无几的话，可以从该日志中看到操作系统层面当前内存情况，Free Memory说明的是空闲物理内存，File Free说明的则是文件Cache，也就是应用或系统从硬盘读取文件，使用结束后，kernel并没有这正释放这类内存，加以缓存，目的是为了下次读写过程加快速度。当然，发现Free和Other整体数值都偏低时，Kernel会进行一定程度的内存交换，导致整个系统卡顿。同时这类现象也会体现在log日志“slow_operation”中，即系统进程的调度也会收到影响。<br>3、分析cpuinfo思路：这类日志一目了然，可以清晰的看到哪类进程CPU偏高，如果存在明显偏高进程，那么ANR和此进程抢占CPU有一定关系。当然，如发现Kswapd，emmc进程在top中，则说明遇到系统内存压力或文件IO开销。<br>4、分析meminfo思路：分析该类日志，主要是看哪类应用或系统占用内存偏高，如果应用内存占用比较正常，系统也没有发生过度内存使用，那么则说明系统中缓存了大量进程，并没有及时释放导致系统整体内存偏低。   </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>App启动过程</title>
-    <link href="http://joyflyaway.com/2017/04/19/App%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/"/>
-    <id>http://joyflyaway.com/2017/04/19/App启动过程/</id>
-    <published>2017-04-19T08:02:01.000Z</published>
-    <updated>2017-04-21T08:50:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h4 id="从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈"><a href="#从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈" class="headerlink" title="从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈"></a>从桌面到Activity的调用堆栈，因为这部分较简单，我们直接列出调用堆栈</h4><p>-&gt;com.android.launcher3.Launcher#onClick<br>&emsp;-&gt;Launcher#onClickAppShortcut<br>&emsp;&emsp;-&gt;Launcher#startAppShortcutOrInfoActivity<br>&emsp;&emsp;&emsp;-&gt;Launcher#startActivitySafely<br>&emsp;&emsp;&emsp;&emsp;-&gt;Launcher#startActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Activity#startActivity</p>
-<h4 id="从Activity-startActivity，到启动进程和launch-activity的调用堆栈"><a href="#从Activity-startActivity，到启动进程和launch-activity的调用堆栈" class="headerlink" title="从Activity#startActivity，到启动进程和launch activity的调用堆栈"></a>从Activity#startActivity，到启动进程和launch activity的调用堆栈</h4><p><code>1.调用堆栈</code><br><code>1-1.准备新的activity</code><br>-&gt;Activity#startActivity<br>&emsp;-&gt;Activity#startActivityForResult  //此时mInstrumentation变量为源activity的，即launcher3<br>&emsp;&emsp;-&gt;Instrumentation#execStartActivity<br>&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startActivity<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startActivityAsUser<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityMayWait<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startActivityUncheckedLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#startActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#resumeTopActivitiesLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityInnerLocked  </p>
-<p><code>1-2.暂停旧的activity</code><br>&emsp;-&gt;ActivityStackSupervisor#pauseBackStacks<br>&emsp;&emsp;-&gt;ActivityStack#startPausingLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityThread#schedulePauseActivity<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handlePauseActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#activityPaused<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#activityPausedLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStack#completePauseLocked   </p>
-<p><code>1-3.启动进程</code><br>&emsp;-&gt;ActivityStackSupervisor#resumeTopActivitiesLocked<br>&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityStack#resumeTopActivityInnerLocked<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#startSpecificActivityLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#startProcessLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Process#start<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#main<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;从ActivityThread#attach<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#attachApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityManagerService#attachApplicationLocked<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread$ApplicationThread#bindApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handleBindApplication    </p>
-<p><code>1-4.启动新的activity，走ActivityStackSupervisor#attachApplicationLocked分支</code><br>&emsp;-&gt;ActivityManagerService#attachApplicationLocked<br>&emsp;&emsp;-&gt;ActivityStackSupervisor#attachApplicationLocked<br>&emsp;&emsp;&emsp;-&gt;ActivityStackSupervisor#realStartActivityLocked<br>&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread$ApplicationThread#scheduleLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#handleLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;ActivityThread#performLaunchActivity<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;LoadedApk#makeApplication<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;-&gt;Activity#attach   </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>编译问题</title>
-    <link href="http://joyflyaway.com/2017/04/19/%E7%BC%96%E8%AF%91%E9%97%AE%E9%A2%98/"/>
-    <id>http://joyflyaway.com/2017/04/19/编译问题/</id>
-    <published>2017-04-19T02:15:43.000Z</published>
-    <updated>2017-04-21T08:51:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h3 id="编译android-7-0-出现Try-increasing-heap-size-with-java-option-‘-Xmx‘错误解决方案"><a href="#编译android-7-0-出现Try-increasing-heap-size-with-java-option-‘-Xmx‘错误解决方案" class="headerlink" title="编译android 7.0 出现Try increasing heap size with java option ‘-Xmx‘错误解决方案"></a>编译android 7.0 出现Try increasing heap size with java option ‘-Xmx<size>‘错误解决方案</size></h3><p>出现这个错误是由于电脑内存不足，在命令行分别执行以下三条语句，然后继续编译<br>export JACK_SERVER_VM_ARGUMENTS=”-Dfile.encoding=UTF-8 -XX:+TieredCompilation -Xmx4g”<br>./prebuilts/sdk/tools/jack-admin kill-server<br>./prebuilts/sdk/tools/jack-admin start-server   </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MAT工具</title>
-    <link href="http://joyflyaway.com/2017/03/30/MAT%E5%B7%A5%E5%85%B7/"/>
-    <id>http://joyflyaway.com/2017/03/30/MAT工具/</id>
-    <published>2017-03-30T11:50:15.000Z</published>
-    <updated>2017-04-19T02:16:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><h3 id="Shallow-Heap-Size"><a href="#Shallow-Heap-Size" class="headerlink" title="Shallow Heap Size:"></a>Shallow Heap Size:</h3><p>指对象自身所占用的内存大小，不包含其引用的对象所占的内存大小。<br>1、数组类型<br>数组元素对象所占内存的大小总和。<br>2、非数组类型<br>对象与它所有的成员变量大小的总和。当然这里面还会包括一些java语言特性的数据存储单元。   </p>
-<h3 id="Retained-Heap-Size"><a href="#Retained-Heap-Size" class="headerlink" title="Retained Heap Size:"></a>Retained Heap Size:</h3><p>前对象大小+当前对象可直接或间接引用到的对象的大小总和。<br>(间接引用的含义：A-&gt;B-&gt;C, C就是间接引用)<br>换句话说，Retained Size就是当前对象被GC后，从Heap上总共能释放掉的内存。<br>不过，释放的时候还要排除被GC Roots直接或间接引用的对象。他们暂时不会被被当做Garbage。</p>
-<h3 id="Java的内存泄露的特点"><a href="#Java的内存泄露的特点" class="headerlink" title="Java的内存泄露的特点"></a>Java的内存泄露的特点</h3><ul>
-<li>Java中的内存泄露主要特征：可达，无用</li>
-<li>无用指的是创建了但是不再使用之后没有释放</li>
-<li>能重用但是却创建了新的对象进行处理</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>高效代码</title>
-    <link href="http://joyflyaway.com/2017/03/30/%E9%AB%98%E6%95%88%E4%BB%A3%E7%A0%81/"/>
-    <id>http://joyflyaway.com/2017/03/30/高效代码/</id>
-    <published>2017-03-30T03:17:02.000Z</published>
-    <updated>2017-04-19T02:16:15.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>通常来说，高效的代码需要满足下面两个规则：</p>
-<ul>
-<li>不要做冗余的动作</li>
-<li>如果能避免，尽量不要分配内存</li>
-</ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
