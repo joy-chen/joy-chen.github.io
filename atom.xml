@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2018-02-23T09:28:09.000Z</updated>
+  <updated>2018-02-28T06:20:52.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -16,11 +16,58 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>MTK之GPIO</title>
+    <link href="http://joyflyaway.com/2018/02/26/MTK%E4%B9%8BGPIO/"/>
+    <id>http://joyflyaway.com/2018/02/26/MTK之GPIO/</id>
+    <published>2018-02-26T11:40:24.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>tools/dct/DrvGen.exe<br>drivers/misc/mediatek/mach/mt6735/tx6735_65c_xz_l1/dct/dct/codegen.dws<br>tools/dct/GPIO_YuSu.cmp</p>
+<p>mt_set_gpio_mode(GPIO_LCM_PWR_EN, GPIO_MODE_00);<br>mt_set_gpio_dir(GPIO_LCM_PWR_EN, GPIO_DIR_OUT);<br>mt_set_gpio_out(GPIO_LCM_PWR_EN, GPIO_OUT_ONE);</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mt6735_xc6130_ov2718驱动移植调试</title>
+    <link href="http://joyflyaway.com/2018/02/26/mt6735-xc6130-ov2718%E9%A9%B1%E5%8A%A8%E7%A7%BB%E6%A4%8D%E8%B0%83%E8%AF%95/"/>
+    <id>http://joyflyaway.com/2018/02/26/mt6735-xc6130-ov2718驱动移植调试/</id>
+    <published>2018-02-26T03:13:35.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="驱动文件"><a href="#驱动文件" class="headerlink" title="驱动文件"></a>驱动文件</h3><p>ov2718_mipi_yuv_h (HAL)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">camera_info_ov2718_mipi_yuv.cpp  </div><div class="line">camera_info_ov2718_mipi_yuv.h  </div><div class="line">camera_sensor_para_ov2718_mipi_yuv.h  </div><div class="line">camera_tuning_para_ov2718_mipi_yuv.cpp  </div><div class="line">config.ftbl.ov2718_mipi_yuv.h</div></pre></td></tr></table></figure></p>
+<p>ov2718_mipi_yuv_k (KERNEL)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ov2718mipiyuv_CameraCustomized.h</div><div class="line">ov2718mipiyuv_Camera_Sensor_para.h  </div><div class="line">ov2718mipiyuv_Sensor.c  </div><div class="line">ov2718mipiyuv_Sensor.</div></pre></td></tr></table></figure></p>
+<h3 id="移植步骤"><a href="#移植步骤" class="headerlink" title="移植步骤"></a>移植步骤</h3><p>1.配置config<br>device/tangxun/tx6735_65c_xz_l1/ProjectConfig.mk<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CUSTOM_HAL_IMGSENSOR = ov2718_mipi_yuv</div><div class="line">CUSTOM_HAL_MAIN_IMGSENSOR = ov2718_mipi_yuv</div><div class="line">CUSTOM_KERNEL_IMGSENSOR = ov2718_mipi_yuv</div><div class="line">CUSTOM_KERNEL_MAIN_IMGSENSOR = ov2718_mipi_yuv</div></pre></td></tr></table></figure></p>
+<p>kernel-3.10/arch/arm64/configs/tx6735_65c_xz_l1_defconfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CONFIG_CUSTOM_KERNEL_IMGSENSOR=&quot;ov2718_mipi_yuv&quot;</div></pre></td></tr></table></figure></p>
+<p>2.拷贝驱动<br>ov2718_mipi_yuv_k -&gt; kernel-3.10/drivers/misc/mediatek/imgsensor/src/mt6735/ov2718_mipi_yuv<br>ov2718_mipi_yuv_h -&gt; vendor/mediatek/proprietary/custom/mt6735/hal/D1/imgsensor/ov2718_mipi_yuv<br>config.ftbl.ov2718_mipi_yuv.h -&gt; ./vendor/mediatek/proprietary/custom/tx6735_65c_xz_l1/hal/sendepfeature/ov2718_mipi_yuv</p>
+<p>3.添加摄像头注册信息<br>vendor/mediatek/proprietary/custom/mt6735/hal/D1/imgsensor_src/sensorlist.cpp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#if defined(OV2718_MIPI_YUV)</div><div class="line">    YUV_INFO(OV2718MIPI_SENSOR_ID, SENSOR_DRVNAME_OV2718_MIPI_YUV, NULL),</div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<p>kernel-3.10/drivers/misc/mediatek/imgsensor/inc/kd_imgsensor.h<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#define OV2718MIPI_SENSOR_ID                    0x2770</div><div class="line">#define SENSOR_DRVNAME_OV2718_MIPI_YUV          &quot;ov2718mipiyuv&quot;</div></pre></td></tr></table></figure></p>
+<p>4.为系统提供调用的API<br>kernel-3.10/drivers/misc/mediatek/imgsensor/src/mt6735/kd_sensorlist.h</p>
+<p>5.camera 上电和掉电<br>kernel-3.10/drivers/misc/mediatek/mach/mt6735/tx6735_65c_xz_l1/camera/camera/kd_camera_hw.c</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>MTK之lcm架构</title>
     <link href="http://joyflyaway.com/2018/02/22/MTK%E4%B9%8Blcm%E6%9E%B6%E6%9E%84/"/>
     <id>http://joyflyaway.com/2018/02/22/MTK之lcm架构/</id>
     <published>2018-02-22T09:24:36.000Z</published>
-    <updated>2018-02-23T09:28:09.000Z</updated>
+    <updated>2018-02-28T06:20:52.000Z</updated>
     
     <content type="html"><![CDATA[<!-- excerpt --></p>
 <p>Linux kernel有一些总线，比如USB、I2C等。对于每一个总线都会有一些设备和驱动挂在上面。驱动服务于匹配的设备，使Linux正确的操作硬件设备。当一个设备或者驱动注册到特定的总线上的时候就会触发总线匹配函数，比如一个设备注册到了总线，所有的该总线的驱动都会被枚举，判断是不是可以服务于新添加的设备（一般通过name来匹配），反之亦然。<br>如果总线匹配成功，就会调用驱动的probe函数，检查指定的硬件确实存在，然后确定是否所需的资源都能够从系统申请。<br>事实上，设备或者驱动能够正确的合作，在probe之后，模块初始化顺序决定于probe的执行顺序，可以由BSP函数中注册设备的顺序控制。MT6572平台，L版本的BSP文件放在kernel/arch/arm/mach-mt6572/mt_devs.c,mt_board_init()函数控制着probe的顺序。<br>platform虚拟总线，关联在该总线的设备和驱动通过name来匹配。</p>
@@ -30,7 +77,124 @@
 <h3 id="drivers-misc-mediatek-videox-mt6735-mtkfb-c"><a href="#drivers-misc-mediatek-videox-mt6735-mtkfb-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/mtkfb.c"></a>./drivers/misc/mediatek/videox/mt6735/mtkfb.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">static struct fb_ops mtkfb_ops = &#123;</div><div class="line">    .owner          = THIS_MODULE,</div><div class="line">    .fb_open        = mtkfb_open,</div><div class="line">    .fb_release     = mtkfb_release,</div><div class="line">    .fb_setcolreg   = mtkfb_setcolreg,</div><div class="line">    .fb_pan_display = mtkfb_pan_display_proxy,</div><div class="line">    .fb_fillrect    = cfb_fillrect,</div><div class="line">    .fb_copyarea    = cfb_copyarea,</div><div class="line">    .fb_imageblit   = cfb_imageblit,</div><div class="line">    .fb_cursor      = mtkfb_soft_cursor,</div><div class="line">    .fb_check_var   = mtkfb_check_var,</div><div class="line">    .fb_set_par     = mtkfb_set_par,</div><div class="line">    .fb_ioctl       = mtkfb_ioctl,</div><div class="line">#ifdef CONFIG_COMPAT</div><div class="line">	.fb_compat_ioctl = mtkfb_compat_ioctl,</div><div class="line">#endif    </div><div class="line">#ifdef CONFIG_DMA_SHARED_BUFFER</div><div class="line">    .fb_dmabuf_export = mtkfb_dmabuf_export,</div><div class="line">#endif</div><div class="line">&#125;;</div><div class="line"></div><div class="line">static struct platform_driver mtkfb_driver =</div><div class="line">&#123;</div><div class="line">    .driver = &#123;</div><div class="line">        .name    = MTKFB_DRIVER,</div><div class="line">#ifdef CONFIG_PM</div><div class="line">        .pm     = &amp;mtkfb_pm_ops,</div><div class="line">#endif</div><div class="line">        .bus     = &amp;platform_bus_type,</div><div class="line">        .probe   = mtkfb_probe,</div><div class="line">        .remove  = mtkfb_remove,</div><div class="line">        .suspend = mtkfb_suspend,</div><div class="line">        .resume  = mtkfb_resume,</div><div class="line">	.shutdown = mtkfb_shutdown,</div><div class="line">	.of_match_table = mtkfb_of_ids,</div><div class="line">    &#125;,</div><div class="line">&#125;;</div><div class="line">static int mtkfb_probe(struct device *dev) ｛</div><div class="line">  primary_display_init(mtkfb_find_lcm_driver(), lcd_fps);</div><div class="line">  mtkfb_fbinfo_init(fbi);</div><div class="line">  mtkfb_register_sysfs(fbdev);</div><div class="line">  register_framebuffer(fbi);</div><div class="line">｝</div><div class="line">mtk_fb_probe函数主要做的工作如下：</div><div class="line">Called by LDM binding to probe andattach a new device.</div><div class="line"> * Initialization sequence:</div><div class="line"> *   1.allocate system fb_info structure</div><div class="line"> *     select panel type according to machine type</div><div class="line"> *   2.init LCD panel</div><div class="line"> *   3.init LCD controller and LCD DMA</div><div class="line"> *   4.init system fb_info structure</div><div class="line"> *   5.init gfx DMA</div><div class="line"> *   6.enable LCD panel</div><div class="line">       start LCD frame transfer</div><div class="line"> *   7.register system fb_info structure</div></pre></td></tr></table></figure>
 <h3 id="drivers-misc-mediatek-videox-mt6735-primary-display-c"><a href="#drivers-misc-mediatek-videox-mt6735-primary-display-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/primary_display.c"></a>./drivers/misc/mediatek/videox/mt6735/primary_display.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int primary_display_init(char *lcm_name, unsigned int lcm_fps) &#123;</div><div class="line">  disp_lcm_probe( lcm_name, LCM_INTERFACE_NOTDEFINED);</div><div class="line">  disp_lcm_init(pgc-&gt;plcm, 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="drivers-misc-mediatek-videox-mt6735-disp-lcm-c"><a href="#drivers-misc-mediatek-videox-mt6735-disp-lcm-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/disp_lcm.c"></a>./drivers/misc/mediatek/videox/mt6735/disp_lcm.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">disp_lcm_handle* disp_lcm_probe(char* plcm_name, LCM_INTERFACE_ID lcm_id)</div><div class="line">&#123;</div><div class="line">  lcm_drv = lcm_driver_list[0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="drivers-misc-mediatek-lcm-mt65xx-lcm-list-c"><a href="#drivers-misc-mediatek-lcm-mt65xx-lcm-list-c" class="headerlink" title="drivers/misc/mediatek/lcm/mt65xx_lcm_list.c"></a>drivers/misc/mediatek/lcm/mt65xx_lcm_list.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">驱动列表</div><div class="line">LCM_DRIVER* lcm_driver_list[] = &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+<h3 id="drivers-misc-mediatek-lcm-mt65xx-lcm-list-c"><a href="#drivers-misc-mediatek-lcm-mt65xx-lcm-list-c" class="headerlink" title="drivers/misc/mediatek/lcm/mt65xx_lcm_list.c"></a>drivers/misc/mediatek/lcm/mt65xx_lcm_list.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">驱动列表</div><div class="line">LCM_DRIVER* lcm_driver_list[] = &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="驱动调试"><a href="#驱动调试" class="headerlink" title="驱动调试"></a>驱动调试</h3><ul>
+<li><p>白屏无显示<br>检查电压是否正常，确定硬件是否有问题</p>
+</li>
+<li><p>黑色横条，颜色失真<br>初始化时序问题</p>
+</li>
+<li><p>闪屏<br>时序，pclk配置不对</p>
+</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CAMERA_COMMON</title>
+    <link href="http://joyflyaway.com/2018/02/09/CAMERA-COMMON/"/>
+    <id>http://joyflyaway.com/2018/02/09/CAMERA-COMMON/</id>
+    <published>2018-02-09T05:40:45.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="Image-Sensor类型"><a href="#Image-Sensor类型" class="headerlink" title="Image Sensor类型"></a>Image Sensor类型</h2><h3 id="YUV-Sensor"><a href="#YUV-Sensor" class="headerlink" title="YUV Sensor"></a>YUV Sensor</h3><p>YUV Sensor输出的Data格式为YUV，图像的效果处理使用Sensor内部的ISP，BB端接收YUV格式的data后只进行格式的转换，效果方面不进行处理，由于Sensor内部的ISP处理能力有限，且YUV Sensor的数据量比较大（YUV422的格式1个pixel2个byte），一般Size都比较小，常见的YUV sensor都是5M以下。</p>
+<h3 id="Raw-Sensor"><a href="#Raw-Sensor" class="headerlink" title="Raw Sensor"></a>Raw Sensor</h3><p>Raw Sensor输出的Data格式为Raw，图像的效果处理使用BB端的ISP，BB端接收Raw data后进行一系列的图像处理（OB，Shading，AWB，Gamma，EE，ANR等），效果方面由BB端控制，需要针对不同的模组进行效果调试，Raw sensor是目前的主流，数据量比YUV Sensor小（RAW10 格式的sensor 1个pixel 10个bit）使用平台ISP处理，能支持较大的size。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MTK_CAMERA</title>
+    <link href="http://joyflyaway.com/2018/02/09/MTK-CAMERA/"/>
+    <id>http://joyflyaway.com/2018/02/09/MTK-CAMERA/</id>
+    <published>2018-02-09T02:54:09.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="驱动配置"><a href="#驱动配置" class="headerlink" title="驱动配置"></a>驱动配置</h3><p>CONFIG_CUSTOM_KERNEL_LCM</p>
+<h3 id="isp驱动"><a href="#isp驱动" class="headerlink" title="isp驱动"></a>isp驱动</h3><p>vendor/mediatek/proprietary/platform/mt6735/hardware/mtkcam/</p>
+<h3 id="摄像头驱动"><a href="#摄像头驱动" class="headerlink" title="摄像头驱动"></a>摄像头驱动</h3><p>kernel-3.10/drivers/misc/mediatek/imgsensor/src/mt6735/</p>
+<h3 id="驱动结构添加"><a href="#驱动结构添加" class="headerlink" title="驱动结构添加"></a>驱动结构添加</h3><p>kernel-3.10/drivers/misc/mediatek/imgsensor/src/mt6735/kd_sensorlist.c<br>驱动的注册：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">module_init(CAMERA_HW_i2C_init);</div><div class="line">static int __init CAMERA_HW_i2C_init(void)</div><div class="line">&#123;</div><div class="line">  platform_device_register(&amp;camerahw_platform_device);</div><div class="line">  platform_driver_register(&amp;g_stCAMERA_HW_Driver);</div><div class="line">&#125;</div><div class="line"></div><div class="line">static int CAMERA_HW_probe(struct platform_device *pdev)</div><div class="line">&#123;</div><div class="line">    return i2c_add_driver(&amp;CAMERA_HW_i2c_driver);</div><div class="line">&#125;</div><div class="line"></div><div class="line">static int CAMERA_HW_i2c_probe(struct i2c_client *client, const struct i2c_device_id *id)</div><div class="line">&#123;</div><div class="line">    RegisterCAMERA_HWCharDrv();</div><div class="line">    register_camera_sysfs();</div><div class="line">&#125;</div><div class="line"></div><div class="line">inline static int RegisterCAMERA_HWCharDrv(void)</div><div class="line">&#123;</div><div class="line">  cdev_init(g_pCAMERA_HW_CharDrv, &amp;g_stCAMERA_HW_fops);</div><div class="line">&#125;</div><div class="line"></div><div class="line">static const struct file_operations g_stCAMERA_HW_fops =</div><div class="line">&#123;</div><div class="line">    .owner = THIS_MODULE,</div><div class="line">    .open = CAMERA_HW_Open,</div><div class="line">    .release = CAMERA_HW_Release,</div><div class="line">    .unlocked_ioctl = CAMERA_HW_Ioctl,</div><div class="line">#ifdef CONFIG_COMPAT</div><div class="line">    .compat_ioctl = CAMERA_HW_Ioctl_Compat,</div><div class="line">#endif</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="定义id和drv-name"><a href="#定义id和drv-name" class="headerlink" title="定义id和drv name"></a>定义id和drv name</h3><p>kernel-3.10/drivers/miscmediatek/custom/common/kernel/imgsensor/inc/kd_imgsensor.h</p>
+<h3 id="hal层ID和driver-name的衔接"><a href="#hal层ID和driver-name的衔接" class="headerlink" title="hal层ＩＤ和driver　name的衔接"></a>hal层ＩＤ和driver　name的衔接</h3><p>./vendor/mediatek/proprietary/custom/mt6735/hal/D1/imgsensor_src/sensorlist.cpp</p>
+<h3 id="时序配置"><a href="#时序配置" class="headerlink" title="时序配置"></a>时序配置</h3><p>./drivers/misc/mediatek/mach/mt6735/tx6735_65c_xz_l1/camera/camera/kd_camera_hw.c</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android之kenel编译</title>
+    <link href="http://joyflyaway.com/2018/02/05/Android%E4%B9%8Bkenel%E7%BC%96%E8%AF%91/"/>
+    <id>http://joyflyaway.com/2018/02/05/Android之kenel编译/</id>
+    <published>2018-02-05T12:35:40.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<p>make arm=arm64 O=out_path {xxx_defconfig, menuconfig, distclean}</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android之输入系统</title>
+    <link href="http://joyflyaway.com/2018/02/05/Android%E4%B9%8B%E8%BE%93%E5%85%A5%E7%B3%BB%E7%BB%9F/"/>
+    <id>http://joyflyaway.com/2018/02/05/Android之输入系统/</id>
+    <published>2018-02-05T12:31:47.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="android-子系统主要由以下几个模块组成："><a href="#android-子系统主要由以下几个模块组成：" class="headerlink" title="android 子系统主要由以下几个模块组成："></a>android 子系统主要由以下几个模块组成：</h3><p>EventHub：事件的传入是从EventHub开始的，EventHub是事件的抽象结构，维护着系统设备的运行情况，并维护一个所有输入设备的文件描述符<br>Input Reader: 负责从硬件获取输入，转换成事件（Event), 并分发给Input Dispatcher.<br>Input Dispatcher: 将Input Reader传送过来的Events 分发给合适的窗口，并监控ANR。<br>Input Manager Service：负责Input Reader 和 Input Dispatchor的创建，并提供Policy 用于Events的预处理。<br>Window Manager Service：管理Input Manager 与 View（Window) 以及 ActivityManager 之间的通信。<br>View and Activity：接收按键并处理。<br>ActivityManager Service：ANR 处理</p>
+<h3 id="getevent"><a href="#getevent" class="headerlink" title="getevent"></a>getevent</h3><p>输入设备插拔或者使用时，数据会实时显示出来</p>
+<h3 id="查看外接输入设备"><a href="#查看外接输入设备" class="headerlink" title="查看外接输入设备"></a>查看外接输入设备</h3><p>cat /proc/bus/input/devices</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>驱动问题分析思路</title>
+    <link href="http://joyflyaway.com/2018/02/05/%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/"/>
+    <id>http://joyflyaway.com/2018/02/05/驱动问题分析思路/</id>
+    <published>2018-02-05T12:10:35.000Z</published>
+    <updated>2018-02-28T06:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<ol>
+<li>先集成驱动</li>
+<li>是否生成相应节点或相应数据结构</li>
+<li>权限是否正常</li>
+</ol>
+<h3 id="Kernel驱动"><a href="#Kernel驱动" class="headerlink" title="Kernel驱动"></a>Kernel驱动</h3><p>dump_stack(); 查看调用栈</p>]]></content>
     
     <summary type="html">
     
@@ -115,20 +279,20 @@
     <link href="http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/"/>
     <id>http://joyflyaway.com/2018/01/19/Android底层图形系统/</id>
     <published>2018-01-19T09:46:14.000Z</published>
-    <updated>2018-01-19T10:40:52.000Z</updated>
+    <updated>2018-02-28T06:20:52.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="OpenGL-ES"><a href="#OpenGL-ES" class="headerlink" title="OpenGL ES"></a>OpenGL ES</h2><h3 id="什么是OpenGL？"><a href="#什么是OpenGL？" class="headerlink" title="什么是OpenGL？"></a>什么是OpenGL？</h3><p>OpenGL是和编程语言、平台无关的一套interface ，主要是为了渲染 2D 和 3D图形等。一般这套接口是用来和GPU进行交互的，使用GPU进行硬件加速。</p>
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h2 id="OpenGL-ES"><a href="#OpenGL-ES" class="headerlink" title="OpenGL ES"></a>OpenGL ES</h2><h3 id="什么是OpenGL？"><a href="#什么是OpenGL？" class="headerlink" title="什么是OpenGL？"></a>什么是OpenGL？</h3><p>OpenGL是和编程语言、平台无关的一套interface ，主要是为了渲染 2D 和 3D图形等。一般这套接口是用来和GPU进行交互的，使用GPU进行硬件加速。</p>
 <h3 id="什么是OpenGL-ES？"><a href="#什么是OpenGL-ES？" class="headerlink" title="什么是OpenGL ES？"></a>什么是OpenGL ES？</h3><p>OpenGL ES就是专为嵌入式设备设计的，OpenGL ES和OpenGL中的函数接口有一些是不一样，因为嵌入式设备和pc等的硬件处理能力有差距的。</p>
 <p>既然OpenGL ES只是一组函数接口，Android平台提供了两种类型的实现：软件实现，硬件实现。</p>
 <p>a.硬件实现，前面提到这组函数接口主要是为了和GPU这个硬件进行打交道的。所以各个硬件厂商会提供相关的实现，例如高通平台的adreno解决方案；</p>
 <p>b.软件实现，Android自身也提供了一套OpenGL ES的软件实现，不使用GPU，完全用软件实现画图的相关功能，也就是libagl</p>
 <h3 id="EGL"><a href="#EGL" class="headerlink" title="EGL"></a>EGL</h3><p>那么什么是EGL？EGL是OpenGL ES和底层的native window system之间的接口，承上启下。</p>
-<p><img src="https://github.com/joy-chen/ResourceForBlog/blob/master/android/graph/egl.png?raw=true" alt="架构"></p>
-]]></content>
+<p><img src="https://github.com/joy-chen/ResourceForBlog/blob/master/android/graph/egl.png?raw=true" alt="架构"></p>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;OpenGL-ES&quot;&gt;&lt;a href=&quot;#OpenGL-ES&quot; class=&quot;headerlink&quot; title=&quot;OpenGL ES&quot;&gt;&lt;/a&gt;OpenGL ES&lt;/h2&gt;&lt;h3 id=&quot;什么是OpenGL？&quot;&gt;&lt;a href=&quot;#什么是OpenGL？&quot; cla
+      &lt;p&gt;Author JOY.&lt;br&gt;
     
     </summary>
     
@@ -337,191 +501,6 @@
     <summary type="html">
     
       &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>查看调用栈</title>
-    <link href="http://joyflyaway.com/2017/12/28/%E6%9F%A5%E7%9C%8B%E8%B0%83%E7%94%A8%E6%A0%88/"/>
-    <id>http://joyflyaway.com/2017/12/28/查看调用栈/</id>
-    <published>2017-12-28T12:18:14.000Z</published>
-    <updated>2017-12-29T10:02:23.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt -->
-<ol>
-<li>Java中打印调用栈<br>比较简单，利用Throwable，直接log中打印出来：<br>Log.d(TAG, Log.getStackTraceString(new Throwable()));   </li>
-</ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- excerpt --&gt;
-&lt;ol&gt;
-&lt;li&gt;Java中打印调用栈&lt;br&gt;比较简单，利用Throwable，直接log中打印出来：&lt;br&gt;Log.d(TAG, Log.getStackTraceString(new Throwable()));   &lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>rk3288_OTA</title>
-    <link href="http://joyflyaway.com/2017/12/25/rk3288-OTA/"/>
-    <id>http://joyflyaway.com/2017/12/25/rk3288-OTA/</id>
-    <published>2017-12-25T11:56:32.000Z</published>
-    <updated>2017-12-29T10:13:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>OTA整个功能代码分布：服务端，recovery，framework层，以及apk共同组成<br>  APK(vendor/rockchip/common/apps/RKUpdateService)<br>  RK只提供apk，没有源码。反编译，apk的主要功能是从服务器下载ota包到本地，<br>  然后写入参数提供给recovery，然后重启进入recovery。</p>
-<p>系统升级分为OTA升级和固件包升级<br>OTA方式：<br>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.zip<br>2)写如下字段到/cache/recovery/command<br>–update_package=/mnt/internal_sd/update.zip<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<h3 id="固件包方式："><a href="#固件包方式：" class="headerlink" title="固件包方式："></a>固件包方式：</h3><p>1)写如下字段到/cache/recovery/last_flag<br>updating$path=/mnt/internal_sd/update.img<br>2)写如下字段到/cache/recovery/command<br>–update_rkimage=/mnt/internal_sd/update.img<br>–locale=en_US<br>3)在adb shell中运行reboot recovery</p>
-<h3 id="OTA升级失败排查"><a href="#OTA升级失败排查" class="headerlink" title="OTA升级失败排查:"></a>OTA升级失败排查:</h3><p><a href="http://blog.csdn.net/luzhenrong45/article/details/62042400" target="_blank" rel="external">http://blog.csdn.net/luzhenrong45/article/details/62042400</a></p>
-<h3 id="dd命令："><a href="#dd命令：" class="headerlink" title="dd命令："></a>dd命令：</h3><p>  dd备份分区：<br>    df查看各分区使用<br>    mount查看挂载路径<br>    ls /dev/block／platform/xxx/ 查看各分区<br>    cat proc/partitions 查看各分区大小<br>  备份system分区：<br>  dd if=/dev/block/platform/ff0f0000.rksdmmc/by-name/system of=/sdcard/system.img<br>  挂载：mount -t ext4 system.img dest_path<br>  <a href="http://blog.csdn.net/u014134180/article/details/78120143" target="_blank" rel="external">http://blog.csdn.net/u014134180/article/details/78120143</a></p>
-<h3 id="recovery相关部分的代码路径"><a href="#recovery相关部分的代码路径" class="headerlink" title="recovery相关部分的代码路径"></a>recovery相关部分的代码路径</h3><p>  ${code_root}/bootable/recovery<br>  ${code_root}/bootable/recovery/recovery.cpp<br>  ${code_root}/bootable/recovery/rkimage.cpp<br>  ${code_root}/frameworks/base/core/java/android/os/RecoverySystem.java</p>
-<h3 id="流程分析"><a href="#流程分析" class="headerlink" title="流程分析"></a>流程分析</h3><p>The recovery tool communicates with the main system through /cache files.<br>/cache/recovery/command - INPUT - command line for tool, one arg per line<br>/cache/recovery/log - OUTPUT - combined log file from recovery run(s)<br>/cache/recovery/intent - OUTPUT - intent that was passed in</p>
-<p>The arguments which may be supplied in the recovery.command file:   </p>
-<ul>
-<li>–send_intent=anystring - write the text out to recovery.intent</li>
-<li>–update_package=path - verify install an OTA package file</li>
-<li>–wipe_data - erase user data (and cache), then reboot</li>
-<li>–wipe_cache - wipe cache (but not user data), then reboot</li>
-<li>–set_encrypted_filesystem=on|off - enables / diasables encrypted fs</li>
-<li>–just_exit - do nothing; exit and reboot<br>Arguments may also be supplied in the bootloader control block (BCB).</li>
-</ul>
-<p>After completing, we remove /cache/recovery/command and reboot.</p>
-<h4 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h4><p>app执行安装/重置/清楚缓存操作调用代码文件<br>  frameworks/base/core/java/android/os/RecoverySystem.java<br>    installPackage<br>    rebootWipeUserData<br>    rebootWipeCache</p>
-<p>上面的所有操作都是往/cache/recovery/command文件中写入不同的命令，在进入recovery后（recovery.cpp）对command的关键字进行判断，执行相应的操作</p>
-<p>recovery.cpp<br>  -main()<br>   -&gt;install_package()<br>    install.cpp<br>      -&gt;install_package()<br>        -&gt;try_update_binary()</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>rk3288源码结构</title>
-    <link href="http://joyflyaway.com/2017/12/25/rk3288%E6%BA%90%E7%A0%81%E7%BB%93%E6%9E%84/"/>
-    <id>http://joyflyaway.com/2017/12/25/rk3288源码结构/</id>
-    <published>2017-12-25T09:11:54.000Z</published>
-    <updated>2017-12-29T10:12:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>device/rockchip/rk3288：<br>板级配置<br>  device/rockchip/rk3288/rk3288.mk<br>    PRODUCT_NAME :=<br>    PRODUCT_BRAND :=<br>    PRODUCT_DEVICE :=<br>    PRODUCT_MODEL :=</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>RK3288编译介绍</title>
-    <link href="http://joyflyaway.com/2017/12/25/RK3288%E7%BC%96%E8%AF%91%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://joyflyaway.com/2017/12/25/RK3288编译介绍/</id>
-    <published>2017-12-25T06:32:32.000Z</published>
-    <updated>2018-01-17T09:58:32.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>[<a href="http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux" target="_blank" rel="external">http://wiki.t-firefly.com/index.php/Firefly-RK3288/Flash_image#Linux</a>]</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">upgrade_tool:RKTools/linux/Linux_Upgrade_Tool_v1.2/upgrade_tool</div></pre></td></tr></table></figure>
-<p>烧写统一固件 update.img<br>sudo upgrade_tool uf update.img</p>
-<p>烧写分区镜像：<br>sudo upgrade_tool di -b /path/to/boot.img<br>sudo upgrade_tool di -k /path/to/kernel.img<br>sudo upgrade_tool di -s /path/to/system.img<br>sudo upgrade_tool di -r /path/to/recovery.img<br>sudo upgrade_tool di -m /path/to/misc.img<br>sudo upgrade_tool di resource /path/to/resource.img<br>sudo upgrade_tool di -p paramater   #烧写 parameter<br>sudo upgrade_tool ul bootloader.bin # 烧写 bootloader</p>
-<p>如果因 flash 问题导致升级时出错，可以尝试低级格式化、擦除 nand flash：<br>sudo upgrade_tool lf   # 低级格式化<br>sudo upgrade_tool ef   # 擦除</p>
-<p>编译内核:<br>make -j${JOBS} -C kernel rockchip_defconfig<br>make -j${JOBS} -C kernel rk3288-${MODEL}.img</p>
-<p>编译Android:<br>. build.sh<br>make -j8<br>./mkimage.sh</p>
-<p>上一步骤的 ./mkimage.sh 会重新打包 boot.img 和 system.img, 并将其它相关的映像文件拷贝到目录 rockdev/Image-rk3288_box/ 中。以下列出一般固件用到的映像文件：<br>boot.img ：Android 的初始文件映像，负责初始化并加载 system 分区。<br>kernel.img ：内核映像。<br>misc.img ：misc 分区映像，负责启动模式切换和急救模式的参数传递。<br>recovery.img ：急救模式映像。<br>resource.img ：资源映像，内含开机图片和内核的设备树信息。<br>system.img ：Android 的 system 分区映像，ext4 文件系统格式。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>git常用命令</title>
-    <link href="http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-    <id>http://joyflyaway.com/2017/12/22/git常用命令/</id>
-    <published>2017-12-22T09:03:01.000Z</published>
-    <updated>2017-12-29T10:02:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt -->
-<p>git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地<br>git diff –staged 查看未提交的更改</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;!-- excerpt --&gt;
-&lt;p&gt;git checkout -b nativeBranchName remoteBranchPath 切换远程分支到本地&lt;br&gt;git diff –staged 查看未提交的更改&lt;/p&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Camera调试相关总结</title>
-    <link href="http://joyflyaway.com/2017/12/21/camera/"/>
-    <id>http://joyflyaway.com/2017/12/21/camera/</id>
-    <published>2017-12-21T10:49:21.000Z</published>
-    <updated>2018-02-01T10:29:41.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<p>1.获取设备的自然方向？<br>public int getDeviceDefaultOrientation() {<br>    WindowManager windowManager =  (WindowManager) getSystemService(Context.WINDOW_SERVICE);</p>
-<pre><code>Configuration config = getResources().getConfiguration();
-int rotation = windowManager.getDefaultDisplay().getRotation();
-
-if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;&amp;
-        config.orientation == Configuration.ORIENTATION_LANDSCAPE)
-    || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &amp;&amp;    
-        config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
-  return Configuration.ORIENTATION_LANDSCAPE;
-} else {
-  return Configuration.ORIENTATION_PORTRAIT;
-}
-</code></pre><p>}</p>
-<p>2.rk3288 摄像头显示改为前置？<br>cam_board.xml 里头有个front 和back配置<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=13091&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
-<p>3.rk3288 摄像头向左翻转90%显示如何修改?<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
-<p>4.查看相机型号版本<br>getprop | grep sys_graphic</p>
-<p>5.camera配置文件path<br>hardware/rk29/camera/Config</p>
-<p>6.关键log点<br>CameraHal,</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>自定义view</title>
-    <link href="http://joyflyaway.com/2017/10/30/%E8%87%AA%E5%AE%9A%E4%B9%89view/"/>
-    <id>http://joyflyaway.com/2017/10/30/自定义view/</id>
-    <published>2017-10-30T04:30:35.000Z</published>
-    <updated>2017-11-03T09:33:14.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>view<br>1.分析view需要哪些属性，在构造方法里获取处理。<br>2.重写测量方法<br>3.重写ondraw方法</p>
-<p>viewgroup<br>1.测量<br>2.布局<br>3.事件处理 </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;view&lt;br&gt;1.分析view需要哪些属性，在构造方法里获取处理。&lt;br&gt;2.重写测量方法&lt;br&gt;3.重写ondraw方法&lt;/p&gt;
-&lt;p&gt;viewgroup&lt;br&gt;1.测量&lt;br&gt;2.布局&lt;br&gt;3.事件处理 &lt;/p&gt;
-
     
     </summary>
     

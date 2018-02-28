@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Joy">
-    <title>Camera调试相关总结 - Joy</title>
+    <title>RK_Camera调试相关总结 - Joy</title>
     <meta name="author" content="Joy">
     
     
@@ -15,13 +15,13 @@
     
     <meta name="description" content="Author JOY.">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Camera调试相关总结">
+<meta property="og:title" content="RK_Camera调试相关总结">
 <meta property="og:url" content="http://joyflyaway.com/2017/12/21/camera/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="Author JOY.">
-<meta property="og:updated_time" content="2018-02-01T10:29:41.000Z">
+<meta property="og:updated_time" content="2018-02-28T06:20:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Camera调试相关总结">
+<meta name="twitter:title" content="RK_Camera调试相关总结">
 <meta name="twitter:description" content="Author JOY.">
     
     
@@ -259,7 +259,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            Camera调试相关总结
+            RK_Camera调试相关总结
         </h1>
     
     <div class="post-meta">
@@ -293,7 +293,8 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
 <p>3.rk3288 摄像头向左翻转90%显示如何修改?<br><a href="http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7" target="_blank" rel="external">http://dev.t-firefly.com/forum.php?mod=viewthread&amp;tid=12667&amp;highlight=%C9%E3%CF%F1%CD%B7</a></p>
 <p>4.查看相机型号版本<br>getprop | grep sys_graphic</p>
 <p>5.camera配置文件path<br>hardware/rk29/camera/Config</p>
-<p>6.关键log点<br>CameraHal,</p>
+<p>6.关键log点<br>CameraHal</p>
+<p>7.相机设备<br>/data/camera/media_profiles.xml</p>
             
         </div>
     </div>
@@ -342,12 +343,12 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
@@ -373,7 +374,7 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
             
                 <section id="comments">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="post-camera" data-title="Camera调试相关总结" data-url="http://joyflyaway.com/2017/12/21/camera/"></div>
+    <div class="ds-thread" data-thread-key="post-camera" data-title="RK_Camera调试相关总结" data-url="http://joyflyaway.com/2017/12/21/camera/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
@@ -390,7 +391,7 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
     <!-- 多说公共JS代码 end -->
 
     <!--
-    <div class="ds-share" data-thread-key="post-camera" data-title="Camera调试相关总结" data-url="http://joyflyaway.com/2017/12/21/camera/">
+    <div class="ds-share" data-thread-key="post-camera" data-title="RK_Camera调试相关总结" data-url="http://joyflyaway.com/2017/12/21/camera/">
       <div class="ds-share-inline">
         <ul  class="ds-share-icons-16">
       	   <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
@@ -464,12 +465,12 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="post-action-btn btn btn--default tooltip--top" target="new" data-tooltip="分享至微信" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weixin"></i>
             </a>
         </li>
@@ -495,12 +496,12 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
                 <div id="share-options-bar" class="share-options-bar" data-behavior="5">
     <ul class="share-options">
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weibo"></i><span>Share on weibo</span>
             </a>
         </li>
         <li class="share-option">
-            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=Camera调试相关总结">
+            <a class="share-option-btn" target="new" href="http://www.jiathis.com/send/?webid=weixin&amp;appkey=&amp;uid=2113868&amp;url=http://joyflyaway.com/2017/12/21/camera/&amp;title=RK_Camera调试相关总结">
                 <i class="fa fa-weixin"></i><span>Share on weixin</span>
             </a>
         </li>
@@ -787,7 +788,7 @@ if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &amp;
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 63 篇文章
+                找到 70 篇文章
             </p>
         </div>
     </div>

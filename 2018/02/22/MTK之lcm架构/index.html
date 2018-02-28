@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2018/02/22/MTK之lcm架构/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="Author JOY.">
-<meta property="og:updated_time" content="2018-02-23T09:28:09.000Z">
+<meta property="og:updated_time" content="2018-02-28T06:20:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MTK之lcm架构">
 <meta name="twitter:description" content="Author JOY.">
@@ -284,6 +284,14 @@
 <h3 id="drivers-misc-mediatek-videox-mt6735-primary-display-c"><a href="#drivers-misc-mediatek-videox-mt6735-primary-display-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/primary_display.c"></a>./drivers/misc/mediatek/videox/mt6735/primary_display.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">int primary_display_init(char *lcm_name, unsigned int lcm_fps) &#123;</div><div class="line">  disp_lcm_probe( lcm_name, LCM_INTERFACE_NOTDEFINED);</div><div class="line">  disp_lcm_init(pgc-&gt;plcm, 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="drivers-misc-mediatek-videox-mt6735-disp-lcm-c"><a href="#drivers-misc-mediatek-videox-mt6735-disp-lcm-c" class="headerlink" title="./drivers/misc/mediatek/videox/mt6735/disp_lcm.c"></a>./drivers/misc/mediatek/videox/mt6735/disp_lcm.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">disp_lcm_handle* disp_lcm_probe(char* plcm_name, LCM_INTERFACE_ID lcm_id)</div><div class="line">&#123;</div><div class="line">  lcm_drv = lcm_driver_list[0];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="drivers-misc-mediatek-lcm-mt65xx-lcm-list-c"><a href="#drivers-misc-mediatek-lcm-mt65xx-lcm-list-c" class="headerlink" title="drivers/misc/mediatek/lcm/mt65xx_lcm_list.c"></a>drivers/misc/mediatek/lcm/mt65xx_lcm_list.c</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">驱动列表</div><div class="line">LCM_DRIVER* lcm_driver_list[] = &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="驱动调试"><a href="#驱动调试" class="headerlink" title="驱动调试"></a>驱动调试</h3><ul>
+<li><p>白屏无显示<br>检查电压是否正常，确定硬件是否有问题</p>
+</li>
+<li><p>黑色横条，颜色失真<br>初始化时序问题</p>
+</li>
+<li><p>闪屏<br>时序，pclk配置不对</p>
+</li>
+</ul>
             
         </div>
     </div>
@@ -294,7 +302,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/26/mt6735-xc6130-ov2718驱动移植调试/"  data-tooltip="mt6735_xc6130_ov2718驱动移植调试">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -302,7 +310,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/01/Android之gradle/" data-tooltip="Android之gradle">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/CAMERA-COMMON/" data-tooltip="CAMERA_COMMON">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -416,7 +424,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/26/mt6735-xc6130-ov2718驱动移植调试/"  data-tooltip="mt6735_xc6130_ov2718驱动移植调试">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -424,7 +432,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/01/Android之gradle/" data-tooltip="Android之gradle">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/02/09/CAMERA-COMMON/" data-tooltip="CAMERA_COMMON">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -777,7 +785,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 63 篇文章
+                找到 70 篇文章
             </p>
         </div>
     </div>

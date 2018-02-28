@@ -4,12 +4,177 @@
 
     
   <url>
+    <loc>http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android底层图形系统</title>
+        <pubTime>2018-01-19T09:46:14.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/05/Android%E4%B9%8Bkenel%E7%BC%96%E8%AF%91/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android之kenel编译</title>
+        <pubTime>2018-02-05T12:35:40.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-%E5%88%86%E6%9E%90/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android Native Tombstone/Crash 分析</title>
+        <pubTime>2017-01-14T08:12:32.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/05/Android%E4%B9%8B%E8%BE%93%E5%85%A5%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Android之输入系统</title>
+        <pubTime>2018-02-05T12:31:47.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2017/12/21/camera/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>RK_Camera调试相关总结</title>
+        <pubTime>2017-12-21T10:49:21.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>git常用命令</title>
+        <pubTime>2017-12-22T09:03:01.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/05/%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>驱动问题分析思路</title>
+        <pubTime>2018-02-05T12:10:35.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://joyflyaway.com/2018/02/22/MTK%E4%B9%8Blcm%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2018-02-23T09:28:09.000Z</lastmod>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
     <data>
         <display>
         <title>MTK之lcm架构</title>
         <pubTime>2018-02-22T09:24:36.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/26/mt6735-xc6130-ov2718%E9%A9%B1%E5%8A%A8%E7%A7%BB%E6%A4%8D%E8%B0%83%E8%AF%95/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>mt6735_xc6130_ov2718驱动移植调试</title>
+        <pubTime>2018-02-26T03:13:35.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/26/MTK%E4%B9%8BGPIO/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>MTK之GPIO</title>
+        <pubTime>2018-02-26T11:40:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/09/MTK-CAMERA/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>MTK_CAMERA</title>
+        <pubTime>2018-02-09T02:54:09.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/09/CAMERA-COMMON/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>CAMERA_COMMON</title>
+        <pubTime>2018-02-09T05:40:45.000Z</pubTime>
         
          
            
@@ -49,21 +214,6 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2017/12/21/camera/</loc>
-    <lastmod>2018-02-01T10:29:41.000Z</lastmod>
-    <data>
-        <display>
-        <title>Camera调试相关总结</title>
-        <pubTime>2017-12-21T10:49:21.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://joyflyaway.com/2018/01/29/Android%E4%B9%8BSensor/</loc>
     <lastmod>2018-02-01T10:29:38.000Z</lastmod>
     <data>
@@ -93,21 +243,6 @@
     </url>
 
     
-    
-  <url>
-    <loc>http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-01-19T10:40:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android底层图形系统</title>
-        <pubTime>2018-01-19T09:46:14.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>http://joyflyaway.com/2018/01/18/Android-NDK%E5%BC%80%E5%8F%91%E4%B9%8Bbuild-gradle/</loc>
@@ -356,21 +491,6 @@
         <display>
         <title>查看调用栈</title>
         <pubTime>2017-12-28T12:18:14.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2017-12-29T10:02:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>git常用命令</title>
-        <pubTime>2017-12-22T09:03:01.000Z</pubTime>
         
          
            
@@ -679,21 +799,6 @@
              
               <breadCrumb title="framework" url="http://joyflyaway.com/categories/framework/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2017/01/14/Android-Native-Tombstone-Crash-%E5%88%86%E6%9E%90/</loc>
-    <lastmod>2017-01-30T04:17:02.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android Native Tombstone/Crash 分析</title>
-        <pubTime>2017-01-14T08:12:32.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
