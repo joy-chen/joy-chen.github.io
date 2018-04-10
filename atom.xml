@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://joyflyaway.com/"/>
-  <updated>2018-02-28T06:20:52.000Z</updated>
+  <updated>2018-04-03T02:19:58.000Z</updated>
   <id>http://joyflyaway.com/</id>
   
   <author>
@@ -14,6 +14,104 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android之自定义控件</title>
+    <link href="http://joyflyaway.com/2018/04/03/Android%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/"/>
+    <id>http://joyflyaway.com/2018/04/03/Android之自定义控件/</id>
+    <published>2018-04-03T02:19:58.000Z</published>
+    <updated>2018-04-03T02:19:58.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MTK-之音频驱动</title>
+    <link href="http://joyflyaway.com/2018/03/10/MTK-%E9%9F%B3%E9%A2%91%E9%A9%B1%E5%8A%A8/"/>
+    <id>http://joyflyaway.com/2018/03/10/MTK-音频驱动/</id>
+    <published>2018-03-10T07:33:04.000Z</published>
+    <updated>2018-04-03T02:17:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>kernel-3.10/arch/arm64/configs/tx6735_65c_xz_l1_defconfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CONFIG_MT_SND_SOC_V3=y</div><div class="line">CONFIG_MTK_SPEAKER=y</div></pre></td></tr></table></figure></p>
+<h3 id="驱动源码"><a href="#驱动源码" class="headerlink" title="驱动源码"></a>驱动源码</h3><p>kernel-3.10/sound/soc/mediatek/mt_soc_audio_v3/</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Android性能优化之内存优化</title>
+    <link href="http://joyflyaway.com/2018/03/02/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"/>
+    <id>http://joyflyaway.com/2018/03/02/Android性能优化之内存优化/</id>
+    <published>2018-03-02T06:45:24.000Z</published>
+    <updated>2018-03-22T12:37:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>对于Java来说，就是new出来的Object 放在Heap上无法被GC回收（内存中存在无法被回收的对象）</p>
+<h3 id="分析工具"><a href="#分析工具" class="headerlink" title="分析工具"></a>分析工具</h3><ul>
+<li>Android Studio 内存分析工具</li>
+<li>MAT 内存分析工具</li>
+<li>LeakCanary 分析</li>
+</ul>
+<h3 id="Android-OOM"><a href="#Android-OOM" class="headerlink" title="Android OOM"></a>Android OOM</h3><p>Android系统的每个进程都有一个最大内存限制，如果申请的内存资源超过这个限制，系统就会抛出OOM错误。</p>
+<h4 id="避免方法"><a href="#避免方法" class="headerlink" title="避免方法"></a>避免方法</h4><ul>
+<li><p>对内存的状态进行监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public void onTrimMemory(int level) &#123;</div><div class="line">    super.onTrimMemory(level);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>避免内存抖动<br>避免在循环调用的场景下，生成对象</p>
+</li>
+</ul>
+<h3 id="代码注意点"><a href="#代码注意点" class="headerlink" title="代码注意点"></a>代码注意点</h3><ul>
+<li><p>节制地使用Service<br>建议使用JobScheduler，而尽量避免使用持久性的Service。还有建议使用IntentService，它会在处理完交代给它的任务之后尽快结束自己。</p>
+</li>
+<li><p>使用优化过的集合<br>Android API当中提供了一些优化过后的数据集合工具类，如SparseArray，SparseBooleanArray，以及LongSparseArray等，使用这些API可以让我们的程序更加高效。</p>
+</li>
+<li><p>移除消耗内存的库、缩减Apk的大小<br>查看Apk的大小，包括三方库和内嵌的资源，这些都会影响应用消耗的内存。通过减少冗余、非必须或大的组件、库、图片、资源、动画等，都可以改善应用的内存消耗。</p>
+</li>
+</ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MTK之USB-OTG</title>
+    <link href="http://joyflyaway.com/2018/03/02/MTK%E4%B9%8BUSB-OTG/"/>
+    <id>http://joyflyaway.com/2018/03/02/MTK之USB-OTG/</id>
+    <published>2018-03-02T06:12:10.000Z</published>
+    <updated>2018-04-03T02:17:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<!-- excerpt --></p>
+<h3 id="调试准备"><a href="#调试准备" class="headerlink" title="调试准备"></a>调试准备</h3><p>1.查看电路原理图，USB device功能正常的话，说明USB HUB部分没问题<br>2.查看供电是否正常，是否需要配置GPIO口</p>
+<h3 id="USB-OTG-配置"><a href="#USB-OTG-配置" class="headerlink" title="USB OTG 配置"></a>USB OTG 配置</h3><p>kernel-3.10/arch/arm64/configs/tx6735_65c_xz_l1_defconfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CONFIG_USB_MTK_OTG=y</div><div class="line">CONFIG_USB_MTK_HDRC_HCD=y</div></pre></td></tr></table></figure></p>
+<p>kernel-3.10/tools/dct/<br>在dws中设定OTG VBUS对应的输出控制pin配置为GPIO模式，var name为GPIO_OTG_DRVVBUS_PIN。再设定USB ID默认模式为IDDIG，var name为GPIO_OTG_IDDIG_EINT_PIN(具体哪个引脚，以及是否需要配置其他引脚，需要参考电路原理图)</p>
+<p>建立挂载目录<br>device/tangxun/tx6735_65c_xz_l1/init.project.rc<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">on init</div><div class="line">    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw</div><div class="line">    mkdir /storage/usbotg 0700 root root</div><div class="line"></div><div class="line">    service fuse_usbotg /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbotg /storage/usbotg</div><div class="line">        class late_start</div><div class="line">        disabled</div></pre></td></tr></table></figure></p>
+<p>device/mediatek/mt6735/fstab.mt6735<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/devices/platform/mt_usb                auto      vfat      defaults        voldmanaged=usbotg:auto</div></pre></td></tr></table></figure></p>
+<p>device/tangxun/tx6735_65c_xz_l1/overlay/frameworks/base/core/res/res/xml/storage_list.xml<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;storage android:mountPoint=&quot;/storage/usbotg&quot;</div><div class="line">     android:storageDescription=&quot;@string/storage_external_usb&quot;</div><div class="line">     android:removable=&quot;true&quot; /&gt;</div></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Author JOY.&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>MTK之GPIO</title>
@@ -421,82 +519,6 @@
 <p>2.char <em>p = “abcdef”; 与 char p[] = “abcdef”;的区别<br>首先：“abcdef”是存放再 rodata 段的 char </em>p = “abcdef”; 只为指针 p 开辟一个空间，指向 rodata 段的字符串，不可以修改 char p[] = “abcdef”;用时将字符串拷贝到栈里（如果局部）即开辟空间，可以修改；   </p>
 <p>3.syscall 的过程（以 arm 平台，mount 函数为例）：<br>mount（） {<br>  swi #n<br>}<br>此条指令有 sub lr， pc， #4； mov pc，#0x08 的动作<br>切换到内核模式（swi 异常模式），pc 指向对应的异常入口地址并跳转执行， 0x08： b handle_swi;<br>handle_swi: stmfd sp!, {r0-r12, lr} b swi_handle ldmfd sp!, {r0-r12, pc}<br>swi_handle(int n) {<br>  (syscall[n])();<br>}<br>此时可以根据 ldr r0，[lr, #-4] bic r0, r0, 0xff000000 得到系统调用号 n。</p>
 <p>4.进程和线程：<br>进程是资源的基本单位，线程是调度的基本单位</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>gradle相关用法</title>
-    <link href="http://joyflyaway.com/2018/01/14/gradle%E7%9B%B8%E5%85%B3%E7%94%A8%E6%B3%95/"/>
-    <id>http://joyflyaway.com/2018/01/14/gradle相关用法/</id>
-    <published>2018-01-14T10:46:21.000Z</published>
-    <updated>2018-01-17T09:59:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h3 id="settings-gradle"><a href="#settings-gradle" class="headerlink" title="settings.gradle"></a>settings.gradle</h3><p>include :表示工程包含哪些module，包含的工程将会编译</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android之Alarm框架</title>
-    <link href="http://joyflyaway.com/2018/01/10/Android%E4%B9%8BAlarm%E6%A1%86%E6%9E%B6/"/>
-    <id>http://joyflyaway.com/2018/01/10/Android之Alarm框架/</id>
-    <published>2018-01-10T07:29:48.000Z</published>
-    <updated>2018-01-17T09:59:59.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY.&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Android问题定位总结</title>
-    <link href="http://joyflyaway.com/2018/01/04/Android%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D%E6%80%BB%E7%BB%93/"/>
-    <id>http://joyflyaway.com/2018/01/04/Android问题定位总结/</id>
-    <published>2018-01-04T08:27:05.000Z</published>
-    <updated>2018-01-17T10:00:04.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h3 id="Android进程终止和重启问题"><a href="#Android进程终止和重启问题" class="headerlink" title="Android进程终止和重启问题"></a>Android进程终止和重启问题</h3><p>原因是：虚拟机捕获了一些unchecked异常，如空指针异常等<br>在ddms或logcat或bugreport的log中搜索FATAL关键字，或者在/data/system/dropbox目录中找对应生成的crash字段的文件</p>
-<h3 id="异常相关的log目录"><a href="#异常相关的log目录" class="headerlink" title="异常相关的log目录"></a>异常相关的log目录</h3><p>/data/anr<br>/data/system/dropbox<br>/data/dontpanic/<br>/data/tombstones/</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Author JOY&lt;br&gt;
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>MTK_OTA分析</title>
-    <link href="http://joyflyaway.com/2017/12/28/MTK-OTA%E5%88%86%E6%9E%90/"/>
-    <id>http://joyflyaway.com/2017/12/28/MTK-OTA分析/</id>
-    <published>2017-12-28T12:44:24.000Z</published>
-    <updated>2018-02-22T09:26:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<!-- excerpt --></p>
-<h3 id="SystemUpdate"><a href="#SystemUpdate" class="headerlink" title="SystemUpdate"></a>SystemUpdate</h3><p>MainEntry<br>  onStart()<br>    bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);<br>      onServiceConnected()<br>        queryPackagesInternal();<br>          mService.queryPackages();<br>            sQueryNewVersionThread.start();<br>              mHttpManager.queryNewVersion();<br>                checkNewVersion()</p>]]></content>
     
     <summary type="html">
     

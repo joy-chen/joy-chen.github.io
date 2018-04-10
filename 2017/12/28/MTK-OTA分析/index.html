@@ -19,7 +19,7 @@
 <meta property="og:url" content="http://joyflyaway.com/2017/12/28/MTK-OTA分析/index.html">
 <meta property="og:site_name" content="Joy">
 <meta property="og:description" content="Author JOY.">
-<meta property="og:updated_time" content="2018-02-22T09:26:19.000Z">
+<meta property="og:updated_time" content="2018-04-03T02:17:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MTK_OTA分析">
 <meta name="twitter:description" content="Author JOY.">
@@ -276,7 +276,24 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <!-- excerpt --></p>
+<p>升级一般通过运行升级包中的META-INF/com/google/android/update-script脚本来执行自定义升级，脚本中是一组recovery系统能识别的UI控制，文件系统操作命令，例如write_raw_image（写FLASH分区），copy_dir（复制目录）。</p>
 <h3 id="SystemUpdate"><a href="#SystemUpdate" class="headerlink" title="SystemUpdate"></a>SystemUpdate</h3><p>MainEntry<br>  onStart()<br>    bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);<br>      onServiceConnected()<br>        queryPackagesInternal();<br>          mService.queryPackages();<br>            sQueryNewVersionThread.start();<br>              mHttpManager.queryNewVersion();<br>                checkNewVersion()</p>
+<h3 id="命令形式"><a href="#命令形式" class="headerlink" title="命令形式"></a>命令形式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">echo</div><div class="line">--update_package=/sdcard/update.zip</div><div class="line">--local=en_US</div><div class="line">to /cache/recovery/command</div><div class="line"></div><div class="line">adb reboot recovery</div></pre></td></tr></table></figure>
+<h3 id="cache-recovery-command："><a href="#cache-recovery-command：" class="headerlink" title="/cache/recovery/command："></a>/cache/recovery/command：</h3><p>recovery命令，由主系统写入。所有命令如下：</p>
+<ul>
+<li><p>–send_intent=anystring - write the text out to recovery.intent</p>
+</li>
+<li><p>–update_package=root:path - verify install an OTA package file</p>
+</li>
+<li><p>–wipe_data - erase user data (and cache), then reboot</p>
+</li>
+<li><p>–wipe_cache - wipe cache (but not user data), then reboot</p>
+</li>
+</ul>
+<h3 id="文件对应"><a href="#文件对应" class="headerlink" title="文件对应"></a>文件对应</h3><p>update-binary -&gt; bootable/recovery/updater<br>patch -&gt; bootable/recovery/applypatch</p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h4 id="cache-recovery-last-log"><a href="#cache-recovery-last-log" class="headerlink" title="/cache/recovery/last_log"></a>/cache/recovery/last_log</h4><p>该log记录了patch过程的信息，如果出现错误，很容易定位到具体问题点。</p>
+<h3 id="差分包"><a href="#差分包" class="headerlink" title="差分包"></a>差分包</h3><p>制作差分包基于：<br>out/target/product/$(product_name)/obj/PACKAGING/target_files_intermediates/$(product_name)-target_files-eng.root.zip<br>脚本：<br>build/tools/releasetools/ota_from_target_files.py<br>ota_from_target_files.py -i Base.zip New.zip update.zip<br>md5sum -b update.zip &gt; md5sum<br> zip package.zip update.zip md5sum</p>
+<p><a href="http://blog.csdn.net/luzhenrong45/article/details/60968458" target="_blank" rel="external">参考链接</a></p>
             
         </div>
     </div>
@@ -770,7 +787,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 70 篇文章
+                找到 74 篇文章
             </p>
         </div>
     </div>
