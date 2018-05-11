@@ -4,12 +4,12 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2018-04-10T09:15:49.136Z</lastmod>
+    <loc>http://joyflyaway.com/2018/04/03/Android%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/</loc>
+    <lastmod>2018-04-13T09:31:53.988Z</lastmod>
     <data>
         <display>
-        <title>git常用命令</title>
-        <pubTime>2017-12-22T09:03:01.000Z</pubTime>
+        <title>Android之自定义控件</title>
+        <pubTime>2018-04-03T02:19:58.000Z</pubTime>
         
          
            
@@ -19,12 +19,27 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2018/04/03/Android%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8E%A7%E4%BB%B6/</loc>
-    <lastmod>2018-04-03T02:19:58.000Z</lastmod>
+    <loc>http://joyflyaway.com/2018/02/05/Android%E4%B9%8B%E8%BE%93%E5%85%A5%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-04-13T09:30:50.078Z</lastmod>
     <data>
         <display>
-        <title>Android之自定义控件</title>
-        <pubTime>2018-04-03T02:19:58.000Z</pubTime>
+        <title>Android之输入系统</title>
+        <pubTime>2018-02-05T12:31:47.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2017/12/22/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2018-04-10T09:15:49.136Z</lastmod>
+    <data>
+        <display>
+        <title>git常用命令</title>
+        <pubTime>2017-12-22T09:03:01.000Z</pubTime>
         
          
            
@@ -94,12 +109,12 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2018/02/05/Android%E4%B9%8B%E8%BE%93%E5%85%A5%E7%B3%BB%E7%BB%9F/</loc>
+    <loc>http://joyflyaway.com/2018/02/22/MTK%E4%B9%8Blcm%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2018-02-28T06:20:52.000Z</lastmod>
     <data>
         <display>
-        <title>Android之输入系统</title>
-        <pubTime>2018-02-05T12:31:47.000Z</pubTime>
+        <title>MTK之lcm架构</title>
+        <pubTime>2018-02-22T09:24:36.000Z</pubTime>
         
          
            
@@ -139,6 +154,51 @@
 
     
   <url>
+    <loc>http://joyflyaway.com/2018/02/26/MTK%E4%B9%8BGPIO/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>MTK之GPIO</title>
+        <pubTime>2018-02-26T11:40:24.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/05/%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>驱动问题分析思路</title>
+        <pubTime>2018-02-05T12:10:35.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://joyflyaway.com/2018/02/09/CAMERA-COMMON/</loc>
+    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>CAMERA_COMMON</title>
+        <pubTime>2018-02-09T05:40:45.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://joyflyaway.com/2018/02/09/MTK-CAMERA/</loc>
     <lastmod>2018-02-28T06:20:52.000Z</lastmod>
     <data>
@@ -169,57 +229,12 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2018/02/05/%E9%A9%B1%E5%8A%A8%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF/</loc>
+    <loc>http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2018-02-28T06:20:52.000Z</lastmod>
     <data>
         <display>
-        <title>驱动问题分析思路</title>
-        <pubTime>2018-02-05T12:10:35.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2018/02/22/MTK%E4%B9%8Blcm%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>MTK之lcm架构</title>
-        <pubTime>2018-02-22T09:24:36.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2018/02/26/MTK%E4%B9%8BGPIO/</loc>
-    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>MTK之GPIO</title>
-        <pubTime>2018-02-26T11:40:24.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2018/02/09/CAMERA-COMMON/</loc>
-    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>CAMERA_COMMON</title>
-        <pubTime>2018-02-09T05:40:45.000Z</pubTime>
+        <title>Android底层图形系统</title>
+        <pubTime>2018-01-19T09:46:14.000Z</pubTime>
         
          
            
@@ -235,21 +250,6 @@
         <display>
         <title>mt6735_xc6130_ov2718驱动移植调试</title>
         <pubTime>2018-02-26T03:13:35.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2018/01/19/Android%E5%BA%95%E5%B1%82%E5%9B%BE%E5%BD%A2%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-02-28T06:20:52.000Z</lastmod>
-    <data>
-        <display>
-        <title>Android底层图形系统</title>
-        <pubTime>2018-01-19T09:46:14.000Z</pubTime>
         
          
            
@@ -950,36 +950,6 @@
 
     
   <url>
-    <loc>http://joyflyaway.com/2016/11/03/%E8%81%8C%E4%BD%8D%E9%80%89%E6%8B%A9/</loc>
-    <lastmod>2016-11-03T04:25:51.000Z</lastmod>
-    <data>
-        <display>
-        <title>职位选择</title>
-        <pubTime>2016-11-03T04:24:30.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2016/10/31/%E5%AF%B9%E5%9B%A2%E9%98%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A3/</loc>
-    <lastmod>2016-11-01T02:14:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>对团队的一些理解</title>
-        <pubTime>2016-10-31T09:13:16.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://joyflyaway.com/2016/10/20/Android%E8%AE%BE%E5%A4%87%E6%B8%A9%E5%BA%A6%E8%8A%82%E7%82%B9/</loc>
     <lastmod>2016-10-20T13:01:52.000Z</lastmod>
     <data>
@@ -1011,76 +981,12 @@
     
     
   <url>
-    <loc>http://joyflyaway.com/2016/10/06/%E5%8D%81%E4%B8%80%E6%9C%89%E6%84%9F/</loc>
-    <lastmod>2016-10-07T02:27:09.000Z</lastmod>
-    <data>
-        <display>
-        <title>十一有感</title>
-        <pubTime>2016-10-06T03:18:34.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2016/10/03/%E6%BB%A8%E6%B5%B7%E6%A0%88%E9%81%93/</loc>
-    <lastmod>2016-10-03T14:28:05.000Z</lastmod>
-    <data>
-        <display>
-        <title>滨海栈道</title>
-        <pubTime>2016-10-03T08:55:41.000Z</pubTime>
-        
-        <tag>徒步</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://joyflyaway.com/2016/09/27/pic-2016-9/</loc>
     <lastmod>2016-10-03T13:32:24.000Z</lastmod>
     <data>
         <display>
         <title>九月所见</title>
         <pubTime>2016-09-27T08:51:46.000Z</pubTime>
-        
-        <tag>九月</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2016/10/02/%E9%A6%99%E6%B8%AF%E5%BE%92%E6%AD%A5%E7%BA%BF%E8%B7%AF/</loc>
-    <lastmod>2016-10-02T06:34:06.000Z</lastmod>
-    <data>
-        <display>
-        <title>香港徒步线路</title>
-        <pubTime>2016-10-02T05:28:01.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2016/10/01/%E5%B0%BC%E6%B3%8A%E5%B0%94/</loc>
-    <lastmod>2016-10-02T05:28:10.000Z</lastmod>
-    <data>
-        <display>
-        <title>尼泊尔</title>
-        <pubTime>2016-10-01T05:23:12.000Z</pubTime>
         
          
            
@@ -1097,23 +1003,6 @@
         <title>Framework层监听前台进程</title>
         <pubTime>2016-09-27T08:13:50.000Z</pubTime>
         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://joyflyaway.com/2016/09/15/water/</loc>
-    <lastmod>2016-09-27T11:42:40.000Z</lastmod>
-    <data>
-        <display>
-        <title>About Jamie</title>
-        <pubTime>2016-09-15T10:48:57.000Z</pubTime>
-        
-        <tag>媚子</tag>
-         
          
            
         </display>

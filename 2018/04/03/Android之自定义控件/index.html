@@ -13,16 +13,16 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="haha">
+    <meta name="description" content="Author JOY.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Android之自定义控件">
 <meta property="og:url" content="http://joyflyaway.com/2018/04/03/Android之自定义控件/index.html">
 <meta property="og:site_name" content="Joy">
-<meta property="og:description" content="haha">
-<meta property="og:updated_time" content="2018-04-03T02:19:58.000Z">
+<meta property="og:description" content="Author JOY.">
+<meta property="og:updated_time" content="2018-04-13T09:31:53.988Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android之自定义控件">
-<meta name="twitter:description" content="haha">
+<meta name="twitter:description" content="Author JOY.">
     
     
         
@@ -275,7 +275,11 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            
+            <!-- excerpt --></p>
+<h3 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h3><h4 id="Android坐标系"><a href="#Android坐标系" class="headerlink" title="Android坐标系"></a>Android坐标系</h4><p>左上角为坐标原地(0, 0)。</p>
+<h4 id="视图坐标系"><a href="#视图坐标系" class="headerlink" title="视图坐标系"></a>视图坐标系</h4><p>getLeft(),getRight(),getTop(),getBottom(),getX(),getY()相对父布局<br>getRawX(),getRawY()相对Android坐标系原点</p>
+<h3 id="自定义组合控件"><a href="#自定义组合控件" class="headerlink" title="自定义组合控件"></a>自定义组合控件</h3><p>自定义组合控件就是多个控件组合起来成为一个新的控件，主要用来解决多次重复的使用同一类型的布局。比如我们应用的顶部的标题栏，还有弹出的固定样式的dialog，这些都是常用的，所以把他们所需要的控件组合起来重新定义成一个新的控件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XXXClass</span> <span class="keyword">extends</span> <span class="title">XXXLayout</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">XXXClass</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">     <span class="keyword">super</span>(context);</div><div class="line">     initView(context);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">XXXClass</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</div><div class="line">     <span class="keyword">super</span>(context, attrs);</div><div class="line">     initView(context);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="title">XXXClass</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span>    defStyleAttr)</span> </span>&#123;</div><div class="line">     <span class="keyword">super</span>(context, attrs, defStyleAttr);</div><div class="line">     initView(context);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">(Context context)</span></span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line">    自定义组合控件布局，初始化，对外提供操作接口。</div><div class="line">    */</div><div class="line">     LayoutInflater.from(context).inflate(R.layout.xxx, <span class="keyword">this</span>, <span class="keyword">true</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
             
         </div>
     </div>
@@ -576,31 +580,6 @@
                 <div class="media">
                     
                     <div class="media-left">
-                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/15/water/">
-                            <img class="media-image" src="http://imglf1.nosdn.127.net/img/SDNSM3A1RmE3NjVOQjJkY0d4N0RPSDVOcU9DWE96bUVSUjZJeVJPQlBmSmhmZ2loSFdUMjJ3PT0.jpg?imageView&amp;thumbnail=1680x0&amp;quality=96&amp;stripmeta=0&amp;type=jpg" width="90" height="90"/>
-                        </a>
-                    </div>
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://joyflyaway.com/2016/09/15/water/">
-                            <h3 class="media-heading">About Jamie</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月15日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><p>啦啦啦<br>介绍一位美女!<br></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-left">
                         <a class="link-unstyled" href="http://joyflyaway.com/2016/09/18/GUI/">
                             <img class="media-image" src="http://joyflyaway.com/2016/09/18/GUI/ape_fwk_graphics.png" width="90" height="90"/>
                         </a>
@@ -746,13 +725,32 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://joyflyaway.com/2016/10/01/尼泊尔/">
-                            <h3 class="media-heading">尼泊尔</h3>
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/10/19/cpu使用率监控/">
+                            <h3 class="media-heading">CPU使用率监控</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2016年10月1日
+                                    2016年10月19日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><p>核心类：ProcessCpuTracker<br></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://joyflyaway.com/2016/10/20/Android设备温度节点/">
+                            <h3 class="media-heading">Android设备温度节点</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年10月20日
                                 
                             </span>
                         </span>
@@ -769,7 +767,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 74 篇文章
+                找到 67 篇文章
             </p>
         </div>
     </div>
